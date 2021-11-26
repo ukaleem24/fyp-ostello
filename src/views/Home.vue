@@ -1,4 +1,9 @@
 <template>
+  <div class="preloader" v-if="togglePreloader">
+    <div class="clear-loading loading-effect-2">
+      <span></span>
+    </div>
+  </div>
   <the-header></the-header>
   <page-title></page-title>
   <mix-comp></mix-comp>
@@ -22,6 +27,14 @@ export default {
     TheCards,
     SectionDiscover,
     SectionTeam,
+  },
+  data() {
+    return {
+      togglePreloader: true,
+    };
+  },
+  beforeCreate() {
+    setTimeout(() => (this.togglePreloader = false), 1000);
   },
 };
 </script>

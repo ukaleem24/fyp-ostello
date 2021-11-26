@@ -31,7 +31,9 @@
                         <a href="explore-v4.html" title="">Explore Grid</a>
                       </li>
                       <li>
-                        <a href="explore-v5.html" title="">Explore List</a>
+                        <router-link to="/my/listings"
+                          >Explore List</router-link
+                        >
                       </li>
                       <li>
                         <a href="explore-detail.html" title=""
