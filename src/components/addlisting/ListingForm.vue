@@ -45,7 +45,7 @@
                 <label>What type of property is this? *</label>
                 <div class="wrap-listing price">
                   <span class="ti-angle-down"></span>
-                  <select name="category" id="type" v-model="type">
+                  <select name="category" id="type" v-model="listingData.type">
                     <option value="default">Select Type</option>
                     <option value="volvo">House</option>
                     <option value="saab">Building</option>
@@ -62,7 +62,7 @@
                   type="text"
                   name="yourname"
                   placeholder="e.g.”New York”"
-                  v-model="address"
+                  v-model="listingData.address"
                 />
               </div>
               <!-- /.wrap-listing -->
@@ -83,7 +83,7 @@
                   type="text"
                   name="phonenumber"
                   placeholder="+92 312 3456789"
-                  v-model="phone"
+                  v-model="listingData.phone"
                 />
               </div>
               <!-- /.wrap-listing -->
@@ -93,7 +93,7 @@
                   type="text"
                   name="website"
                   placeholder="http://"
-                  v-model="website"
+                  v-model="listingData.website"
                 />
               </div>
               <!-- /.wrap-listing -->
@@ -110,7 +110,7 @@
                 <div class="wrap-listing category">
                   <label>Minimum rental period *</label>
                   <span class="ti-angle-down"></span>
-                  <select name="category" v-model="rentalPeriod">
+                  <select name="category" v-model="listingData.rentalPeriod">
                     <option value="default">No preference</option>
                     <option value="1">1 Month</option>
                     <option value="2">2 Month</option>
@@ -133,7 +133,7 @@
                     type="date"
                     name="rent"
                     id="rent"
-                    v-model="availableFrom"
+                    v-model="listingData.availableFrom"
                   />
                 </div>
                 <!-- /.wrap-listing -->
@@ -143,14 +143,14 @@
                     type="text"
                     name="price"
                     placeholder="Price"
-                    v-model="price"
+                    v-model="listingData.price"
                   />
                 </div>
                 <!-- /.wrap-listing -->
                 <div class="wrap-listing price-to category">
                   <label>Currency</label>
                   <span class="ti-angle-down my-fix"></span>
-                  <select name="category" v-model="currency">
+                  <select name="category" v-model="listingData.currency">
                     <option value="pkr">PKR</option>
                     <option value="eur">EUR</option>
                   </select>
@@ -209,7 +209,7 @@
                           id="noBed"
                           name="bed"
                           value="no"
-                          v-model="bed"
+                          v-model="listingData.bed"
                         />
                         <label for="noBed">No</label>
                       </div>
@@ -219,7 +219,7 @@
                           id="yesBed"
                           name="bed"
                           value="yes"
-                          v-model="bed"
+                          v-model="listingData.bed"
                         />
                         <label for="yesBed">Yes</label>
                       </div>
@@ -235,7 +235,7 @@
                           id="noWifi"
                           name="wifi"
                           value="no"
-                          v-model="wifi"
+                          v-model="listingData.wifi"
                         />
                         <label for="noWifi">No</label>
                       </div>
@@ -245,7 +245,7 @@
                           id="yesWifi"
                           name="wifi"
                           value="yes"
-                          v-model="wifi"
+                          v-model="listingData.wifi"
                         />
                         <label for="yesWifi">Yes</label>
                       </div>
@@ -261,7 +261,7 @@
                           id="noWashingMachine"
                           name="washingmachine"
                           value="no"
-                          v-model="washingMachine"
+                          v-model="listingData.washingMachine"
                         />
                         <label for="noWashingMachine">No</label>
                       </div>
@@ -270,8 +270,8 @@
                           type="radio"
                           id="yesWashingMachine"
                           name="washingmachine"
-                          value="yesWashingMachine"
-                          v-model="washingMachine"
+                          value="yes"
+                          v-model="listingData.washingMachine"
                         />
                         <label for="yesWashingMachine">Yes</label>
                       </div>
@@ -290,7 +290,7 @@
                           id="nodryer"
                           name="dryer"
                           value="no"
-                          v-model="dryer"
+                          v-model="listingData.dryer"
                         />
                         <label for="nodryer">No</label>
                       </div>
@@ -300,7 +300,7 @@
                           id="yesdryer"
                           name="dryer"
                           value="yes"
-                          v-model="dryer"
+                          v-model="listingData.dryer"
                         />
                         <label for="yesdryer">Yes</label>
                       </div>
@@ -316,7 +316,7 @@
                           id="notv"
                           name="tv"
                           value="no"
-                          v-model="tv"
+                          v-model="listingData.tv"
                         />
                         <label for="notv">No</label>
                       </div>
@@ -326,7 +326,7 @@
                           id="yestv"
                           name="tv"
                           value="yes"
-                          v-model="tv"
+                          v-model="listingData.tv"
                         />
                         <label for="yestv">Yes</label>
                       </div>
@@ -342,7 +342,7 @@
                           id="noair"
                           name="airconditioner"
                           value="no"
-                          v-model="airConditioner"
+                          v-model="listingData.airConditioner"
                         />
                         <label for="noair">No</label>
                       </div>
@@ -352,9 +352,181 @@
                           id="yesair"
                           name="airconditioner"
                           value="yes"
-                          v-model="airConditioner"
+                          v-model="listingData.airConditioner"
                         />
                         <label for="yesair">Yes</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- Facilities-section:    -->
+            <div class="inner-box form style1">
+              <h3>Facilities</h3>
+              <br />
+              <div class="one-half">
+                <div class="wrap-listing category">
+                  <div class="whole-radio-container">
+                    <h4>Balcony</h4>
+                    <div class="radio-buttons-container">
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="noBalcony"
+                          name="balcony"
+                          value="no"
+                          v-model="listingData.balcony"
+                        />
+                        <label for="noBalcony">No</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="yesBalcony"
+                          name="balcony"
+                          value="yes"
+                          v-model="listingData.balcony"
+                        />
+                        <label for="yesBalcony">Yes</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="whole-radio-container">
+                    <h4>Garden</h4>
+                    <div class="radio-buttons-container">
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="noGarden"
+                          name="garden"
+                          value="no"
+                          v-model="listingData.garden"
+                        />
+                        <label for="noGarden">No</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="yesGarden"
+                          name="garden"
+                          value="yes"
+                          v-model="listingData.garden"
+                        />
+                        <label for="yesGarden">Yes</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="whole-radio-container">
+                    <h4>Pets allowed</h4>
+                    <div class="radio-buttons-container">
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="noPets"
+                          name="pets"
+                          value="no"
+                          v-model="listingData.pets"
+                        />
+                        <label for="noPets">No</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="yesPets"
+                          name="pets"
+                          value="yes"
+                          v-model="listingData.pets"
+                        />
+                        <label for="yesPets">Yes</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="one-half">
+                <div class="wrap-listing category">
+                  <div class="whole-radio-container">
+                    <h4>Parking</h4>
+                    <div class="radio-buttons-container">
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="noParking"
+                          name="parking"
+                          value="no"
+                          v-model="listingData.parking"
+                        />
+                        <label for="noParking">No</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="yesParking"
+                          name="parking"
+                          value="yes"
+                          v-model="listingData.parking"
+                        />
+                        <label for="yesParking">Yes</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="whole-radio-container">
+                    <h4>Basement</h4>
+                    <div class="radio-buttons-container">
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="noBasement"
+                          name="basement"
+                          value="no"
+                          v-model="listingData.basement"
+                        />
+                        <label for="noBasement">No</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="yesBasement"
+                          name="basement"
+                          value="yes"
+                          v-model="listingData.basement"
+                        />
+                        <label for="yesBasement">Yes</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="whole-radio-container">
+                    <h4>Furnished</h4>
+                    <div class="radio-buttons-container">
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="noFurnished"
+                          name="furnished"
+                          value="no"
+                          v-model="listingData.furnished"
+                        />
+                        <label for="noFurnished">No</label>
+                      </div>
+                      <div class="radio">
+                        <input
+                          type="radio"
+                          id="yesFurnished"
+                          name="furnished"
+                          value="yes"
+                          v-model="listingData.furnished"
+                        />
+                        <label for="yesFurnished">Yes</label>
                       </div>
                     </div>
                   </div>
@@ -459,13 +631,18 @@ export default {
         dryer: "",
         tv: "",
         airConditioner: "",
+        balcony: "",
+        garden: "",
+        pets: "",
+        parking: "",
+        basement: "",
+        furnished: "",
       },
     };
   },
   methods: {
     submitListing() {
       this.$store.dispatch("addNewListing", this.listingData);
-      console.log(this.$store.getters.getListings);
     },
   },
 };
