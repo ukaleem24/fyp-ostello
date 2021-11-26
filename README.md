@@ -22,7 +22,6 @@ npm run build
 
 ```
 npm run lint
-This is a temporary change
 ```
 
 ### Customize configuration
