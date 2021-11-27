@@ -643,6 +643,7 @@ export default {
   methods: {
     submitListing() {
       this.$store.dispatch("addNewListing", this.listingData);
+      this.$router.push("/my/listings");
     },
   },
 };

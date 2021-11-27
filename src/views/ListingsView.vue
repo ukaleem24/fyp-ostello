@@ -1,15 +1,14 @@
 <template>
   <the-header></the-header>
-  <listings />
+  <landlord-listing></landlord-listing>
   <the-footer></the-footer>
 </template>
 
 <script>
-import Listings from "../components/addlisting/Listings.vue";
-
+import LandlordListing from "../components/listingview/LandlordListing.vue";
 export default {
   components: {
-    Listings,
+    LandlordListing,
   },
 };
 </script>

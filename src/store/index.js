@@ -11,6 +11,7 @@ export default createStore({
       state.listings.push(payload);
     },
   },
+
   actions: {
     addNewListing(context, payload) {
       context.commit("addListing", payload);
