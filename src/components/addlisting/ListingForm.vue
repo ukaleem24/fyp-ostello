@@ -537,30 +537,48 @@
             </div>
             <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-            <!-- Images-section:    -->
+            <!-- Media-section:    -->
             <div class="inner-box style3">
+              <h3>Media</h3>
               <div class="one-half">
-                <label>Your Business Images</label>
-                <div class="browse">
-                  <p>Drag & Drop files here</p>
-                  <span>or</span>
-                  <div class="upload">
-                    <span>Browse files</span>
-                    <input type="file" name="upload-file" />
+                <div class="media">
+                  <label>Your Business Images</label>
+                  <div class="browse">
+                    <p>Drag & Drop files here</p>
+                    <span>or</span>
+                    <div class="upload">
+                      <span>Browse files</span>
+                      <input
+                        type="file"
+                        name="upload-file"
+                        @change="uploadImage"
+                      />
+                    </div>
                   </div>
+                </div>
+                <div class="media">
+                  <label>Your Business video(Optional)</label>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="ex: https://www.youtube.com/watch?v=XZiki0D_81U"
+                  />
+                  <button class="submit-form-listing" type="submit">
+                    Save & Preview
+                  </button>
                 </div>
               </div>
               <!-- /.one-half -->
               <div class="one-half">
-                <label>Your Business video(Optional)</label>
-                <input
-                  type="text"
-                  value=""
-                  placeholder="ex: https://www.youtube.com/watch?v=XZiki0D_81U"
-                />
-                <button class="submit-form-listing" type="submit">
-                  Save & Preview
-                </button>
+                <div class="media">
+                  <label>Images</label>
+                  <image-card
+                    v-for="singleImage in listingData.images"
+                    :key="singleImage.image"
+                    :image="singleImage.image"
+                    :imageName="singleImage.imageName"
+                  ></image-card>
+                </div>
               </div>
               <!-- /.one-half -->
               <div class="clearfix"></div>
@@ -613,7 +631,11 @@
 </template>
 
 <script>
+import ImageCard from "./ImageCard.vue";
 export default {
+  components: {
+    ImageCard,
+  },
   data() {
     return {
       listingData: {
@@ -637,13 +659,29 @@ export default {
         parking: "",
         basement: "",
         furnished: "",
+        images: [],
       },
     };
   },
+
   methods: {
     submitListing() {
       this.$store.dispatch("addNewListing", this.listingData);
       this.$router.push("/my/listings");
+    },
+    uploadImage(e) {
+      const previewImage = {
+        image: null,
+        imageName: "",
+      };
+      previewImage.imageName = e.target.files[0].name;
+      const image = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = (e) => {
+        previewImage.image = e.target.result;
+        this.listingData.images.push(previewImage);
+      };
     },
   },
 };
@@ -675,5 +713,9 @@ h4 {
 }
 .radio label {
   padding-left: 10px;
+}
+.media {
+  margin: 10px;
+  padding-top: 10px;
 }
 </style>
