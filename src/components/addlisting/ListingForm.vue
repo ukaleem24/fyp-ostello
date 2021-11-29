@@ -47,9 +47,9 @@
                   <span class="ti-angle-down"></span>
                   <select name="category" id="type" v-model="listingData.type">
                     <option value="default">Select Type</option>
-                    <option value="volvo">House</option>
-                    <option value="saab">Building</option>
-                    <option value="mercedes">Apartment</option>
+                    <option value="House">House</option>
+                    <option value="Building">Building</option>
+                    <option value="Apartment">Apartment</option>
                   </select>
                 </div>
               </div>
@@ -151,45 +151,20 @@
                   <label>Currency</label>
                   <span class="ti-angle-down my-fix"></span>
                   <select name="category" v-model="listingData.currency">
-                    <option value="pkr">PKR</option>
-                    <option value="eur">EUR</option>
+                    <option value="PKR ">PKR</option>
+                    <option value="EUR ">EUR</option>
                   </select>
                 </div>
                 <!-- /.wrap-listing -->
               </div>
               <div class="one-half">
-                <div class="wrap-listing category">
-                  <label>Category</label>
-                  <span class="ti-angle-down"></span>
-                  <select name="category">
-                    <option value="">Choose Your Bussines Category</option>
-                    <option value="">Choose Your Bussines Category</option>
-                    <option value="">Choose Your Bussines Category</option>
-                  </select>
-                </div>
-                <!-- /.wrap-listing -->
-                <div class="wrap-listing price">
-                  <label>Price Range</label>
-                  <span class="ti-angle-down"></span>
-                  <select name="category">
-                    <option value="">Pricey</option>
-                    <option value="">Pricey</option>
-                    <option value="">Pricey</option>
-                  </select>
-                </div>
-                <!-- /.wrap-listing -->
-                <div class="wrap-listing price-from">
-                  <label>Price From</label>
-                  <input type="text" name="price" placeholder="Price From" />
-                </div>
-                <!-- /.wrap-listing -->
-                <div class="wrap-listing price-to">
-                  <label>Price To</label>
-                  <input type="text" name="price" placeholder="Price To" />
-                </div>
-                <!-- /.wrap-listing -->
+                <label>Description</label>
+                <textarea
+                  placeholder="Detail description about your listing"
+                  v-model="listingData.description"
+                ></textarea>
               </div>
-
+              <!-- /.one-half -->
               <div class="clearfix"></div>
             </div>
             <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -570,13 +545,15 @@
               </div>
               <!-- /.one-half -->
               <div class="one-half">
-                <div class="media">
+                <div v-if="listingData.images.length > 0" class="media">
                   <label>Images</label>
                   <image-card
                     v-for="singleImage in listingData.images"
                     :key="singleImage.image"
                     :image="singleImage.image"
                     :imageName="singleImage.imageName"
+                    :id="singleImage.id"
+                    @remove-image="removeImage"
                   ></image-card>
                 </div>
               </div>
@@ -639,6 +616,7 @@ export default {
   data() {
     return {
       listingData: {
+        id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
         kind: "default",
         type: "default",
         address: "",
@@ -646,7 +624,8 @@ export default {
         rentalPeriod: "default",
         availableFrom: "",
         price: "",
-        currency: "pkr",
+        currency: "PKR ",
+        description: "",
         bed: "",
         wifi: "",
         washingMachine: "",
@@ -671,9 +650,11 @@ export default {
     },
     uploadImage(e) {
       const previewImage = {
+        id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
         image: null,
         imageName: "",
       };
+      console.log(this.listingData.previewImage);
       previewImage.imageName = e.target.files[0].name;
       const image = e.target.files[0];
       const reader = new FileReader();
@@ -682,6 +663,13 @@ export default {
         previewImage.image = e.target.result;
         this.listingData.images.push(previewImage);
       };
+      console.log(this.listingData.images);
+    },
+    removeImage(imageId) {
+      const imageIndex = this.listingData.images.findIndex(
+        (imageObj) => imageObj.id === imageId
+      );
+      this.listingData.images.splice(imageIndex, 1);
     },
   },
 };

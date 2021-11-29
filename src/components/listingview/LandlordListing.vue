@@ -46,7 +46,7 @@
           <!-- --------------------------------------- -->
 
           <div class="filter-result style2">
-            <div class="result">5 Results Found</div>
+            <div class="result">{{ getListings.length }} Results Found</div>
             <ul class="arrange">
               <li class="active">
                 <span class="ti-view-grid"></span>
@@ -63,9 +63,14 @@
       <!-- -------------------------------- -->
       <landlord-card
         v-for="listing in getListings"
-        :key="listing.address"
+        :key="listing.id"
+        :id="listing.id"
         :price="listing.price"
         :address="listing.address"
+        :type="listing.type"
+        :image="listing.images[0].image"
+        :description="listing.description"
+        :currency="listing.currency"
       ></landlord-card>
 
       <div class="row">

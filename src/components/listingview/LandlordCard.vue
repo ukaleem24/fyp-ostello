@@ -3,39 +3,41 @@
     <div class="col-sm-12">
       <div class="imagebox style2">
         <div class="box-imagebox">
-          <div class="box-header">
-            <div class="box-image">
-              <img src="../../assets/images/page/img-v2-02.png" alt="" />
-              <a href="#" title="">Preview</a>
+          <div class="myfix">
+            <div class="box-header">
+              <div class="box-image">
+                <img :src="image" alt="" />
+                <a href="#" title="">Preview</a>
+              </div>
             </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-content">
-            <div class="box-title">
-              <a href="#" title="">{{ address }}</a
-              ><i class="fa fa-check-circle" aria-hidden="true"></i>
-            </div>
-            <ul class="rating">
-              <li>{{ price }}</li>
+            <!-- /.box-header -->
+            <div class="box-content">
+              <div class="box-title">
+                <a href="#" title="" class="addressName">{{ address }}</a
+                ><i class="fa fa-check-circle" aria-hidden="true"></i>
+              </div>
+              <ul class="rating">
+                <li>
+                  <p class="price">{{ currency }} {{ price }}</p>
+                </li>
 
-              <li>4.5 rating</li>
+                <li>4.5 rating</li>
 
-              <li>Hotel</li>
-            </ul>
-            <div class="box-desc">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+                <li>{{ type }}</li>
+              </ul>
+              <div class="box-desc">
+                <p>{{ description }}</p>
+              </div>
+              <ul class="location">
+                <li class="address city">
+                  <span class="ti-location-pin"></span>
+                  <p>Rawalpindi, Islamabad</p>
+                </li>
+                <li class="remove">
+                  <button @click="removeListing">Remove</button>
+                </li>
+              </ul>
             </div>
-            <ul class="location">
-              <li class="address">
-                <span class="ti-location-pin"></span>Rawalpindi, Islamabad
-              </li>
-              <li class="open">Open Now !</li>
-            </ul>
           </div>
           <!-- /.box-content -->
         </div>
@@ -50,6 +52,33 @@
 
 <script>
 export default {
-  props: ["price", "address"],
+  props: ["id", "price", "address", "type", "image", "description", "currency"],
+  methods: {
+    removeListing() {
+      this.$store.commit("removeListing", { id: this.id });
+    },
+  },
 };
 </script>
+<style scoped>
+.price {
+  color: #4ca1af;
+  font-weight: 600;
+  font-size: 20px;
+}
+.addressName {
+  font-weight: 700;
+  font-size: 25px;
+  padding-bottom: 15px;
+}
+.city {
+  font-weight: 350;
+  font-size: 17px;
+  display: flex;
+}
+.remove {
+  text-align: right;
+  color: #4ca1af;
+  font-weight: 400;
+}
+</style>

@@ -10,6 +10,12 @@ export default createStore({
     addListing(state, payload) {
       state.listings.push(payload);
     },
+    removeListing(state, payload) {
+      const listingIndex = state.listings.findIndex(
+        (listing) => listing.id === payload.id
+      );
+      state.listings.splice(listingIndex, 1);
+    },
   },
 
   actions: {

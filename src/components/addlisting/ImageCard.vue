@@ -8,14 +8,19 @@
     <div class="imageName">
       <label>{{ imageName }}</label>
     </div>
-    <div class="cancelIcon">
-      <i class="fas fa-window-close"></i>
+    <div class="removeIamgeContainer">
+      <i class="ti-close removeIamge" @click="removeImage"></i>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ["image", "imageName"],
+  props: ["image", "imageName", "id"],
+  methods: {
+    removeImage() {
+      this.$emit("remove-image", this.id);
+    },
+  },
 };
 </script>
 
@@ -36,5 +41,12 @@ export default {
 .imageName {
   padding: 15px;
   padding-top: 27px;
+}
+.removeIamgeContainer {
+  padding-top: 28px;
+  padding-left: 130px;
+}
+.removeIamge {
+  cursor: pointer;
 }
 </style>
