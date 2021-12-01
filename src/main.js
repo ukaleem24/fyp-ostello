@@ -9,9 +9,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "./assets/stylesheets/style.css";
 import "./assets/stylesheets/responsive.css";
+import vue3StarRatings from "vue3-star-ratings";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(fas);
 
 const app = createApp(App);
-
+app.component("font-awesome-icon", FontAwesomeIcon);
+app.component("vue3-star-ratings", vue3StarRatings);
 app.component("TheHeader", TheHeader);
 app.component("TheFooter", TheFooter);
 

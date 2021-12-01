@@ -183,7 +183,7 @@
                           type="radio"
                           id="noBed"
                           name="bed"
-                          value="no"
+                          value="No Bed"
                           v-model="listingData.bed"
                         />
                         <label for="noBed">No</label>
@@ -193,7 +193,7 @@
                           type="radio"
                           id="yesBed"
                           name="bed"
-                          value="yes"
+                          value="Bed"
                           v-model="listingData.bed"
                         />
                         <label for="yesBed">Yes</label>
@@ -209,7 +209,7 @@
                           type="radio"
                           id="noWifi"
                           name="wifi"
-                          value="no"
+                          value="No WiFi"
                           v-model="listingData.wifi"
                         />
                         <label for="noWifi">No</label>
@@ -219,7 +219,7 @@
                           type="radio"
                           id="yesWifi"
                           name="wifi"
-                          value="yes"
+                          value="WiFi"
                           v-model="listingData.wifi"
                         />
                         <label for="yesWifi">Yes</label>
@@ -235,7 +235,7 @@
                           type="radio"
                           id="noWashingMachine"
                           name="washingmachine"
-                          value="no"
+                          value="No Washing machine"
                           v-model="listingData.washingMachine"
                         />
                         <label for="noWashingMachine">No</label>
@@ -245,7 +245,7 @@
                           type="radio"
                           id="yesWashingMachine"
                           name="washingmachine"
-                          value="yes"
+                          value="Washing machine"
                           v-model="listingData.washingMachine"
                         />
                         <label for="yesWashingMachine">Yes</label>
@@ -264,7 +264,7 @@
                           type="radio"
                           id="nodryer"
                           name="dryer"
-                          value="no"
+                          value="No Dryer"
                           v-model="listingData.dryer"
                         />
                         <label for="nodryer">No</label>
@@ -274,7 +274,7 @@
                           type="radio"
                           id="yesdryer"
                           name="dryer"
-                          value="yes"
+                          value="Dryer"
                           v-model="listingData.dryer"
                         />
                         <label for="yesdryer">Yes</label>
@@ -290,7 +290,7 @@
                           type="radio"
                           id="notv"
                           name="tv"
-                          value="no"
+                          value="No TV"
                           v-model="listingData.tv"
                         />
                         <label for="notv">No</label>
@@ -300,7 +300,7 @@
                           type="radio"
                           id="yestv"
                           name="tv"
-                          value="yes"
+                          value="TV"
                           v-model="listingData.tv"
                         />
                         <label for="yestv">Yes</label>
@@ -316,7 +316,7 @@
                           type="radio"
                           id="noair"
                           name="airconditioner"
-                          value="no"
+                          value="NO AC"
                           v-model="listingData.airConditioner"
                         />
                         <label for="noair">No</label>
@@ -326,7 +326,7 @@
                           type="radio"
                           id="yesair"
                           name="airconditioner"
-                          value="yes"
+                          value="AC"
                           v-model="listingData.airConditioner"
                         />
                         <label for="yesair">Yes</label>
@@ -355,7 +355,7 @@
                           type="radio"
                           id="noBalcony"
                           name="balcony"
-                          value="no"
+                          value="No Balcony"
                           v-model="listingData.balcony"
                         />
                         <label for="noBalcony">No</label>
@@ -365,7 +365,7 @@
                           type="radio"
                           id="yesBalcony"
                           name="balcony"
-                          value="yes"
+                          value="Balcony"
                           v-model="listingData.balcony"
                         />
                         <label for="yesBalcony">Yes</label>
@@ -381,7 +381,7 @@
                           type="radio"
                           id="noGarden"
                           name="garden"
-                          value="no"
+                          value="No Garden"
                           v-model="listingData.garden"
                         />
                         <label for="noGarden">No</label>
@@ -391,7 +391,7 @@
                           type="radio"
                           id="yesGarden"
                           name="garden"
-                          value="yes"
+                          value="Garden"
                           v-model="listingData.garden"
                         />
                         <label for="yesGarden">Yes</label>
@@ -407,7 +407,7 @@
                           type="radio"
                           id="noPets"
                           name="pets"
-                          value="no"
+                          value="Pets not allowed"
                           v-model="listingData.pets"
                         />
                         <label for="noPets">No</label>
@@ -417,7 +417,7 @@
                           type="radio"
                           id="yesPets"
                           name="pets"
-                          value="yes"
+                          value="Pets allowed"
                           v-model="listingData.pets"
                         />
                         <label for="yesPets">Yes</label>
@@ -436,7 +436,7 @@
                           type="radio"
                           id="noParking"
                           name="parking"
-                          value="no"
+                          value="No Parking"
                           v-model="listingData.parking"
                         />
                         <label for="noParking">No</label>
@@ -446,7 +446,7 @@
                           type="radio"
                           id="yesParking"
                           name="parking"
-                          value="yes"
+                          value="Parking"
                           v-model="listingData.parking"
                         />
                         <label for="yesParking">Yes</label>
@@ -462,7 +462,7 @@
                           type="radio"
                           id="noBasement"
                           name="basement"
-                          value="no"
+                          value="No Basement"
                           v-model="listingData.basement"
                         />
                         <label for="noBasement">No</label>
@@ -472,7 +472,7 @@
                           type="radio"
                           id="yesBasement"
                           name="basement"
-                          value="yes"
+                          value="Basement"
                           v-model="listingData.basement"
                         />
                         <label for="yesBasement">Yes</label>
@@ -488,7 +488,7 @@
                           type="radio"
                           id="noFurnished"
                           name="furnished"
-                          value="no"
+                          value="No Furnished"
                           v-model="listingData.furnished"
                         />
                         <label for="noFurnished">No</label>
@@ -498,7 +498,7 @@
                           type="radio"
                           id="yesFurnished"
                           name="furnished"
-                          value="yes"
+                          value="Furnished"
                           v-model="listingData.furnished"
                         />
                         <label for="yesFurnished">Yes</label>
@@ -639,6 +639,7 @@ export default {
         basement: "",
         furnished: "",
         images: [],
+        reviews: [],
       },
     };
   },
