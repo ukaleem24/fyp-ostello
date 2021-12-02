@@ -655,7 +655,6 @@ export default {
         image: null,
         imageName: "",
       };
-      console.log(this.listingData.previewImage);
       previewImage.imageName = e.target.files[0].name;
       const image = e.target.files[0];
       const reader = new FileReader();
@@ -664,7 +663,6 @@ export default {
         previewImage.image = e.target.result;
         this.listingData.images.push(previewImage);
       };
-      console.log(this.listingData.images);
     },
     removeImage(imageId) {
       const imageIndex = this.listingData.images.findIndex(

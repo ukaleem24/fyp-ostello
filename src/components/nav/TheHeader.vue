@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="header-wrap">
             <div id="logo" class="logo">
-              <a href="index.html" title=""> Ostello </a>
+              <router-link to="/" title=""> Ostello </router-link>
             </div>
             <!-- /.logo -->
             <div class="nav-wrap">

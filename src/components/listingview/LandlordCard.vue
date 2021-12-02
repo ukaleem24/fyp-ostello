@@ -7,7 +7,7 @@
             <div class="box-header">
               <div class="box-image">
                 <img :src="image" alt="" />
-                <a href="#" title="">Preview</a>
+                <router-link :to="listingUrl">Preview</router-link>
               </div>
             </div>
             <!-- /.box-header -->
@@ -56,6 +56,11 @@ export default {
   methods: {
     removeListing() {
       this.$store.commit("removeListing", { id: this.id });
+    },
+  },
+  computed: {
+    listingUrl() {
+      return "/room/" + this.id;
     },
   },
 };

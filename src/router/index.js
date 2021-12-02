@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import AddListing from "../views/AddListing.vue";
 import ListingView from "../views/ListingsView.vue";
@@ -23,7 +23,7 @@ const routes = [
     component: ListingView,
   },
   {
-    path: "/listingdetail",
+    path: "/room/:roomId",
     name: "ListingDetail",
     component: ListingDetail,
   },
@@ -40,7 +40,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
