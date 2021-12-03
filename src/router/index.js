@@ -5,6 +5,7 @@ import ListingView from "../views/ListingsView.vue";
 import ListingDetail from "../views/ListingDetail.vue";
 import RegisterUser from "../views/Register.vue";
 import EditProfile from "../views/dashboard/EditProfile.vue";
+import Listing from "../views/dashboard/Listing.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/dashboard/profile",
     name: "EditProfile",
     component: EditProfile,
+  },
+  {
+    path: "/dashboard/listing",
+    name: "testing",
+    component: Listing,
   },
 ];
 

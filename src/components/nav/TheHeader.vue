@@ -83,7 +83,7 @@
                     <a href="login.html" title="">Log In</a>
                   </li>
                   <li>
-                    <a href="register.html" title="">Sign Up</a>
+                    <a @click="signup" href="#" title="">Sign Up</a>
                   </li>
                 </ul>
               </nav>
@@ -94,7 +94,9 @@
                 >
               </div>
               <div class="show-search">
-                <button><span class="ti-search"></span></button>
+                <button class="icon" @click="dashboard">
+                  <font-awesome-icon icon="user-circle"></font-awesome-icon>
+                </button>
                 <div class="submenu top-search search-header">
                   <form
                     role="search"
@@ -135,3 +137,20 @@
   </div>
   <!-- /.header -->
 </template>
+<script>
+export default {
+  methods: {
+    signup() {
+      this.$router.push("/register/newuser");
+    },
+    dashboard() {
+      this.$router.push("/dashboard/profile");
+    },
+  },
+};
+</script>
+<style scoped>
+.icon {
+  font-size: 25px;
+}
+</style>

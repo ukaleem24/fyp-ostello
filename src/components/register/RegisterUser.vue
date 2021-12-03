@@ -79,6 +79,7 @@ export default {
         email: "",
         password: "",
         isLandlord: "false",
+        persolnalInfo: [],
       },
     };
   },

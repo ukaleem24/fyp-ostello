@@ -312,7 +312,7 @@ export default {
         rating: "",
       },
       index: 0,
-      currentImage: this.$store.getters.getListings[0].images[0],
+      currentImage: this.$store.getters.getListings[0].images[0].image,
     };
   },
   methods: {
@@ -320,14 +320,14 @@ export default {
       if (this.index === this.listingData.images.length - 1) {
         this.index = 0;
       } else ++this.index;
-      this.currentImage = this.listingData.images[this.index];
+      this.currentImage = this.listingData.images[this.index].image;
     },
     previousImage() {
       if (this.index === 0) {
         this.index = this.listingData.images.length;
       }
       this.index -= 1;
-      this.currentImage = this.listingData.images[this.index];
+      this.currentImage = this.listingData.images[this.index].image;
     },
     submitReview() {
       this.listingData.reviews.push(this.reviewData);
