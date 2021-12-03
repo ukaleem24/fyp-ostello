@@ -1,7 +1,10 @@
 import { createApp } from "vue";
+import VueGoogleMaps from "@fawmi/vue-google-maps";
+
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+
 import TheHeader from "./components/nav/TheHeader.vue";
 import TheFooter from "./components/nav/TheFooter.vue";
 
@@ -23,4 +26,10 @@ app.component("vue3-star-ratings", vue3StarRatings);
 app.component("TheHeader", TheHeader);
 app.component("TheFooter", TheFooter);
 
+app.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyBIfcVbyCpXDB9yvN83Lt7uuKtVGp0iDIQ",
+    libraries: "places",
+  },
+});
 app.use(store).use(router).mount("#app");
