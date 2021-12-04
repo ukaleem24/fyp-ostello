@@ -640,6 +640,11 @@ export default {
         furnished: "",
         images: [],
         reviews: [],
+        booking: {
+          isBooked: false,
+          bookeedBy: "",
+          bookingDate: "",
+        },
       },
     };
   },

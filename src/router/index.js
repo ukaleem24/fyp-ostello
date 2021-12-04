@@ -6,6 +6,7 @@ import ListingDetail from "../views/ListingDetail.vue";
 import RegisterUser from "../views/Register.vue";
 import EditProfile from "../views/dashboard/EditProfile.vue";
 import Listing from "../views/dashboard/Listing.vue";
+import Booking from "../views/dashboard/Bookings.vue";
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: "/dashboard/listing",
     name: "testing",
     component: Listing,
+  },
+  {
+    path: "/dashboard/booking",
+    name: "Booking",
+    component: Booking,
   },
 ];
 

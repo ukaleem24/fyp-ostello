@@ -58,17 +58,14 @@
         <div class="listing-result">
           <h4>{{ getListings.length }} Results Found</h4>
         </div>
-        <listing-card
-          v-for="listing in getListings"
-          :key="listing.id"
-          :id="listing.id"
-          :price="listing.price"
-          :address="listing.address"
-          :type="listing.type"
-          :image="listing.images[0].image"
-          :description="listing.description"
-          :currency="listing.currency"
-        ></listing-card>
+        <div class="grid-Container">
+          <grid-card class="grid-item"></grid-card>
+          <grid-card class="grid-item"></grid-card>
+          <grid-card class="grid-item"></grid-card>
+          <grid-card class="grid-item"></grid-card>
+          <grid-card class="grid-item"></grid-card>
+          <grid-card class="grid-item"></grid-card>
+        </div>
       </div>
     </div>
   </div>
@@ -76,12 +73,12 @@
 
 <script>
 import "../../assets/stylesheets/dashbordStyle.css";
-import ListingCard from "./cards/LandlordCard.vue";
+import GridCard from "./cards/BookingCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    ListingCard,
+    GridCard,
   },
   computed: {
     ...mapGetters(["getListings"]),
@@ -93,13 +90,23 @@ export default {
     listing() {
       this.$router.push("/dashboard/listing");
     },
-    booking(){
+    booking() {
       this.$router.push("/dashboard/booking");
-    }
+    },
   },
 };
 </script>
 <style scoped>
+.grid-Container {
+  margin: 20px !important;
+  display: grid !important;
+  grid-template-columns: auto auto;
+}
+.grid-item {
+  padding: 10px 10px 50px 10px;
+  width: 80%;
+  max-height: 80%;
+}
 .sidebar-dashboard .icon-container {
   color: gainsboro;
   display: block;

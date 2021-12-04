@@ -27,7 +27,7 @@
       <div class="icon-container">
         <div class="icon-label">
           <font-awesome-icon icon="landmark"></font-awesome-icon>
-          <h5 class="myFixlabelIcon">Bookings</h5>
+          <h5 @click="booking" class="myFixlabelIcon">Bookings</h5>
         </div>
       </div>
       <div class="icon-container">
@@ -250,6 +250,9 @@ export default {
     },
     listing() {
       this.$router.push("/dashboard/listing");
+    },
+    booking() {
+      this.$router.push("/dashboard/booking");
     },
     submitData() {
       console.log(this.personalInformation);

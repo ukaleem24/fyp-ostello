@@ -75,6 +75,11 @@ export default createStore({
               ratting: "4",
             },
           ],
+          booking: {
+            isBooked: false,
+            bookeedBy: "Usama Ilyas",
+            bookingDate: "02/01/2022",
+          },
         },
       ],
     };
