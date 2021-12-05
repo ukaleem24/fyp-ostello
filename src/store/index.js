@@ -8,7 +8,7 @@ export default createStore({
         {
           id: "1",
           kind: "default",
-          type: "default",
+          type: "Apartment",
           address: "New York 123",
           phone: "00 123 456 789",
           rentalPeriod: "default",
@@ -55,6 +55,7 @@ export default createStore({
               imageName: "",
             },
           ],
+          averageRating: 4.1,
           reviews: [
             {
               author: "Usama Ilyas",
@@ -72,7 +73,7 @@ export default createStore({
               title: "The food was amazing",
               review:
                 "Such a lovely place. The host met us at agreed time, showed us everything. The apartment is conveniently located, a short walk to subway, shops, and restaurants. Wi fi worked well. We had a great time.",
-              ratting: "4",
+              rating: "4",
             },
           ],
           booking: {

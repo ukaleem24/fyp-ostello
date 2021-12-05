@@ -11,34 +11,34 @@
             <a href="#" title="">Preview</a>
             <div class="overlay"></div>
             <div class="queue">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
+              <font-awesome-icon icon="star"></font-awesome-icon>
+              <font-awesome-icon icon="star"></font-awesome-icon>
+              <font-awesome-icon icon="star"></font-awesome-icon>
+              <font-awesome-icon icon="star"></font-awesome-icon>
+              <font-awesome-icon icon="star"></font-awesome-icon>
             </div>
           </div>
         </div>
+
         <!-- /.box-header -->
         <div class="box-content">
           <div class="box-title">
-            <a href="#" title="">Acantara</a
+            <a href="#" title="">{{ listing.price }} {{ listing.currency }}</a
             ><i class="fa fa-check-circle" aria-hidden="true"></i>
           </div>
           <ul class="rating">
-            <li>10 rating</li>
-            <li>Ultra High End</li>
-            <li>Hotel</li>
+            <li>{{ listing.averageRating }} rating</li>
+            <li>{{ listing.kind }}</li>
+            <li>{{ listing.type }}</li>
           </ul>
           <div class="box-desc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            {{ listing.description }}
           </div>
         </div>
         <!-- /.box-content -->
         <ul class="location">
           <li class="address">
-            <span class="ti-location-pin"></span>Seoul, Korea
+            <span class="ti-location-pin"></span>{{ listing.address }}
           </li>
           <li class="open">Open Now !</li>
         </ul>
@@ -49,3 +49,9 @@
     <!-- /.imaegbox style1 -->
   </div>
 </template>
+
+<script>
+export default {
+  props: ["listing"],
+};
+</script>

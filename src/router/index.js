@@ -7,6 +7,7 @@ import RegisterUser from "../views/Register.vue";
 import EditProfile from "../views/dashboard/EditProfile.vue";
 import Listing from "../views/dashboard/Listing.vue";
 import Booking from "../views/dashboard/Bookings.vue";
+import SearchPage from "../views/SearchPage.vue";
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: "/dashboard/booking",
     name: "Booking",
     component: Booking,
+  },
+  {
+    path: "/search/:searchQuery",
+    name: "Search Page",
+    component: SearchPage,
   },
 ];
 
