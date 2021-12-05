@@ -28,7 +28,7 @@ app.component("TheFooter", TheFooter);
 
 app.use(VueGoogleMaps, {
   load: {
-    key: "AIzaSyBIfcVbyCpXDB9yvN83Lt7uuKtVGp0iDIQ",
+    key: "AIzaSyC2R8Dd5E4Y7zyBcTucoM39UDWksTC1zD8",
     libraries: "places",
   },
 });
