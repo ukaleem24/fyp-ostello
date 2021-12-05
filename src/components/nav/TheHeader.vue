@@ -83,7 +83,7 @@
                     <a href="login.html" title="">Log In</a>
                   </li>
                   <li>
-                    <a @click="signup" href="#" title="">Sign Up</a>
+                    <router-link to="/register/newuser">Sign Up</router-link>
                   </li>
                 </ul>
               </nav>
@@ -94,30 +94,72 @@
                 >
               </div>
               <div class="show-search">
-                <button class="icon" @click="dashboard">
-                  <font-awesome-icon icon="user-circle"></font-awesome-icon>
-                </button>
-                <div class="submenu top-search search-header">
-                  <form
-                    role="search"
-                    method="get"
-                    class="search-form"
-                    action="#"
-                  >
-                    <label>
-                      <input
-                        type="search"
-                        class="search-field"
-                        placeholder="Search …"
-                        value=""
-                        name="search"
-                      />
-                    </label>
-                    <button class="search-submit-form" title="Search now">
-                      <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                  </form>
-                </div>
+                <nav id="mainnav" class="mainnav">
+                  <ul class="menu myNewfix">
+                    <li>
+                      <div class="show-search">
+                        <div class="login-icon-container">
+                          <div class="myfix">
+                            <font-awesome-icon
+                              v-if="getCurrentUser === null"
+                              icon="user-circle"
+                            ></font-awesome-icon>
+                            <h6
+                              v-if="getCurrentUser === null"
+                              class="user-name"
+                            >
+                              Log In
+                            </h6>
+                            <img
+                              class="login-img"
+                              v-if="getCurrentUser != null"
+                              src="https://www.w3schools.com/howto/img_avatar.png"
+                              alt=""
+                            />
+                            <h6 v-if="getCurrentUser != null" class="user-name">
+                              HI, USAMA
+                            </h6>
+                            <div class="arrow-down-container">
+                              <font-awesome-icon
+                                v-if="getCurrentUser != null"
+                                class="arrow-down"
+                                icon="angle-down"
+                              ></font-awesome-icon>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <ul v-if="getCurrentUser != null" class="submenu">
+                        <li>
+                          <router-link to="/dashboard/profile"
+                            >Profile</router-link
+                          >
+                        </li>
+                        <li>
+                          <router-link to="/my/listings">Inbox</router-link>
+                        </li>
+                        <li>
+                          <router-link to="/dashboard/booking"
+                            >Bookings</router-link
+                          >
+                        </li>
+                        <li>
+                          <router-link to="/dashboard/listing"
+                            >Listings</router-link
+                          >
+                        </li>
+                        <li>
+                          <router-link to="/my/listings"
+                            >My Payments</router-link
+                          >
+                        </li>
+                        <li>
+                          <router-link to="/my/listings">Logout</router-link>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </nav>
               </div>
               <!-- /.show-search -->
               <div class="btn-menu">
@@ -138,19 +180,74 @@
   <!-- /.header -->
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
-  methods: {
-    signup() {
-      this.$router.push("/register/newuser");
-    },
-    dashboard() {
-      this.$router.push("/dashboard/profile");
-    },
+  computed: {
+    ...mapGetters(["getCurrentUser"]),
+  },
+  created() {
+    console.log(this.getCurrentUser);
   },
 };
 </script>
 <style scoped>
-.icon {
-  font-size: 25px;
+.login-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 100px;
+}
+.login-icon-container {
+  color: #2c3e50;
+
+  line-height: 30px;
+  border-radius: 50%;
+  margin: 25px 0 20px;
+  position: relative;
+  padding-right: 20px !important;
+  font-size: 30px;
+}
+.myfix {
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+}
+.myfix:hover {
+  background-color: #f5f5f5;
+}
+.user-name {
+  font-size: 15px !important;
+  font-weight: 400;
+  padding: 7px 7px;
+}
+.arrow-down-container {
+  line-height: 0px;
+  padding: 6px;
+}
+.arrow-down {
+  font-size: 20px !important;
+}
+.nav-wrap {
+  margin-right: 0px !important;
+}
+.submenu {
+  opacity: 0;
+  z-index: 9999;
+  position: absolute;
+  width: 250px;
+  background-color: #222;
+  top: 150px;
+  left: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+#mainnav ul.myNewfix > li {
+  margin-right: 1px !important;
+}
+.show-search {
+  margin-left: 2px !important;
 }
 </style>

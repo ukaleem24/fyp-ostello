@@ -3,6 +3,7 @@ import { createStore } from "vuex";
 export default createStore({
   state() {
     return {
+      currentUser: "jj",
       registerUsers: [],
       listings: [
         {
@@ -96,6 +97,7 @@ export default createStore({
     },
     addregisterUsers(state, payload) {
       state.registerUsers.push(payload);
+      state.registerUser = payload;
     },
   },
 
@@ -115,6 +117,9 @@ export default createStore({
     },
     getRegisterUsers(state) {
       return state.registerUsers;
+    },
+    getCurrentUser(state) {
+      return state.currentUser;
     },
   },
 });
