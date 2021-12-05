@@ -9,11 +9,11 @@
         <h5>
           {{ title }}
           <span>
-            <font-awesome-icon icon="star"></font-awesome-icon>
-            <font-awesome-icon icon="star"></font-awesome-icon>
-            <font-awesome-icon icon="star"></font-awesome-icon>
-            <font-awesome-icon icon="star"></font-awesome-icon>
-            <font-awesome-icon icon="star"></font-awesome-icon>
+            <font-awesome-icon
+              icon="star"
+              v-for="rate in intRating"
+              :key="rate"
+            ></font-awesome-icon>
           </span>
         </h5>
         <div class="comment-author">
@@ -31,7 +31,15 @@
 </template>
 <script>
 export default {
-  props: ["author", "authorImage", "ratting", "authorReview", "title"],
+  data() {
+    return {
+      intRating: null,
+    };
+  },
+  props: ["author", "authorImage", "rating", "authorReview", "title"],
+  created() {
+    this.intRating = parseInt(this.rating);
+  },
 };
 </script>
 <style scoped>

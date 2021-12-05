@@ -56,10 +56,34 @@
             <h3 class="widget-title">Contact</h3>
             <ul class="contact-infomation">
               <li class="address">
-                PO Box 16122 Collins Street West Victoria 8007 Australia
+                <div class="icon-container">
+                  <font-awesome-icon
+                    class="icon"
+                    icon="map-marker-alt"
+                  ></font-awesome-icon>
+                  <p class="icon-label">
+                    PO Box 16122 Collins Street West Victoria 8007 Australia
+                  </p>
+                </div>
               </li>
-              <li class="phone">(84) 90 532 9119</li>
-              <li class="email">Dailist.support@gmail.com</li>
+              <li class="phone">
+                <div class="icon-container">
+                  <font-awesome-icon
+                    class="icon"
+                    icon="phone-alt"
+                  ></font-awesome-icon>
+                  <p class="icon-label">(+92) 333-9938642</p>
+                </div>
+              </li>
+              <li class="email">
+                <div class="icon-container">
+                  <font-awesome-icon
+                    class="icon"
+                    icon="envelope"
+                  ></font-awesome-icon>
+                  <p class="icon-label">ostello@gmail.com</p>
+                </div>
+              </li>
             </ul>
           </div>
           <!-- /.widget-contact -->
@@ -130,3 +154,30 @@
   </div>
   <!-- /.button-go-top -->
 </template>
+
+<style scoped>
+.icon-container {
+  display: flex;
+  padding-bottom: 10px;
+}
+.icon {
+  padding-top: 4px;
+  font-size: 20px;
+}
+.icon-label {
+  padding-left: 15px;
+  font-size: 15.5px;
+}
+.widget-contact ul.contact-infomation li:before {
+  content: unset;
+}
+.widget-contact ul.contact-infomation li.phone:before {
+  content: unset;
+}
+.widget-contact ul.contact-infomation li.email:before {
+  content: unset;
+}
+.widget-contact ul.contact-infomation li {
+  padding-left: unset;
+}
+</style>
