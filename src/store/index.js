@@ -3,6 +3,7 @@ import { createStore } from "vuex";
 export default createStore({
   state() {
     return {
+      currentUser: "jj",
       registerUsers: [],
       listings: [
         {
@@ -64,7 +65,7 @@ export default createStore({
               title: "The food was amazing",
               review:
                 "Such a lovely place. The host met us at agreed time, showed us everything. The apartment is conveniently located, a short walk to subway, shops, and restaurants. Wi fi worked well. We had a great time.",
-              ratting: "4",
+              rating: 4.5,
             },
             {
               author: "Usama Ilyas",
@@ -74,6 +75,7 @@ export default createStore({
               review:
                 "Such a lovely place. The host met us at agreed time, showed us everything. The apartment is conveniently located, a short walk to subway, shops, and restaurants. Wi fi worked well. We had a great time.",
               rating: "4",
+              rating: 3,
             },
           ],
           booking: {
@@ -97,6 +99,7 @@ export default createStore({
     },
     addregisterUsers(state, payload) {
       state.registerUsers.push(payload);
+      state.registerUser = payload;
     },
   },
 
@@ -116,6 +119,9 @@ export default createStore({
     },
     getRegisterUsers(state) {
       return state.registerUsers;
+    },
+    getCurrentUser(state) {
+      return state.currentUser;
     },
   },
 });

@@ -140,7 +140,7 @@
                 :key="review.email"
                 :author="review.author"
                 :authorImage="review.authorImage"
-                :ratting="review.ratting"
+                :rating="review.rating"
                 :authorReview="review.review"
                 :title="review.title"
               ></review-section>

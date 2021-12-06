@@ -80,6 +80,7 @@ export default {
         password: "",
         isLandlord: "false",
         persolnalInfo: [],
+        
       },
     };
   },
