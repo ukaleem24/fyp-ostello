@@ -65,20 +65,9 @@
                   v-model="listingData.address"
                 />
               </div>
-              <!-- /.wrap-listing -->
-              <div class="pdmap style2" id="flat-map">
-                <div
-                  class="flat-maps"
-                  data-address="Thành phố New York, Tiểu bang New York"
-                  data-name="Themesflat Map"
-                ></div>
-                <div class="gm-map">
-                  <div class="map-3"></div>
-                </div>
-              </div>
               <!-- /#flat-map -->
               <div class="wrap-listing phone">
-                <label>Phone</label>
+                <label>City</label>
                 <input
                   type="text"
                   name="phonenumber"
@@ -88,6 +77,40 @@
               </div>
               <!-- /.wrap-listing -->
               <div class="wrap-listing website">
+                <label>Country</label>
+                <input
+                  type="text"
+                  name="website"
+                  placeholder="http://"
+                  v-model="listingData.website"
+                />
+              </div>
+              <!-- /.wrap-listing -->
+
+              <!-- /.wrap-listing -->
+              <div class="pdmap style2" id="flat-map">
+                <div class="flat-maps">
+                  <div class="map-3">
+                    <GMapMap
+                      class="myMapFix"
+                      :center="{ lat: 33.6844, lng: 73.0479 }"
+                      :zoom="10"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- /#flat-map -->
+              <div class="wrap-listing phone myfix3">
+                <label>Phone</label>
+                <input
+                  type="text"
+                  name="phonenumber"
+                  placeholder="+92 312 3456789"
+                  v-model="listingData.phone"
+                />
+              </div>
+              <!-- /.wrap-listing -->
+              <div class="wrap-listing website myfix3">
                 <label>Website</label>
                 <input
                   type="text"
@@ -103,7 +126,7 @@
             <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
             <!-- Pricing-section:    -->
-            <div class="inner-box form style1">
+            <div class="inner-box form style1 myfix2">
               <h3>Pricing and availability</h3>
               <br />
               <div class="one-half">
@@ -619,7 +642,9 @@ export default {
         id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
         kind: "default",
         type: "default",
-        address: "",
+        city: "",
+        route: "",
+        country: "",
         phone: "",
         rentalPeriod: "default",
         availableFrom: "",
@@ -680,6 +705,14 @@ export default {
 </script>
 
 <style scoped>
+.myfix3 {
+  padding-top: 80px;
+}
+.myMapFix {
+  height: 40vh;
+  padding-bottom: 20px;
+}
+
 h3 {
   font-weight: 600;
 }
