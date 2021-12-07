@@ -4,8 +4,9 @@ import VueGoogleMaps from "@fawmi/vue-google-maps";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from "axios";
+import VueAxios from "vue-axios";
+import auth from "@websanova/vue-auth/src/v3"
 
 import TheHeader from "./components/nav/TheHeader.vue";
 import TheFooter from "./components/nav/TheFooter.vue";
@@ -28,8 +29,9 @@ app.component("vue3-star-ratings", vue3StarRatings);
 app.component("TheHeader", TheHeader);
 app.component("TheFooter", TheFooter);
 
-app.use(VueAxios, axios)
-app.provide('axios', app.config.globalProperties.axios) 
+app.use(VueAxios, axios);
+app.use(auth);
+app.provide("axios", app.config.globalProperties.axios);
 
 app.use(VueGoogleMaps, {
   load: {

@@ -3,7 +3,8 @@ import { createStore } from "vuex";
 export default createStore({
   state() {
     return {
-      currentUser: "jj",
+      currentUser: "",
+      token: "",
       registerUsers: [],
       listings: [
         {
@@ -100,6 +101,10 @@ export default createStore({
       state.registerUsers.push(payload);
       state.registerUser = payload;
     },
+    setCurrentUser(state, payload) {
+      state.currentUser = payload.userName;
+      state.token = payload.token;
+    },
   },
 
   actions: {
@@ -109,6 +114,9 @@ export default createStore({
     addNewUser(context, payload) {
       context.commit("addregisterUsers", payload);
       console.log(payload);
+    },
+    setCurrentUser(context, payload) {
+      context.commit("setCurrentUser", payload);
     },
   },
   modules: {},
@@ -121,6 +129,12 @@ export default createStore({
     },
     getCurrentUser(state) {
       return state.currentUser;
+    },
+    getUname(state) {
+      return state.currentUser;
+    },
+    getToken(state) {
+      return state.token;
     },
   },
 });

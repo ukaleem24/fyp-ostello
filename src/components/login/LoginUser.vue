@@ -7,33 +7,15 @@
         <div class="box">
           <div class="register-form">
             <div class="login-form style2">
-              <h3>Register</h3>
+              <h3>Hi, Welcome Back</h3>
               <form @submit.prevent="">
-                <div class="wrap-login firstname">
-                  <label>First name</label>
-                  <input
-                    type="text"
-                    class="first-name"
-                    name="firstname"
-                    v-model="newUser.fName"
-                  />
-                </div>
-                <div class="wrap-login lastname">
-                  <label>Last name</label>
-                  <input
-                    type="text"
-                    class="last-name"
-                    name="lastname"
-                    v-model="newUser.lName"
-                  />
-                </div>
                 <div class="wrap-login">
                   <label>Email address *</label>
                   <input
                     type="text"
                     class="username"
                     name="username"
-                    v-model="newUser.email"
+                    v-model="user.email"
                   />
                 </div>
                 <div class="wrap-login">
@@ -42,16 +24,16 @@
                     type="password"
                     class="password"
                     name="password"
-                    v-model="newUser.password"
+                    v-model="user.password"
                   />
                 </div>
                 <div class="wrap-login email-exist">
-                  <h4 v-if="emailExist">{{ emailExist }}</h4>
+                  <h4 v-if="emailExist">{{ emailExist }} {{ getUname }}</h4>
+                  <h4>here i am : {{ getUname }}</h4>
                 </div>
                 <div class="btn-more">
-                  <button class="buttonU" @click="registerNewUser">
-                    Register
-                  </button>
+                  <button class="buttonU" @click="login">Login</button>
+                  <button class="buttonU" @click="getProfile">Login</button>
                 </div>
               </form>
               <!-- /form -->
@@ -69,41 +51,59 @@
   <!-- /.flat-login style2 -->
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
       emailExist: null,
-      newUser: {
-        id: "",
-        fName: "",
-        lName: "",
+      user: {
         email: "",
         password: "",
       },
     };
   },
+  computed: {
+    ...mapGetters(["getUname", "getToken"]),
+  },
   methods: {
-    async registerNewUser() {
+    async login() {
       try {
         const data = {
-          fName: this.newUser.fName,
-          lName: this.newUser.lName,
-          email: this.newUser.email,
-          password: this.newUser.password,
+          email: this.user.email,
+          password: this.user.password,
         };
         const response = await this.axios.post(
-          "http://localhost:3000/api/auth/signup",
+          "http://localhost:3000/api/auth/login",
           data
         );
         if (response.data.success === true) {
-          this.$store.dispatch("setCurrentUser", this.newUser);
-          this.$router.push("/");
+          this.$store.dispatch("setCurrentUser", {
+            userName: response.data.user.fName,
+            token: response.data.token,
+          });
+          // this.$router.push("/");
+          console.log(response.data);
         }
 
         // console.log(response.data.message);
       } catch (error) {
-        this.emailExist = error.response.data.message;
         console.log(error.response.data.message);
+      }
+    },
+    async getProfile() {
+      try {
+        const response = await this.axios.get(
+          "https://localhost:3000/api/auth/user",
+          {
+            headers: {
+              Authorization: this.getToken, //the token is a variable which holds the token
+            },
+          }
+        );
+
+        console.log(response);
+      } catch (error) {
+        console.log(error.response);
       }
     },
   },

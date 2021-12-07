@@ -80,7 +80,7 @@
                     </ul>
                   </li>
                   <li>
-                    <a href="login.html" title="">Log In</a>
+                    <router-link to="/login">Log In</router-link>
                   </li>
                   <li>
                     <router-link to="/register/newuser">Sign Up</router-link>

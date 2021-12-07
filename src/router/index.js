@@ -8,6 +8,7 @@ import EditProfile from "../views/dashboard/EditProfile.vue";
 import Listing from "../views/dashboard/Listing.vue";
 import Booking from "../views/dashboard/Bookings.vue";
 import SearchPage from "../views/SearchPage.vue";
+import Login from "../views/Login.vue";
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
     path: "/search/:searchQuery",
     name: "Search Page",
     component: SearchPage,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
 ];
 
