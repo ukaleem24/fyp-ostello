@@ -3,8 +3,14 @@ import { createStore } from "vuex";
 export default createStore({
   state() {
     return {
-      currentUser: "",
+      currentUser: {
+        active: false,
+        firstName: "",
+        lastName: "",
+        id: "",
+      },
       token: "",
+      userimage:"https://www.w3schools.com/howto/img_avatar.png",
       registerUsers: [],
       listings: [
         {
@@ -104,9 +110,16 @@ export default createStore({
       state.registerUser = payload;
     },
     setCurrentUser(state, payload) {
-      state.currentUser = payload.userName;
+      state.currentUser.active = true;
+      state.currentUser.firstName = payload.fName;
+      state.currentUser.lastName = payload.lName;
+      state.currentUser.id = payload.id;
       state.token = payload.token;
     },
+    setUserImage(state,payload)
+    {
+      state.userimage=payload.image;
+    }
   },
 
   actions: {
@@ -120,6 +133,10 @@ export default createStore({
     setCurrentUser(context, payload) {
       context.commit("setCurrentUser", payload);
     },
+    setUserImage(context,payload)
+    {
+      context.commit("setUserImage", payload);
+    }
   },
   modules: {},
   getters: {
@@ -132,11 +149,11 @@ export default createStore({
     getCurrentUser(state) {
       return state.currentUser;
     },
-    getUname(state) {
-      return state.currentUser;
-    },
     getToken(state) {
       return state.token;
     },
+    getUserImage(state){
+      return state.userimage;
+    }
   },
 });

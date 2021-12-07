@@ -7,11 +7,7 @@
   <div class="wholeBody">
     <div class="sidebar-dashboard">
       <div class="profile_info">
-        <img
-          src="../../assets/images/dummy/dummy.jpg"
-          class="profile_image"
-          alt=""
-        />
+        <img :src="getUserImage" class="profile_image" alt="" />
         <h4 class="userName">Jessica</h4>
       </div>
 
@@ -84,7 +80,7 @@ export default {
     ListingCard,
   },
   computed: {
-    ...mapGetters(["getListings"]),
+    ...mapGetters(["getListings", "getUserImage"]),
   },
   methods: {
     profile() {
@@ -93,9 +89,9 @@ export default {
     listing() {
       this.$router.push("/dashboard/listing");
     },
-    booking(){
+    booking() {
       this.$router.push("/dashboard/booking");
-    }
+    },
   },
 };
 </script>

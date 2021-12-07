@@ -101,27 +101,30 @@
                         <div class="login-icon-container">
                           <div class="myfix">
                             <font-awesome-icon
-                              v-if="getCurrentUser === null"
+                              v-if="getCurrentUser.active === false"
                               icon="user-circle"
                             ></font-awesome-icon>
                             <h6
-                              v-if="getCurrentUser === null"
+                              v-if="getCurrentUser.active === false"
                               class="user-name"
                             >
                               Log In
                             </h6>
                             <img
                               class="login-img"
-                              v-if="getCurrentUser != null"
-                              src="https://www.w3schools.com/howto/img_avatar.png"
+                              v-if="getCurrentUser.active === true"
+                              :src="getUserImage"
                               alt=""
                             />
-                            <h6 v-if="getCurrentUser != null" class="user-name">
+                            <h6
+                              v-if="getCurrentUser.active === true"
+                              class="user-name"
+                            >
                               HI, USAMA
                             </h6>
                             <div class="arrow-down-container">
                               <font-awesome-icon
-                                v-if="getCurrentUser != null"
+                                v-if="getCurrentUser.active === true"
                                 class="arrow-down"
                                 icon="angle-down"
                               ></font-awesome-icon>
@@ -183,11 +186,11 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getCurrentUser"]),
+    ...mapGetters(["getCurrentUser", "getUserImage"]),
   },
-  created() {
-    console.log(this.getCurrentUser);
-  },
+  // created() {
+  //   console.log(this.getCurrentUser);
+  // },
 };
 </script>
 <style scoped>

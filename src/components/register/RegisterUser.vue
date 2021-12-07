@@ -96,8 +96,7 @@ export default {
           data
         );
         if (response.data.success === true) {
-          this.$store.dispatch("setCurrentUser", this.newUser);
-          this.$router.push("/");
+          this.$router.push("/login");
         }
 
         // console.log(response.data.message);

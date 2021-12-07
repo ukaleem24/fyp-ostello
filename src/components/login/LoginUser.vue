@@ -29,7 +29,7 @@
                 </div>
                 <div class="wrap-login email-exist">
                   <h4 v-if="emailExist">{{ emailExist }} {{ getUname }}</h4>
-                  <h4>here i am : {{ getUname }}</h4>
+                  <h4>here i am : {{ getCurrentUser.firstName }}</h4>
                 </div>
                 <div class="btn-more">
                   <button class="buttonU" @click="login">Login</button>
@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getUname", "getToken"]),
+    ...mapGetters(["getCurrentUser", "getToken"]),
   },
   methods: {
     async login() {
@@ -78,11 +78,13 @@ export default {
         );
         if (response.data.success === true) {
           this.$store.dispatch("setCurrentUser", {
-            userName: response.data.user.fName,
+            fName: response.data.user.fName,
+            lName: response.data.user.lName,
+            id: response.data.user._id,
             token: response.data.token,
           });
           // this.$router.push("/");
-          console.log(response.data);
+          
         }
 
         // console.log(response.data.message);
@@ -90,22 +92,16 @@ export default {
         console.log(error.response.data.message);
       }
     },
-    async getProfile() {
-      try {
-        const response = await this.axios.get(
-          "https://localhost:3000/api/auth/user",
-          {
-            headers: {
-              Authorization: this.getToken, //the token is a variable which holds the token
-            },
-          }
-        );
-
-        console.log(response);
-      } catch (error) {
-        console.log(error.response);
-      }
-    },
+    // async getProfile() {
+    //   try {
+    //     const response = await this.axios.get(
+    //       "https://localhost:3000/api/auth/user"
+    //     );
+    //     console.log(response.data.user);
+    //   } catch (error) {
+    //     console.log(error.response);
+    //   }
+    // },
   },
 };
 </script>

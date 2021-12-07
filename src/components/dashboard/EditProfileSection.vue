@@ -7,7 +7,7 @@
   <div class="wholeBody">
     <div class="sidebar-dashboard">
       <div class="profile_info">
-        <img :src="personalInformation.image" class="profile_image" alt="" />
+        <img :src="getUserImage" class="profile_image" alt="" />
         <h4 class="userName">Jessica</h4>
       </div>
 
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <form action="#" @submit.prevent="submitData">
+    <form action="#" @submit.prevent="saveUserInfo">
       <div class="content">
         <div class="profile-Container">
           <h3>Personal information</h3>
@@ -254,12 +254,41 @@ export default {
     booking() {
       this.$router.push("/dashboard/booking");
     },
-    submitData() {
-      console.log(this.personalInformation);
+    async saveUserInfo() {
+      try {
+        const data = {
+          userId: this.getCurrentUser.id,
+          photo: this.personalInformation.image,
+          dob: this.personalInformation.dob,
+          gender: this.personalInformation.gender,
+          city: this.personalInformation.residence,
+          nationality: this.personalInformation.nationality,
+          occupation: this.personalInformation.occupation,
+        };
+        const response = await this.axios.post(
+          "http://localhost:3000/api/userInfo",
+          data
+        );
+        if (response.data.success === true) {
+          // this.$store.dispatch("setCurrentUser", {
+          //   fName: response.data.user.fName,
+          //   lName: response.data.user.lName,
+          //   id: response.data.user._id,
+          //   token: response.data.token,
+          // });
+          // this.$router.push("/");
+          console.log(response);
+          console.log(response.data);
+        }
+
+        // console.log(response.data.message);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
     },
   },
   computed: {
-    ...mapGetters(["getRegisterUsers"]),
+    ...mapGetters(["getCurrentUser", "getUserImage"]),
   },
 };
 </script>
