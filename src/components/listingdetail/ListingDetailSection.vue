@@ -4,7 +4,7 @@
       <i class="ti-arrow-circle-left" id="prvButton" @click="previousImage"></i>
       <i class="ti-arrow-circle-right" id="nextButton" @click="nextImage"></i>
       <div>
-        <img class="mySlides" :src="currentImage" />
+        <img class="mySlides image-fix" :src="currentImage" />
       </div>
     </div>
   </section>
@@ -206,15 +206,14 @@
         <div class="col-md-4">
           <div class="sidebar">
             <div class="box pdmap style1" id="flat-map-4">
-              <div
-                class="flat-maps"
-                data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam"
-                data-image="images/icon/map.png"
-                data-name="Themesflat Map"
-              ></div>
-              <div class="gm-map">
+              <GMapMap
+                class="myMapFix"
+                :center="{ lat: 33.6844, lng: 73.0479 }"
+                :zoom="10"
+              />
+              <!-- <div class="gm-map">
                 <div class="map-4"></div>
-              </div>
+              </div> -->
             </div>
             <!-- /#flat-map -->
             <div class="box contact-box">
@@ -415,5 +414,14 @@ export default {
 .header-icons {
   font-size: 20px;
   color: #2c3e50;
+}
+
+.myMapFix {
+  height: 300px;
+}
+
+.image-fix {
+  max-width: 900px; /* you can use % */
+  height: auto;
 }
 </style>

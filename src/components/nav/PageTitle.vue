@@ -15,8 +15,11 @@
                   placeholder="What are you looking for ?"
                   name="search"
                   id="location"
-                  v-bind:value="searchQuery"
-                  v-on:input="searchQuery = $event.target.value"
+                  :options="{
+                    componentRestrictions: { country: ['pk'] },
+                    strictBounds: true,
+                  }"
+                  @place_changed="setPlace"
                 />
               </span>
               <span class="location">
@@ -57,6 +60,31 @@ export default {
     redirectSearchPage() {
       console.log(this.searchQuery);
       this.$router.push("/search/" + this.searchQuery);
+    },
+    setPlace(place) {
+      console.log(place.address_components);
+      // let country, city;
+      // for (const component of place.address_components) {
+      //   const componentType = component.types[0];
+
+      //   switch (componentType) {
+      //     case "street_number": {
+      //       address1 = `${component.long_name} ${address1}`;
+      //       break;
+      //     }
+
+      //     case "route": {
+      //       address1 += component.short_name;
+      //       break;
+      //     }
+      //     case "locality":
+      //       city = component.long_name;
+      //       break;
+      //     case "country":
+      //       country = component.long_name;
+      //       break;
+      //   }
+      // }
     },
   },
 };
