@@ -74,20 +74,29 @@ export default {
     return {
       newUser: {
         id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
-        firstName: "",
-        lastName: "",
+        fName: "",
+        lName: "",
         email: "",
         password: "",
         isLandlord: "false",
         persolnalInfo: [],
-        
       },
     };
   },
   methods: {
     registerNewUser() {
+      this.axios
+        .post(
+          "http://localhoast:3000/auth/signup",
+          this.fName,
+          this.lName,
+          this.email,
+          this.password
+        )
+        .then((result) => {
+          console.warn(result);
+        });
       this.$store.dispatch("addNewUser", this.newUser);
-      this.$router.push("/my/listings");
     },
   },
 };
