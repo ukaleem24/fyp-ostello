@@ -83,8 +83,7 @@ export default {
             id: response.data.user._id,
             token: response.data.token,
           });
-          // this.$router.push("/");
-          
+          this.$router.push("/dashboard/profile");
         }
 
         // console.log(response.data.message);
