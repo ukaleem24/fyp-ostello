@@ -49,21 +49,27 @@
         </div>
       </div>
     </div>
-    <form action="#" @submit.prevent="saveUserInfo">
+    <form
+      action="#"
+      @submit.prevent="saveUserInfo"
+      method="post"
+      enctype="multipart/form-data"
+    >
       <div class="content">
         <div class="profile-Container">
           <h3>Personal information</h3>
           <div class="myfix">
             <div class="uploadImageContainer">
               <img
-                :src="personalInformation.image"
+                :src="personalInformation.photo"
                 class="upload_image"
                 alt=""
               />
               <input
                 class="upload_image_button"
                 type="file"
-                name="upload-file"
+                name="photo"
+                multiple
                 @change="uploadImage"
               />
             </div>
@@ -226,7 +232,7 @@ export default {
   data() {
     return {
       personalInformation: {
-        image: "https://www.w3schools.com/howto/img_avatar.png",
+        photo: "https://www.w3schools.com/howto/img_avatar.png",
         dob: "",
         gender: "",
         residence: "",
@@ -237,14 +243,38 @@ export default {
   },
   methods: {
     uploadImage(e) {
+      /////////////
       var previewImage = null;
-      const image = e.target.files[0];
+      // const photo = e.target.files[0];
+      const image = e.target.files;
+      console.log(image);
       const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onload = (e) => {
-        previewImage = e.target.result;
-        this.personalInformation.image = previewImage;
-      };
+
+      for (let i = 0; i <= image.length; i++) {
+        console.log("First check");
+        console.log(image[0]);
+        this.personalInformation.photo = image[i];
+        reader.readAsDataURL(image[i]);
+        reader.onload = (e) => {
+          previewImage = e.target.result;
+          console.log("check");
+          console.log(previewImage);
+          this.personalInformation.photo = previewImage;
+        };
+      }
+
+      // image.array.forEach((file) => {
+      // console.log("First check");
+      // this.personalInformation.photo = file;
+      // reader.readAsDataURL(file);
+      // reader.onload = (e) => {
+      //   previewImage = e.target.result;
+      //   console.log("check");
+      //   console.log(previewImage);
+      //   this.personalInformation.photo = previewImage;
+      //   console.log(this.personalInformation.photo);
+      // };
+      // });
     },
     profile() {
       this.$router.push("/dashboard/profile");
@@ -257,17 +287,18 @@ export default {
     },
     async saveUserInfo() {
       try {
-        const data = {
-          userId: this.getCurrentUser.id,
-          // photo: this.personalInformation.image,
-          dob: this.personalInformation.dob,
-          gender: this.personalInformation.gender,
-          city: this.personalInformation.residence,
-          nationality: this.personalInformation.nationality,
-          occupation: this.personalInformation.occupation,
-        };
+        console.log(this.getCurrentUser.photo);
+        const data = new FormData();
+        data.append("userId", this.getCurrentUser.id);
+        data.append("photo[]", this.getCurrentUser.photo);
+        data.append("dob", this.getCurrentUser.dob);
+        data.append("gender", this.getCurrentUser.gender);
+        data.append("city", this.getCurrentUser.residence);
+        data.append("nationality", this.getCurrentUser.nationality);
+        data.append("occupation", this.getCurrentUser.occupation);
+
         const response = await this.axios.post(
-          "http://localhost:3000/api//user/info",
+          "http://localhost:3000/api/user/info",
           data
         );
         if (response.data.success === true) {
@@ -278,7 +309,9 @@ export default {
           //   token: response.data.token,
           // });
           // this.$router.push("/");
-          console.log("success");
+          // this.$store.dispatch("setUserImage", {
+          //   image: this.personalInformation.image,
+          // });
         }
 
         // console.log(response.data.message);
