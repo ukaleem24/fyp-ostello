@@ -56,13 +56,30 @@
               <!-- /.wrap-listing -->
               <div class="clearfix"></div>
               <div class="wrap-listing location">
-                <label>Location (optional)</label>
-                <span class="ti-target"></span>
+                <label>Street Address*</label>
                 <input
                   type="text"
-                  name="yourname"
-                  placeholder="e.g.”New York”"
-                  v-model="listingData.address"
+                  placeholder="House#--, Street#--, -----"
+                  name="streetAddress"
+                  id="streetAddress"
+                  v-model="streetAddress"
+                  required
+                />
+              </div>
+              <div class="wrap-listing location">
+                <label>Location*</label>
+                <span class="ti-target"></span>
+                <GMapAutocomplete
+                  type="text"
+                  placeholder="Location of the property"
+                  name="search"
+                  id="location"
+                  :options="{
+                    componentRestrictions: { country: ['pk'] },
+                    strictBounds: true,
+                  }"
+                  @place_changed="setMap"
+                  required
                 />
               </div>
               <!-- /#flat-map -->
@@ -70,19 +87,28 @@
                 <label>City</label>
                 <input
                   type="text"
+                  placeholder="eg. Islamabad"
+                  name="city"
+                  id="city"
+                  v-model="listingData.city"
+                  disabled
+                />
+                <!-- <input
+                  type="text"
                   name="phonenumber"
                   placeholder="+92 312 3456789"
                   v-model="listingData.phone"
-                />
+                /> -->
               </div>
               <!-- /.wrap-listing -->
               <div class="wrap-listing website">
                 <label>Country</label>
                 <input
                   type="text"
-                  name="website"
-                  placeholder="http://"
-                  v-model="listingData.website"
+                  name="country"
+                  placeholder="eg. Pakistan"
+                  v-model="listingData.country"
+                  disabled
                 />
               </div>
               <!-- /.wrap-listing -->
@@ -93,9 +119,11 @@
                   <div class="map-3">
                     <GMapMap
                       class="myMapFix"
-                      :center="{ lat: 33.6844, lng: 73.0479 }"
-                      :zoom="10"
-                    />
+                      :center="{ lat: position.lat, lng: position.lng }"
+                      :zoom="zoom"
+                    >
+                      <GMapMarker v-if="showMarker" :position="position" />
+                    </GMapMap>
                   </div>
                 </div>
               </div>
@@ -568,7 +596,7 @@
               </div>
               <!-- /.one-half -->
               <div class="one-half">
-                <div v-if="listingData.images.length > 0" class="media">
+                <!-- <div v-if="listingData.images.length > 0" class="media">
                   <label>Images</label>
                   <image-card
                     v-for="singleImage in listingData.images"
@@ -578,7 +606,7 @@
                     :id="singleImage.id"
                     @remove-image="removeImage"
                   ></image-card>
-                </div>
+                </div> -->
               </div>
               <!-- /.one-half -->
               <div class="clearfix"></div>
@@ -631,19 +659,20 @@
 </template>
 
 <script>
-import ImageCard from "./ImageCard.vue";
+// import ImageCard from "./ImageCard.vue";
 export default {
   components: {
-    ImageCard,
+    // ImageCard,
   },
   data() {
     return {
       listingData: {
-        id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
+        // id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
         kind: "default",
         type: "default",
+        streetAddress: "",
+        location: "",
         city: "",
-        route: "",
         country: "",
         phone: "",
         rentalPeriod: "default",
@@ -663,20 +692,38 @@ export default {
         parking: "",
         basement: "",
         furnished: "",
-        images: [],
-        reviews: [],
+        // images: [],
+        // reviews: [],
         booking: {
           isBooked: false,
           bookeedBy: "",
           bookingDate: "",
         },
+        position: {},
       },
+      position: { lat: 33.6844, lng: 73.0479 },
+      zoom: 10,
+      showMarker: false,
     };
   },
 
   methods: {
-    submitListing() {
-      this.$store.dispatch("addNewListing", this.listingData);
+    async submitListing() {
+      try {
+        const data = this.listingData;
+        const response = await this.axios.post(
+          "http://localhost:3000/api/add/listing",
+          data
+        );
+        if (response.data.status) {
+          console.log(response.data);
+        }
+
+        // console.log(response.data.message);
+      } catch (error) {
+        console.log(error.message);
+      }
+      // this.$store.dispatch("addNewListing", this.listingData);
       this.$router.push("/my/listings");
     },
     uploadImage(e) {
@@ -699,6 +746,23 @@ export default {
         (imageObj) => imageObj.id === imageId
       );
       this.listingData.images.splice(imageIndex, 1);
+    },
+    setMap(address) {
+      this.position.lat = address.geometry.location.lat();
+      this.position.lng = address.geometry.location.lng();
+      this.listingData.position = this.position;
+      this.zoom = 15;
+      this.showMarker = true;
+      const addressComponents = address.address_components;
+      console.log(address);
+      addressComponents.forEach((comp) => {
+        if (comp.types.includes("locality")) {
+          this.listingData.city = comp.long_name;
+        }
+        if (comp.types.includes("country")) {
+          this.listingData.country = comp.long_name;
+        }
+      });
     },
   },
 };
