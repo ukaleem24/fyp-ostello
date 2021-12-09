@@ -62,7 +62,7 @@
                   placeholder="House#--, Street#--, -----"
                   name="streetAddress"
                   id="streetAddress"
-                  v-model="streetAddress"
+                  v-model="listingData.streetAddress"
                   required
                 />
               </div>
@@ -660,6 +660,8 @@
 
 <script>
 // import ImageCard from "./ImageCard.vue";
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     // ImageCard,
@@ -704,13 +706,19 @@ export default {
       position: { lat: 33.6844, lng: 73.0479 },
       zoom: 10,
       showMarker: false,
+      userId: null,
     };
   },
-
+  computed: {
+    ...mapGetters(["getCurrentUser"]),
+  },
   methods: {
     async submitListing() {
       try {
+        this.listingData.userId = this.getCurrentUser.id;
+        console.log(this.getCurrentUser);
         const data = this.listingData;
+
         const response = await this.axios.post(
           "http://localhost:3000/api/add/listing",
           data
@@ -751,6 +759,7 @@ export default {
       this.position.lat = address.geometry.location.lat();
       this.position.lng = address.geometry.location.lng();
       this.listingData.position = this.position;
+      this.listingData.location = address.formatted_address;
       this.zoom = 15;
       this.showMarker = true;
       const addressComponents = address.address_components;

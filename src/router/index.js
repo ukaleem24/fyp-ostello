@@ -5,7 +5,7 @@ import ListingView from "../views/ListingsView.vue";
 import ListingDetail from "../views/ListingDetail.vue";
 import RegisterUser from "../views/Register.vue";
 import EditProfile from "../views/dashboard/EditProfile.vue";
-import Listing from "../views/dashboard/Listing.vue";
+import LandlordListings from "../views/dashboard/LandlordListings.vue";
 import Booking from "../views/dashboard/Bookings.vue";
 import SearchPage from "../views/SearchPage.vue";
 import Login from "../views/Login.vue";
@@ -42,9 +42,9 @@ const routes = [
     component: EditProfile,
   },
   {
-    path: "/dashboard/listing",
-    name: "testing",
-    component: Listing,
+    path: "/dashboard/listings",
+    name: "listings",
+    component: LandlordListings,
   },
   {
     path: "/dashboard/booking",

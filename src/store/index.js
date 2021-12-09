@@ -7,10 +7,10 @@ export default createStore({
         active: false,
         firstName: "",
         lastName: "",
-        id: "",
+        id: null,
       },
       token: "",
-      userimage:"https://www.w3schools.com/howto/img_avatar.png",
+      userimage: "https://www.w3schools.com/howto/img_avatar.png",
       registerUsers: [],
       listings: [
         {
@@ -116,10 +116,9 @@ export default createStore({
       state.currentUser.id = payload.id;
       state.token = payload.token;
     },
-    setUserImage(state,payload)
-    {
-      state.userimage=payload.image;
-    }
+    setUserImage(state, payload) {
+      state.userimage = payload.image;
+    },
   },
 
   actions: {
@@ -133,10 +132,9 @@ export default createStore({
     setCurrentUser(context, payload) {
       context.commit("setCurrentUser", payload);
     },
-    setUserImage(context,payload)
-    {
+    setUserImage(context, payload) {
       context.commit("setUserImage", payload);
-    }
+    },
   },
   modules: {},
   getters: {
@@ -152,8 +150,8 @@ export default createStore({
     getToken(state) {
       return state.token;
     },
-    getUserImage(state){
+    getUserImage(state) {
       return state.userimage;
-    }
+    },
   },
 });

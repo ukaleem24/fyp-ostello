@@ -14,6 +14,12 @@ export default {
     ListingForm,
     DesignAddListing,
   },
+  beforeCreate() {
+    const currentUser = this.$store.getters.getCurrentUser;
+    if (!currentUser.active) {
+      this.$router.push("/login");
+    }
+  },
 };
 </script>
 

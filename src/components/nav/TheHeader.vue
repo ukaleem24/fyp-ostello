@@ -147,7 +147,7 @@
                           >
                         </li>
                         <li>
-                          <router-link to="/dashboard/listing"
+                          <router-link to="/dashboard/listings"
                             >Listings</router-link
                           >
                         </li>
