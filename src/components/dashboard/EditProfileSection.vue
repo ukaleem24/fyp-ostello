@@ -76,7 +76,7 @@
                   type="text"
                   id="fname"
                   name="fname"
-                  placeholder="Usama"
+                  v-model="getCurrentUser.firstName"
                   class="nameInput"
                 />
               </div>
@@ -86,6 +86,7 @@
                   type="text"
                   id="lname"
                   name="lname"
+                  v-model="getCurrentUser.lastName"
                   class="nameInput"
                   placeholder="Ilyas"
                 />
@@ -258,7 +259,7 @@ export default {
       try {
         const data = {
           userId: this.getCurrentUser.id,
-          photo: this.personalInformation.image,
+          // photo: this.personalInformation.image,
           dob: this.personalInformation.dob,
           gender: this.personalInformation.gender,
           city: this.personalInformation.residence,
@@ -266,7 +267,7 @@ export default {
           occupation: this.personalInformation.occupation,
         };
         const response = await this.axios.post(
-          "http://localhost:3000/api/userInfo",
+          "http://localhost:3000/api//user/info",
           data
         );
         if (response.data.success === true) {
@@ -277,8 +278,7 @@ export default {
           //   token: response.data.token,
           // });
           // this.$router.push("/");
-          console.log(response);
-          console.log(response.data);
+          console.log("success");
         }
 
         // console.log(response.data.message);
@@ -289,6 +289,11 @@ export default {
   },
   computed: {
     ...mapGetters(["getCurrentUser", "getUserImage"]),
+  },
+  created() {
+    if (this.getCurrentUser.active === false) {
+      this.$router.push("/");
+    }
   },
 };
 </script>

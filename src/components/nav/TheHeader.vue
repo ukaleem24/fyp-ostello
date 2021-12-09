@@ -120,7 +120,7 @@
                               v-if="getCurrentUser.active === true"
                               class="user-name"
                             >
-                              HI, USAMA
+                              HI, {{ getCurrentUser.firstName.toUpperCase() }}
                             </h6>
                             <div class="arrow-down-container">
                               <font-awesome-icon
