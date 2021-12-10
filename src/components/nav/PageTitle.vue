@@ -18,8 +18,11 @@
                   :options="{
                     componentRestrictions: { country: ['pk'] },
                     strictBounds: true,
+                    types: ['(cities)'],
                   }"
                   @place_changed="setPlace"
+                  @input="inputChanged"
+                  @keyup.enter="redirectSearchPage"
                 />
               </span>
               <span class="location">
@@ -58,33 +61,18 @@ export default {
   },
   methods: {
     redirectSearchPage() {
-      console.log(this.searchQuery);
       this.$router.push("/search/" + this.searchQuery);
     },
     setPlace(place) {
-      console.log(place.address_components);
-      // let country, city;
-      // for (const component of place.address_components) {
-      //   const componentType = component.types[0];
-
-      //   switch (componentType) {
-      //     case "street_number": {
-      //       address1 = `${component.long_name} ${address1}`;
-      //       break;
-      //     }
-
-      //     case "route": {
-      //       address1 += component.short_name;
-      //       break;
-      //     }
-      //     case "locality":
-      //       city = component.long_name;
-      //       break;
-      //     case "country":
-      //       country = component.long_name;
-      //       break;
-      //   }
-      // }
+      const addressComponents = place.address_components;
+      addressComponents.forEach((comp) => {
+        if (comp.types.includes("locality")) {
+          this.searchQuery = comp.long_name;
+        }
+      });
+    },
+    inputChanged(e) {
+      this.searchQuery = e.target.value;
     },
   },
 };

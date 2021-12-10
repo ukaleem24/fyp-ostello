@@ -5,7 +5,7 @@
       <div class="row">
         <grid-card
           v-for="result in searchResults"
-          :key="result.id"
+          :key="result._id"
           :listing="result"
         ></grid-card>
       </div>
@@ -23,20 +23,20 @@ export default {
     SimpleSearchBar,
   },
   data() {
-    return {};
+    return {
+      searchResults: [],
+    };
   },
 
-  computed: {
-    searchResults() {
-      const allListings = this.$store.getters.getListings;
-      const searchQuery = this.$route.params.searchQuery;
-      const searchResults = allListings.filter((listing) =>
-        listing.address.includes(searchQuery)
-      );
-      console.log(searchQuery);
-      console.log(searchResults);
-      return searchResults;
-    },
+  computed: {},
+  async beforeCreate() {
+    const searchQuery = this.$route.params.searchQuery;
+    console.log(searchQuery);
+    const response = await this.axios.get(
+      "http://localhost:3000/api/search/listings/" + searchQuery
+    );
+    console.log(response.data.searchResults);
+    this.searchResults = response.data.searchResults;
   },
 };
 </script>

@@ -84,7 +84,7 @@ export default {
       this.$router.push("/dashboard/profile");
     },
     listing() {
-      this.$router.push("/dashboard/listing");
+      this.$router.push("/dashboard/listings");
     },
     booking() {
       this.$router.push("/dashboard/booking");

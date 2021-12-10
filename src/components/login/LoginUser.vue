@@ -81,9 +81,9 @@ export default {
             fName: response.data.user.fName,
             lName: response.data.user.lName,
             id: response.data.user._id,
-            token: response.data.token,
+            active: true,
           });
-          this.$router.push("/dashboard/profile");
+          this.$router.push("/");
           // this.$router.push("/");
         }
 
