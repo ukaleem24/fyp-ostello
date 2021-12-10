@@ -707,6 +707,7 @@ export default {
       zoom: 10,
       showMarker: false,
       userId: null,
+      files: null,
     };
   },
   computed: {
@@ -734,13 +735,24 @@ export default {
       // this.$store.dispatch("addNewListing", this.listingData);
       this.$router.push("/my/listings");
     },
-    uploadImage(e) {
+    async uploadImage(e) {
       const previewImage = {
         id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
         image: null,
         imageName: "",
       };
       previewImage.imageName = e.target.files[0].name;
+      const file = e.target.files;
+      let formData = new FormData();
+      formData.append("photo", file);
+      console.log(formData);
+      const response = await this.axios.post(
+        "http://localhost:3000/api/test/photo/" + this.getCurrentUser.id,
+        formData
+      );
+      if (response.data.success) {
+        console.log(response.data);
+      }
       const image = e.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(image);
