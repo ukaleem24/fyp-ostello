@@ -71,8 +71,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="flat-row-title center">
-            <h2>Our Top Destinations</h2>
-            <p>Cities you must explore this summer</p>
+            <h2>Explore our most popular cities</h2>
+            <p>
+              See what these cities have to offer and rent the perfect place
+            </p>
           </div>
         </div>
         <!-- /.col-md-12 -->
@@ -82,12 +84,12 @@
         <div class="col-md-6">
           <div class="imagebox style5">
             <div class="box-image">
-              <img src="../../assets/images/page/halong.png" alt="" />
+              <img src="../../assets/images/cities/islamabad.jpeg" alt="" />
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Ha Long</a>
-              <p>Viet Nam</p>
+              <a href="#" title="">Islamabad</a>
+              <p>Pakistan</p>
             </div>
           </div>
           <!-- /.imagebox style5 -->
@@ -96,24 +98,24 @@
         <div class="col-md-3 col-sm-6">
           <div class="imagebox style5">
             <div class="box-image">
-              <img src="../../assets/images/page/tokyo.png" alt="" />
+              <img src="../../assets/images/cities/karachi1.webp" alt="" />
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Tokyo</a>
-              <p>Japan</p>
+              <a href="#" title="">Karachi</a>
+              <p>Pakistan</p>
             </div>
           </div>
           <!-- /.imaebox style5 -->
           <div class="height20"></div>
           <div class="imagebox style5">
             <div class="box-image">
-              <img src="../../assets/images/page/hanoi.png" alt="" />
+              <img src="../../assets/images/cities/lahore.jpg" alt="" />
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Ha Noi</a>
-              <p>Viet Nam</p>
+              <a href="#" title="">Lahore</a>
+              <p>Pakistan</p>
             </div>
           </div>
           <!-- /.imaebox style5 -->
@@ -122,24 +124,24 @@
         <div class="col-md-3 col-sm-6">
           <div class="imagebox style5">
             <div class="box-image">
-              <img src="../../assets/images/page/newyork.png" alt="" />
+              <img src="../../assets/images/cities/quetta.jpg" alt="" />
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">New York</a>
-              <p>USA</p>
+              <a href="#" title="">Quetta</a>
+              <p>Pakistan</p>
             </div>
           </div>
           <!-- /.imagebox style5 -->
           <div class="height20"></div>
           <div class="imagebox style5">
             <div class="box-image">
-              <img src="../../assets/images/page/seoul.png" alt="" />
+              <img src="../../assets/images/cities/peshawar.jpg" alt="" />
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Seoul</a>
-              <p>Korea</p>
+              <a href="#" title="">Peshawar</a>
+              <p>Pakistan</p>
             </div>
           </div>
           <!-- /.imagebox style5 -->

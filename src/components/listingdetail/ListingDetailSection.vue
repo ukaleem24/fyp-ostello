@@ -217,28 +217,28 @@
             </div>
             <!-- /#flat-map -->
             <div class="box contact-box">
-              <ul class="contact-list">
-                <li class="address myfix">
-                  <font-awesome-icon
-                    class="header-icons"
-                    icon="map-marker-alt"
-                  ></font-awesome-icon>
-                  <p class="icon-label">{{ listingData.address }}</p>
-                </li>
-                <li class="phone myfix">
-                  <font-awesome-icon
-                    class="header-icons"
-                    icon="phone-alt"
-                  ></font-awesome-icon>
-                  <p class="icon-label">{{ listingData.phone }}</p>
-                </li>
-              </ul>
-            </div>
-            <div class="box open">
-              <p><i class="fa fa-clock-o" aria-hidden="true"></i>Open Hour:</p>
-              <div class="box-desc">
-                <p>Mon - Sunday</p>
-                <p>09:00 AM - 05:00 PM<span>Closed Now !</span></p>
+              <div class="profile_info">
+                <img
+                  src="https://www.w3schools.com/howto/img_avatar.png"
+                  class="profile_image1"
+                  alt=""
+                />
+              </div>
+
+              <h4 class="ownerName">Usama</h4>
+              <h4 class="rent">RENTAL PERIOD</h4>
+              <div>
+                <div>
+                  <label for="moveIn">Move-in date</label>
+                  <input type="date" name="moveIn" class="date_input" />
+                </div>
+                <div>
+                  <label for="moveOut">Move-out date</label>
+                  <input type="date" name="moveOut" class="date_input" />
+                </div>
+              </div>
+              <div class="booking-button-container">
+                <button class="booking-button">Book Now</button>
               </div>
             </div>
           </div>
@@ -350,6 +350,36 @@ export default {
 </script>
 
 <style scoped>
+.sidebar {
+  margin-left: 20px;
+}
+.booking-button-container {
+  text-align: center !important;
+}
+.booking-button {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.rent {
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+.ownerName {
+  text-align: center;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.profile_info {
+  justify-content: center !important;
+  align-items: center !important;
+}
+.profile_image1 {
+  width: 130px;
+  height: 130px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
 .ButtonDisplay-myfix {
   display: flex;
 }

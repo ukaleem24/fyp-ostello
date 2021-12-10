@@ -132,7 +132,7 @@
                           </div>
                         </div>
                       </div>
-                      <ul v-if="getCurrentUser != null" class="submenu">
+                      <ul v-if="getCurrentUser.active === true" class="submenu">
                         <li>
                           <router-link to="/dashboard/profile"
                             >Profile</router-link

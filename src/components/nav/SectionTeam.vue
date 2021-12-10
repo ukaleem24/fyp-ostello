@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="flat-row-title center">
-            <h2>Team Behind Dailist</h2>
+            <h2>Team Behind Ostello</h2>
             <p>We are one</p>
           </div>
           <!-- /.flat-row-title -->
@@ -13,63 +13,33 @@
       </div>
       <!-- /.row -->
       <div class="row">
-        <div class="col-md-12">
-          <div class="owl-carousel">
-            <div class="team-member">
+        <div class="team-container">
+          <div class="team">
+            <div class="member">
               <div class="member-image">
-                <img src="images/page/team-01.png" alt="" />
+                <img src="../../assets/images/members/usama.jpg" alt="" />
               </div>
-              <div class="member-content">
-                <h4 class="name">Tifany Reny</h4>
-                <div class="option">Reviewer</div>
+              <div class="">
+                <h4 class="name">Usama Ilyas</h4>
+                <div class="option">CEO</div>
               </div>
             </div>
             <!-- /.team-member -->
-            <div class="team-member">
+            <div class="member">
               <div class="member-image">
-                <img src="images/page/team-02.png" alt="" />
+                <img src="../../assets/images/members/usama.jpg" alt="" />
               </div>
-              <div class="member-content">
-                <h4 class="name">Adam Levan</h4>
-                <div class="option">Reviewer</div>
+              <div class="">
+                <h4 class="name">Kaleem Ullah</h4>
+                <div class="option">CEO Assistant</div>
               </div>
             </div>
-            <!-- /.team-member -->
-            <div class="team-member">
-              <div class="member-image">
-                <img src="images/page/team-03.png" alt="" />
-              </div>
-              <div class="member-content">
-                <h4 class="name">Lisay lohen</h4>
-                <div class="option">Reviewer</div>
-              </div>
-            </div>
-            <!-- /.team-member -->
-            <div class="team-member">
-              <div class="member-image">
-                <img src="images/page/team-04.png" alt="" />
-              </div>
-              <div class="member-content">
-                <h4 class="name">Jessica Anta</h4>
-                <div class="option">Reviewer</div>
-              </div>
-            </div>
-            <!-- /.team-member -->
-            <div class="team-member">
-              <div class="member-image">
-                <img src="images/page/team-04.png" alt="" />
-              </div>
-              <div class="member-content">
-                <h4 class="name">Jessica Anta</h4>
-                <div class="option">Reviewer</div>
-              </div>
-            </div>
-            <!-- /.team-member -->
           </div>
-          <!-- /.owl-carousel -->
         </div>
-        <!-- /.col-md-12 -->
       </div>
+
+      <!-- /.owl-carousel -->
+
       <!-- /.row -->
     </div>
     <!-- /.container -->
@@ -78,7 +48,24 @@
 </template>
 
 <style scoped>
-.owl-carousel {
-  position: relative;
+.team-container {
+  padding-left: 200px;
+}
+.team {
+  display: flex;
+  text-align: center;
+}
+.member-image {
+  margin-bottom: 40px;
+}
+.member-image img {
+  width: 180px;
+  height: 180px;
+  border-radius: 110px !important;
+}
+.member {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 30px 30px 110px;
 }
 </style>
