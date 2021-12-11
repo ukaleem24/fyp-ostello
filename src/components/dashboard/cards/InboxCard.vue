@@ -4,10 +4,14 @@
       <div class="imagebox style2">
         <div class="box-imagebox">
           <div class="myfix">
-            <div class="box-header">
-              <div class="box-image">
-                <img :src="image" alt="" />
-                <router-link :to="listingUrl">Preview</router-link>
+            <div class="profile_info">
+              <div class="imageSection">
+                <img
+                  src="https://housinganywhere.imgix.net/room/1666164/c160ccda-c41b-47ea-b77a-d5a993e4fce3.jpg?auto=format&fit=clip&orient=0&ixlib=react-9.2.0&w=1446"
+                  class="profile_image"
+                  alt=""
+                />
+                <h4 class="userName">Kaleem Ullah</h4>
               </div>
             </div>
             <!-- /.box-header -->
@@ -18,25 +22,15 @@
               </div>
               <ul class="rating">
                 <li>
-                  <p class="price">{{ currency }}{{ price }}</p>
+                  <p>22/12/2021</p>
                 </li>
-
-                <li>4.5 rating</li>
-
-                <li>{{ type }}</li>
               </ul>
               <div class="box-desc">
-                <p>{{ description }}</p>
+                <p>
+                  Kaleem has booked your property.If you want to kick him out,
+                  first take the rent then do whatever you want to do with him
+                </p>
               </div>
-              <ul class="location">
-                <li class="address city">
-                  <span class="ti-location-pin"></span>
-                  <p>Rawalpindi, Islamabad</p>
-                </li>
-                <li class="remove">
-                  <button @click="removeListing">Remove</button>
-                </li>
-              </ul>
             </div>
           </div>
           <!-- /.box-content -->
@@ -52,7 +46,7 @@
 
 <script>
 export default {
-  props: ["id", "price", "address", "type", "image", "description", "currency"],
+  //   props: ["id", "price", "address", "type", "image", "description", "currency"],
   methods: {
     async removeListing() {
       const roomId = this.id;
@@ -72,6 +66,22 @@ export default {
 };
 </script>
 <style scoped>
+.myfix {
+  display: flex;
+}
+.profile_info {
+  padding: 20px;
+}
+.userName {
+  text-align: center;
+  padding-top: 10px;
+  font-weight: 600;
+}
+.profile_image {
+  width: 130px;
+  height: 130px;
+  border-radius: 100%;
+}
 .price {
   color: #4ca1af;
   font-weight: 600;

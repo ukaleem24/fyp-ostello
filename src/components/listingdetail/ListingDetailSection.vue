@@ -16,7 +16,7 @@
           <div class="title-left">
             <!-- /.queue -->
             <div class="title">
-              <a href="#" title="">{{ listingData.address }}</a>
+              <a href="#" title="">{{ listingData.streetAddress }}</a>
             </div>
             <!-- /.box-title -->
             <ul class="box-address">
@@ -25,7 +25,7 @@
                   class="header-icons"
                   icon="map-marker-alt"
                 ></font-awesome-icon>
-                <p class="icon-label">{{ listingData.address }}</p>
+                <p class="icon-label">{{ listingData.location }}</p>
               </li>
               <li class="phone myfix">
                 <font-awesome-icon
@@ -131,15 +131,12 @@
             <div class="clearfix"></div>
           </div>
           <div class="comment-area">
-            <h3 class="comment-title">
-              {{ listingData.reviews.length }} Reviews
-            </h3>
+            <h3 class="comment-title">{{ allReviews.length }} Reviews</h3>
             <ol>
               <review-section
-                v-for="review in listingData.reviews"
-                :key="review.email"
-                :author="review.author"
-                :authorImage="review.authorImage"
+                v-for="review in allReviews"
+                :key="review._id"
+                :author="review.user"
                 :rating="review.rating"
                 :authorReview="review.review"
                 :title="review.title"
@@ -162,15 +159,6 @@
                 accept-charset="utf-8"
                 @submit.prevent="submitReview"
               >
-                <div class="comment-form-email">
-                  <label for="comment-email">Your Email</label>
-                  <input
-                    type="email"
-                    id="comment-email"
-                    name="email"
-                    v-model="reviewData.email"
-                  />
-                </div>
                 <div class="comment-form-title">
                   <label for="comment-title">Title</label>
                   <input
@@ -225,7 +213,7 @@
                 />
               </div>
 
-              <h4 class="ownerName">Usama</h4>
+              <h4 class="ownerName">{{ listingData.user.fName }}</h4>
               <h4 class="rent">RENTAL PERIOD</h4>
               <div>
                 <div>
@@ -301,6 +289,7 @@ export default {
   },
   data() {
     return {
+      allReviews: [],
       listingData: [],
       reviewData: {
         author: "Usama Ilyas",
@@ -313,6 +302,9 @@ export default {
       index: 0,
       currentImage: this.$store.getters.getListings[0].images[0].image,
     };
+  },
+  computed: {
+    ...mapGetters(["getListings", "getCurrentUser"]),
   },
   methods: {
     nextImage() {
@@ -328,23 +320,59 @@ export default {
       this.index -= 1;
       this.currentImage = this.listingData.images[this.index].image;
     },
-    submitReview() {
-      this.listingData.reviews.push(this.reviewData);
-      console.log(this.reviewData);
-    },
-  },
-  computed: {
-    ...mapGetters(["getListings"]),
-  },
-  created() {
-    console.log(this.$route.params);
+    async submitReview() {
+      try {
+        const data = {
+          user: this.getCurrentUser.id,
+          listing: this.$route.params.roomId,
+          title: this.reviewData.title,
+          review: this.reviewData.review,
+          rating: this.reviewData.rating,
+        };
+        const response = await this.axios.post(
+          "http://localhost:3000/api/listingdetail/review",
+          data
+        );
+        if (response.data.success === true) {
+          this.allReviews.push(data);
+        }
 
+        // console.log(response.data.message);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    },
+    //
+    // this.listingData.reviews.push(this.reviewData);
+    // console.log(this.reviewData);
+  },
+
+  created() {
+    // console.log(this.$route.params);
+    // const roomId = this.$route.params.roomId;
+    // this.listingData = this.$store.getters.getListings.find(
+    //   (listing) => listing.id == roomId
+    // );
+    // console.log(this.$store.getters.getListings);
+    // console.log;
+  },
+  async beforeCreate() {
+    //getting specfic listing Detail
     const roomId = this.$route.params.roomId;
-    this.listingData = this.$store.getters.getListings.find(
-      (listing) => listing.id == roomId
+    console.log(roomId);
+    const response = await this.axios.get(
+      "http://localhost:3000/api/search/specific_listing/" + roomId
     );
-    console.log(this.$store.getters.getListings);
-    console.log;
+    console.log(response.data.searchResults);
+    this.listingData = response.data.searchResults[0];
+
+    //getting reviews
+    const reviewsResponse = await this.axios.get(
+      "http://localhost:3000/api/listingdetail/review/" + roomId
+    );
+
+    console.log(reviewsResponse.data.reviews);
+    this.allReviews = reviewsResponse.data.reviews;
   },
 };
 </script>
@@ -453,5 +481,8 @@ export default {
 .image-fix {
   max-width: 900px; /* you can use % */
   height: auto;
+}
+.comment-respond form .comment-form-title {
+  padding-left: unset;
 }
 </style>

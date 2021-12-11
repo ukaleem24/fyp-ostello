@@ -17,7 +17,7 @@
           </span>
         </h5>
         <div class="comment-author">
-          by <a href="#" title="">{{ author }}</a>
+          by <a href="#" title="">{{ author.fName }} {{ author.lName }}</a>
         </div>
         <p>
           {{ authorReview }}
@@ -34,9 +34,10 @@ export default {
   data() {
     return {
       intRating: null,
+      authorImage: "https://www.w3schools.com/howto/img_avatar.png",
     };
   },
-  props: ["author", "authorImage", "rating", "authorReview", "title"],
+  props: ["author", "rating", "authorReview", "title"],
   created() {
     this.intRating = parseInt(this.rating);
   },

@@ -26,21 +26,17 @@
             ><i class="fa fa-check-circle" aria-hidden="true"></i>
           </div>
           <ul class="rating">
-            <li>10 rating</li>
-            <li>Ultra High End</li>
-            <li>Hotel</li>
+            <li>kaleem Ullah</li>
+            <li>12/12/12</li>
+            <li>12/12/12</li>
           </ul>
-          <div class="box-desc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </div>
         </div>
         <!-- /.box-content -->
         <ul class="location">
           <li class="address">
             <span class="ti-location-pin"></span>Seoul, Korea
           </li>
-          <li class="open">Open Now !</li>
+          <li class="open">Booked</li>
         </ul>
         <!-- /.location -->
       </div>

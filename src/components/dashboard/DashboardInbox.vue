@@ -21,7 +21,7 @@
       <div class="icon-container">
         <div class="icon-label">
           <font-awesome-icon icon="inbox"></font-awesome-icon>
-          <h5 @click="inbox" class="myFixlabelIcon">Inbox</h5>
+         <h5 @click="inbox" class="myFixlabelIcon">Inbox</h5>
         </div>
       </div>
       <div class="icon-container">
@@ -55,12 +55,7 @@
           <h4>{{ getListings.length }} Results Found</h4>
         </div>
         <div class="grid-Container">
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
+          <inbox-card></inbox-card>
         </div>
       </div>
     </div>
@@ -69,12 +64,12 @@
 
 <script>
 import "../../assets/stylesheets/dashbordStyle.css";
-import GridCard from "./cards/BookingCard.vue";
+import InboxCard from "./cards/InboxCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    GridCard,
+    InboxCard,
   },
   computed: {
     ...mapGetters(["getListings", "getUserImage"]),

@@ -21,7 +21,7 @@
       <div class="icon-container">
         <div class="icon-label">
           <font-awesome-icon icon="inbox"></font-awesome-icon>
-          <h5 class="myFixlabelIcon">Inbox</h5>
+          <h5 @click="inbox" class="myFixlabelIcon">Inbox</h5>
         </div>
       </div>
       <div class="icon-container">
@@ -285,12 +285,15 @@ export default {
     booking() {
       this.$router.push("/dashboard/booking");
     },
+    inbox() {
+      this.$router.push("/dashboard/inbox");
+    },
     async saveUserInfo() {
       try {
         console.log(this.getCurrentUser.photo);
         const data = new FormData();
         data.append("userId", this.getCurrentUser.id);
-        data.append("photo[]", this.getCurrentUser.photo);
+        // data.append("photo[]", this.getCurrentUser.photo);
         data.append("dob", this.getCurrentUser.dob);
         data.append("gender", this.getCurrentUser.gender);
         data.append("city", this.getCurrentUser.residence);
