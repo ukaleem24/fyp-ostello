@@ -80,6 +80,7 @@ export default {
           this.$store.dispatch("setCurrentUser", {
             fName: response.data.user.fName,
             lName: response.data.user.lName,
+            email: response.data.user.email,
             id: response.data.user._id,
             active: true,
           });

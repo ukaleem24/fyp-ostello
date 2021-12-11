@@ -13,7 +13,7 @@
             <!-- /.box-header -->
             <div class="box-content">
               <div class="box-title">
-                <a href="#" title="" class="addressName">{{ address }}</a
+                <a href="#" title="" class="addressName">New York 123 </a
                 ><i class="fa fa-check-circle" aria-hidden="true"></i>
               </div>
               <ul class="rating">

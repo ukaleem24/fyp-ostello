@@ -6,11 +6,14 @@ export default createStore({
       currentUser: {
         active: false,
         firstName: "",
+        email: "",
         lastName: "",
         id: null,
       },
       token: "",
       userimage: "https://www.w3schools.com/howto/img_avatar.png",
+
+      ///////Previous Store////////
       registerUsers: [],
       listings: [
         {
@@ -113,6 +116,7 @@ export default createStore({
       state.currentUser.active = true;
       state.currentUser.firstName = payload.fName;
       state.currentUser.lastName = payload.lName;
+      state.currentUser.email = payload.email;
       state.currentUser.id = payload.id;
       state.token = payload.token;
     },

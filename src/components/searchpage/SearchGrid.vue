@@ -3,6 +3,9 @@
   <section class="flat-row flat-imagebox style3">
     <div class="container">
       <div class="row">
+        <div class="listing-result">
+          <h4>{{ searchResults.length }} Results Found</h4>
+        </div>
         <grid-card
           v-for="result in searchResults"
           :key="result._id"
@@ -40,3 +43,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.listing-result {
+  padding: 5px 5px 30px;
+}
+h4 {
+  color: grey;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+}
+</style>

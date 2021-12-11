@@ -8,7 +8,7 @@
               src="https://housinganywhere.imgix.net/room/1666164/2c7b7d12-4352-4220-b79f-46f27da8e820.jpg?auto=format&fit=clip&orient=0&ixlib=react-9.2.0&w=1446"
               alt=""
             />
-            <a href="#" title="">Preview</a>
+            <a @click="saveListing" href="#" title="">Preview</a>
             <div class="overlay"></div>
             <div class="queue">
               <font-awesome-icon icon="star"></font-awesome-icon>
@@ -23,7 +23,7 @@
         <!-- /.box-header -->
         <div class="box-content">
           <div class="box-title">
-            <a href="#" title="">{{ listing.price }} {{ listing.currency }}</a
+            <a href="#" title="">{{ listing.currency }} {{ listing.price }}</a
             ><i class="fa fa-check-circle" aria-hidden="true"></i>
           </div>
           <ul class="rating">
@@ -53,5 +53,17 @@
 <script>
 export default {
   props: ["listing"],
+  created() {
+    console.log(this.listing);
+  },
+  methods: {
+    saveListing() {
+      // console.log("savelisting");
+      // this.$store.dispatch("setSelectedListing", {
+      //   selectedListing: this.listing,
+      // });
+      this.$router.push("/room/" + this.listing._id);
+    },
+  },
 };
 </script>
