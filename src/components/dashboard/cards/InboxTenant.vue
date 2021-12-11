@@ -26,10 +26,7 @@
                 </li>
               </ul>
               <div class="box-desc">
-                <p>
-                  Kaleem has booked your property.If you want to kick him out,
-                  first take the rent then do whatever you want to do with him
-                </p>
+                <p>Your request for booking New York 123 is panding</p>
               </div>
             </div>
           </div>
@@ -71,11 +68,17 @@ export default {
 }
 .profile_info {
   padding: 20px;
+  padding-left: 40px;
 }
 .userName {
   text-align: center;
   padding-top: 10px;
   font-weight: 600;
+}
+.imagebox.style2 .box-content {
+  float: unset;
+  padding: 29px 30px 0 30px;
+  width: calc(100% - 250px);
 }
 .profile_image {
   width: 130px;

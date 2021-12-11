@@ -21,7 +21,7 @@
       <div class="icon-container">
         <div class="icon-label">
           <font-awesome-icon icon="inbox"></font-awesome-icon>
-         <h5 @click="inbox" class="myFixlabelIcon">Inbox</h5>
+          <h5 @click="inbox" class="myFixlabelIcon">Inbox</h5>
         </div>
       </div>
       <div class="icon-container">
@@ -54,9 +54,8 @@
         <div class="listing-result">
           <h4>{{ getListings.length }} Results Found</h4>
         </div>
-        <div class="grid-Container">
-          <inbox-card></inbox-card>
-        </div>
+        <inbox-tenant v-if="isTenant === true"></inbox-tenant>
+        <inbox-landlord v-if="isLandlord === true"></inbox-landlord>
       </div>
     </div>
   </div>
@@ -64,15 +63,23 @@
 
 <script>
 import "../../assets/stylesheets/dashbordStyle.css";
-import InboxCard from "./cards/InboxCard.vue";
+import InboxTenant from "./cards/InboxTenant.vue";
+import InboxLandlord from "./cards/InboxLandlord.vue";
 import { mapGetters } from "vuex";
 
 export default {
+  data() {
+    return {
+      isLandlord: false,
+      isTenant: false,
+    };
+  },
   components: {
-    InboxCard,
+    InboxTenant,
+    InboxLandlord,
   },
   computed: {
-    ...mapGetters(["getListings", "getUserImage"]),
+    ...mapGetters(["getListings", "getUserImage", "getCurrentUser"]),
   },
   methods: {
     profile() {
@@ -84,8 +91,26 @@ export default {
     booking() {
       this.$router.push("/dashboard/booking");
     },
-    inbox(){
+    inbox() {
       this.$router.push("/dashboard/inbox");
+    },
+  },
+  async created() {
+    try {
+      const searchQuery = this.getCurrentUser.id;
+      const response = await this.axios.get(
+        "http://localhost:3000/api/listings/" + searchQuery
+      );
+      console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+      console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+      console.log("response.data.success ");
+      if (response.data.success === true) {
+        this.isLandlord = true;
+      }
+    } catch (error) {
+      if (error.response.data.success === false) {
+        this.isTenant = true;
+      }
     }
   },
 };
