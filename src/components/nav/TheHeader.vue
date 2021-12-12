@@ -113,7 +113,7 @@
                             <img
                               class="login-img"
                               v-if="getCurrentUser.active === true"
-                              :src="getUserImage"
+                              :src="profileImage"
                               alt=""
                             />
                             <h6
@@ -189,12 +189,29 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      profileImage: null,
+    };
+  },
   computed: {
     ...mapGetters(["getCurrentUser", "getUserImage"]),
   },
   // created() {
   //   console.log(this.getCurrentUser);
   // },
+  created() {
+    this.profileImage = this.getUserImage;
+    // if (this.getCurrentUser.active === true) {
+    //   const userId = this.getCurrentUser.id;
+    //   //getting reviews
+    //   const reviewsResponse = await this.axios.get(
+    //     "http://localhost:3000/api/user/info/" + userId
+    //   );
+    //   this.profileImage = reviewsResponse.data.userinfo.photo;
+    //   console.log(reviewsResponse.data.userinfo);
+    // }
+  },
 };
 </script>
 <style scoped>

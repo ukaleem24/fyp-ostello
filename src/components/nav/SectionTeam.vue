@@ -48,8 +48,14 @@
 </template>
 
 <style scoped>
+.flat-team .flat-row-title {
+  margin-bottom: unset;
+}
 .team-container {
-  padding-left: 200px;
+  padding-left: 270px;
+}
+.flat-team {
+  padding: 30px 0 30px;
 }
 .team {
   display: flex;
@@ -59,8 +65,8 @@
   margin-bottom: 40px;
 }
 .member-image img {
-  width: 180px;
-  height: 180px;
+  width: 140px;
+  height: 140px;
   border-radius: 110px !important;
 }
 .member {

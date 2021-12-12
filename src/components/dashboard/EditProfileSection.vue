@@ -69,7 +69,6 @@
                 class="upload_image_button"
                 type="file"
                 name="photo"
-                multiple
                 @change="uploadImage"
               />
             </div>
@@ -231,6 +230,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      tempPhoto: null,
       personalInformation: {
         photo: "https://www.w3schools.com/howto/img_avatar.png",
         dob: "",
@@ -243,25 +243,21 @@ export default {
   },
   methods: {
     uploadImage(e) {
-      /////////////
+      ////////////
+      this.tempPhoto = e.target.files[0];
       var previewImage = null;
       // const photo = e.target.files[0];
       const image = e.target.files;
       console.log(image);
       const reader = new FileReader();
 
-      for (let i = 0; i <= image.length; i++) {
-        console.log("First check");
-        console.log(image[0]);
-        this.personalInformation.photo = image[i];
-        reader.readAsDataURL(image[i]);
-        reader.onload = (e) => {
-          previewImage = e.target.result;
-          console.log("check");
-          console.log(previewImage);
-          this.personalInformation.photo = previewImage;
-        };
-      }
+      reader.readAsDataURL(image[0]);
+      reader.onload = (e) => {
+        previewImage = e.target.result;
+        console.log("check");
+        console.log(previewImage);
+        this.personalInformation.photo = previewImage;
+      };
 
       // image.array.forEach((file) => {
       // console.log("First check");
@@ -290,21 +286,25 @@ export default {
     },
     async saveUserInfo() {
       try {
-        console.log(this.getCurrentUser.photo);
+        console.log(this.tempPhoto);
         const data = new FormData();
         data.append("userId", this.getCurrentUser.id);
-        // data.append("photo[]", this.getCurrentUser.photo);
-        data.append("dob", this.getCurrentUser.dob);
-        data.append("gender", this.getCurrentUser.gender);
-        data.append("city", this.getCurrentUser.residence);
-        data.append("nationality", this.getCurrentUser.nationality);
-        data.append("occupation", this.getCurrentUser.occupation);
+        data.append("path", this.tempPhoto);
+        data.append("dob", this.personalInformation.dob);
+        data.append("gender", this.personalInformation.gender);
+        data.append("city", this.personalInformation.residence);
+        data.append("nationality", this.personalInformation.nationality);
+        data.append("occupation", this.personalInformation.occupation);
 
         const response = await this.axios.post(
           "http://localhost:3000/api/user/info",
           data
         );
         if (response.data.success === true) {
+          console.log("success");
+          console.log("success");
+          console.log("success");
+          console.log("success");
           // this.$store.dispatch("setCurrentUser", {
           //   fName: response.data.user.fName,
           //   lName: response.data.user.lName,

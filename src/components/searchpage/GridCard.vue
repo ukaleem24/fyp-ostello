@@ -21,6 +21,7 @@
           </div>
           <div class="queue" v-if="averageRating != 'No'">
             <font-awesome-icon
+              class="font-icon"
               icon="star"
               v-for="rate in averageRating"
               :key="rate"
@@ -45,7 +46,8 @@
         <!-- /.box-content -->
         <ul class="location">
           <li class="address">
-            <span class="ti-location-pin"></span>{{ listing.address }}
+            <span class="ti-location-pin"></span>{{ listing.city }},
+            {{ listing.country }}
           </li>
           <li class="open">Open Now !</li>
         </ul>
@@ -98,6 +100,6 @@ export default {
 
 <style scoped>
 .queue {
-  color: rgb(248, 248, 26);
+  color: rgb(236, 236, 20);
 }
 </style>
