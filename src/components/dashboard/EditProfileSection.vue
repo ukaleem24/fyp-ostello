@@ -244,7 +244,7 @@ export default {
   methods: {
     uploadImage(e) {
       ////////////
-      this.tempPhoto = e.target.files;
+      this.tempPhoto = e.target.files[0];
       var previewImage = null;
       // const photo = e.target.files[0];
       const image = e.target.files;
@@ -287,16 +287,16 @@ export default {
       try {
         const file = this.tempPhoto;
         const data = new FormData();
-        // data.append("userId", this.getCurrentUser.id);
+        data.append("userId", this.getCurrentUser.id);
         data.append("photo", file);
-        // data.append("dob", this.personalInformation.dob);
-        // data.append("gender", this.personalInformation.gender);
-        // data.append("city", this.personalInformation.residence);
-        // data.append("nationality", this.personalInformation.nationality);
-        // data.append("occupation", this.personalInformation.occupation);
+        data.append("dob", this.personalInformation.dob);
+        data.append("gender", this.personalInformation.gender);
+        data.append("city", this.personalInformation.residence);
+        data.append("nationality", this.personalInformation.nationality);
+        data.append("occupation", this.personalInformation.occupation);
 
         const response = await this.axios.post(
-          "http://localhost:3000/api/test/photo/" + this.getCurrentUser.id,
+          "http://localhost:3000/api/user/info",
           data
         );
         if (response.data.success === true) {
