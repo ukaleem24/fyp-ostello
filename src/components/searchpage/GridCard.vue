@@ -10,13 +10,6 @@
             />
             <a @click="saveListing" href="#" title="">Preview</a>
             <div class="overlay"></div>
-            <div class="queue">
-              <font-awesome-icon icon="star"></font-awesome-icon>
-              <font-awesome-icon icon="star"></font-awesome-icon>
-              <font-awesome-icon icon="star"></font-awesome-icon>
-              <font-awesome-icon icon="star"></font-awesome-icon>
-              <font-awesome-icon icon="star"></font-awesome-icon>
-            </div>
           </div>
         </div>
 
@@ -26,8 +19,22 @@
             <a href="#" title="">{{ listing.currency }} {{ listing.price }}</a
             ><i class="fa fa-check-circle" aria-hidden="true"></i>
           </div>
+          <div class="queue" v-if="averageRating != 'No'">
+            <font-awesome-icon
+              icon="star"
+              v-for="rate in averageRating"
+              :key="rate"
+            ></font-awesome-icon>
+          </div>
+          <div class="queuee" v-if="averageRating === 'No'">
+            <font-awesome-icon icon="star"></font-awesome-icon>
+            <font-awesome-icon icon="star"></font-awesome-icon>
+            <font-awesome-icon icon="star"></font-awesome-icon>
+            <font-awesome-icon icon="star"></font-awesome-icon>
+            <font-awesome-icon icon="star"></font-awesome-icon>
+          </div>
           <ul class="rating">
-            <li>{{ listing.averageRating }} rating</li>
+            <li>{{ averageRating }} rating</li>
             <li>{{ listing.kind }}</li>
             <li>{{ listing.type }}</li>
           </ul>
@@ -53,8 +60,12 @@
 <script>
 export default {
   props: ["listing"],
-  created() {
-    console.log(this.listing);
+  data() {
+    return {
+      allReviews: "",
+      rating: 0,
+      averageRating: null,
+    };
   },
   methods: {
     saveListing() {
@@ -65,5 +76,28 @@ export default {
       this.$router.push("/room/" + this.listing._id);
     },
   },
+  async beforeCreate() {
+    const roomId = this.listing._id;
+
+    //getting reviews
+    const reviewsResponse = await this.axios.get(
+      "http://localhost:3000/api/listingdetail/review/" + roomId
+    );
+
+    this.allReviews = reviewsResponse.data.reviews;
+    for (let i = 0; i < this.allReviews.length; i++) {
+      this.rating += this.allReviews[i].rating;
+    }
+    this.averageRating = this.rating / this.allReviews.length;
+    if (isNaN(this.averageRating)) {
+      this.averageRating = "No";
+    }
+  },
 };
 </script>
+
+<style scoped>
+.queue {
+  color: rgb(248, 248, 26);
+}
+</style>

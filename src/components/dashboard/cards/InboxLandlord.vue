@@ -71,8 +71,7 @@ export default {
   padding: 29px 30px 0 30px;
   width: calc(100% - 200px);
 }
-.imageSection {
-}
+
 .button-Container {
   margin-bottom: 20px;
   float: right;
