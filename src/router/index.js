@@ -9,6 +9,7 @@ import LandlordListings from "../views/dashboard/LandlordListings.vue";
 import Booking from "../views/dashboard/Bookings.vue";
 import SearchPage from "../views/SearchPage.vue";
 import Login from "../views/Login.vue";
+import Payment from "../views/Payment.vue";
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/payment",
+    name: "Paymen",
+    component: Payment,
   },
 ];
 
