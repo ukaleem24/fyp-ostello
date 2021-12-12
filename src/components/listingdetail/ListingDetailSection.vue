@@ -44,7 +44,7 @@
           <div class="title-right">
             <div class="ButtonDisplay-myfix">
               <div class="btn-more review">
-                <a href="#" title="">Write A Review</a>
+                <a href="#review-section" title="">Write A Review</a>
               </div>
               <div class="btn-more">
                 <a href="#" title="">Book Now</a>
@@ -144,7 +144,7 @@
             </ol>
             <!-- /.comment-list -->
             <hr />
-            <div class="comment-respond">
+            <div class="comment-respond" id="review-section">
               <h2 class="comment-reply-title">Leave a Review</h2>
               <div class="comment-vote">
                 <vue3-star-ratings
@@ -204,7 +204,7 @@
               </div> -->
             </div>
             <!-- /#flat-map -->
-            <div class="box contact-box">
+            <div class="box contact-box" id="booking-section">
               <div class="profile_info">
                 <img
                   src="https://www.w3schools.com/howto/img_avatar.png"
