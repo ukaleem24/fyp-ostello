@@ -745,7 +745,6 @@ export default {
       const file = e.target.files;
       let formData = new FormData();
       formData.append("photo", file);
-      console.log(formData);
       const response = await this.axios.post(
         "http://localhost:3000/api/test/photo/" + this.getCurrentUser.id,
         formData
