@@ -230,7 +230,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      tempPhoto: null,
+      tempPhoto: [],
       personalInformation: {
         photo: "https://www.w3schools.com/howto/img_avatar.png",
         dob: "",
@@ -248,7 +248,6 @@ export default {
       var previewImage = null;
       // const photo = e.target.files[0];
       const image = e.target.files;
-      console.log(image);
       const reader = new FileReader();
 
       reader.readAsDataURL(image[0]);
@@ -286,18 +285,18 @@ export default {
     },
     async saveUserInfo() {
       try {
-        const files = this.tempPhoto;
+        const file = this.tempPhoto;
         const data = new FormData();
-        data.append("userId", this.getCurrentUser.id);
-        data.append("path", files);
-        data.append("dob", this.personalInformation.dob);
-        data.append("gender", this.personalInformation.gender);
-        data.append("city", this.personalInformation.residence);
-        data.append("nationality", this.personalInformation.nationality);
-        data.append("occupation", this.personalInformation.occupation);
+        // data.append("userId", this.getCurrentUser.id);
+        data.append("photo", file);
+        // data.append("dob", this.personalInformation.dob);
+        // data.append("gender", this.personalInformation.gender);
+        // data.append("city", this.personalInformation.residence);
+        // data.append("nationality", this.personalInformation.nationality);
+        // data.append("occupation", this.personalInformation.occupation);
 
         const response = await this.axios.post(
-          "http://localhost:3000/api/user/info",
+          "http://localhost:3000/api/test/photo/" + this.getCurrentUser.id,
           data
         );
         if (response.data.success === true) {

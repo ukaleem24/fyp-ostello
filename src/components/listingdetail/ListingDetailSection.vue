@@ -213,7 +213,7 @@
                 />
               </div>
 
-              <h4 class="ownerName">{{ listingData.user.fName }}</h4>
+              <h4 class="ownerName">{{ landlord.fName }}</h4>
               <h4 class="rent">RENTAL PERIOD</h4>
               <div>
                 <div>
@@ -289,6 +289,7 @@ export default {
   },
   data() {
     return {
+      landlord: {},
       allReviews: [],
       listingData: [],
       reviewData: {
@@ -347,7 +348,7 @@ export default {
     // console.log(this.reviewData);
   },
 
-  created() {
+  async created() {
     // console.log(this.$route.params);
     // const roomId = this.$route.params.roomId;
     // this.listingData = this.$store.getters.getListings.find(
@@ -355,8 +356,6 @@ export default {
     // );
     // console.log(this.$store.getters.getListings);
     // console.log;
-  },
-  async beforeCreate() {
     //getting specfic listing Detail
     const roomId = this.$route.params.roomId;
     console.log(roomId);
@@ -365,6 +364,7 @@ export default {
     );
     console.log(response.data.searchResults);
     this.listingData = response.data.searchResults[0];
+    this.landlord = this.listingData.user;
 
     //getting reviews
     const reviewsResponse = await this.axios.get(
