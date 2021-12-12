@@ -221,12 +221,12 @@
                   <input type="date" name="moveIn" class="date_input" />
                 </div>
                 <div>
-                  <label for="moveOut">Move-out date</label>
-                  <input type="date" name="moveOut" class="date_input" />
+                  <label for="moveOut">Description</label>
+                  <textarea name="" id="" cols="30" rows="3"></textarea>
                 </div>
               </div>
               <div class="booking-button-container">
-                <button class="booking-button">Book Now</button>
+                <button class="booking-button">Send Enquiry</button>
               </div>
             </div>
           </div>

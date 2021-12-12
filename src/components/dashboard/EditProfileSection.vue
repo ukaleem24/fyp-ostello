@@ -244,7 +244,7 @@ export default {
   methods: {
     uploadImage(e) {
       ////////////
-      this.tempPhoto = e.target.files[0];
+      this.tempPhoto = e.target.files;
       var previewImage = null;
       // const photo = e.target.files[0];
       const image = e.target.files;
@@ -286,10 +286,10 @@ export default {
     },
     async saveUserInfo() {
       try {
-        console.log(this.tempPhoto);
+        const files = this.tempPhoto;
         const data = new FormData();
         data.append("userId", this.getCurrentUser.id);
-        data.append("path", this.tempPhoto);
+        data.append("path", files);
         data.append("dob", this.personalInformation.dob);
         data.append("gender", this.personalInformation.gender);
         data.append("city", this.personalInformation.residence);
