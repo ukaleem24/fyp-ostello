@@ -139,7 +139,11 @@
                           >
                         </li>
                         <li>
-                          <router-link to="/my/listings">Inbox</router-link>
+                          <router-link
+                            to="/dashboard/inbox"
+                            class="myFixlabelIcon"
+                            >Inbox</router-link
+                          >
                         </li>
                         <li>
                           <router-link to="/dashboard/booking"

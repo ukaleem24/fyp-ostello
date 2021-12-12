@@ -21,7 +21,7 @@
       <div class="icon-container">
         <div class="icon-label">
           <font-awesome-icon icon="inbox"></font-awesome-icon>
-          <h5 class="myFixlabelIcon">Inbox</h5>
+          <h5 @click="inbox" class="myFixlabelIcon">Inbox</h5>
         </div>
       </div>
       <div class="icon-container">
@@ -52,16 +52,16 @@
     <div class="content">
       <div class="profile-Container">
         <div class="listing-result">
-          <h4>{{ getListings.length }} Results Found</h4>
+          <h4>{{ listingData.length }} Results Found</h4>
         </div>
         <listing-card
-          v-for="listing in getListings"
-          :key="listing.id"
-          :id="listing.id"
+          v-for="listing in getLandlordListing"
+          :key="listing._id"
+          :id="listing._id"
           :price="listing.price"
           :address="listing.address"
           :type="listing.type"
-          :image="listing.images[0].image"
+          image="https://housinganywhere.imgix.net/room/1666164/1cbe6586-3e60-4748-ab99-58664ed0eb49.jpg?auto=format&fit=clip&orient=0&ixlib=react-9.2.0&w=1446"
           :description="listing.description"
           :currency="listing.currency"
         ></listing-card>
@@ -76,11 +76,16 @@ import ListingCard from "./cards/LandlordCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
+  data() {
+    return {
+      listingData: [],
+    };
+  },
   components: {
     ListingCard,
   },
   computed: {
-    ...mapGetters(["getListings", "getUserImage"]),
+    ...mapGetters(["getLandlordListing", "getUserImage", "getCurrentUser"]),
   },
   methods: {
     profile() {
@@ -92,6 +97,19 @@ export default {
     booking() {
       this.$router.push("/dashboard/booking");
     },
+    inbox(){
+      this.$router.push("/dashboard/inbox");
+    }
+  },
+  async created() {
+    //getting specfic listing Detail
+    const response = await this.axios.get(
+      "http://localhost:3000/api/listings/" + this.getCurrentUser.id
+    );
+    console.log(response.data.searchResults);
+    this.listingData = response.data.searchResults;
+    this.$store.dispatch("setLandlordListings", { listing: this.listingData });
+    console.log(this.getLandlordListing);
   },
 };
 </script>

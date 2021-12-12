@@ -12,7 +12,7 @@ export default createStore({
       },
       token: "",
       userimage: "https://www.w3schools.com/howto/img_avatar.png",
-
+      landlordListings: [],
       ///////Previous Store////////
       registerUsers: [],
       listings: [
@@ -103,10 +103,13 @@ export default createStore({
       state.listings.push(payload);
     },
     removeListing(state, payload) {
-      const listingIndex = state.listings.findIndex(
-        (listing) => listing.id === payload.id
+      console.log(payload.id);
+      console.log(state.landlordListings);
+      const listingIndex = state.landlordListings.findIndex(
+        (listing) => listing._id === payload.id
       );
-      state.listings.splice(listingIndex, 1);
+      console.log(listingIndex);
+      state.landlordListings.splice(listingIndex, 1);
     },
     addregisterUsers(state, payload) {
       state.registerUsers.push(payload);
@@ -119,6 +122,9 @@ export default createStore({
       state.currentUser.email = payload.email;
       state.currentUser.id = payload.id;
       state.token = payload.token;
+    },
+    setLandlordListings(state, payload) {
+      state.landlordListings = payload.listing;
     },
     setUserImage(state, payload) {
       state.userimage = payload.image;
@@ -133,11 +139,17 @@ export default createStore({
       context.commit("addregisterUsers", payload);
       console.log(payload);
     },
+    removeListing(context, payload) {
+      context.commit("removeListing", payload);
+    },
     setCurrentUser(context, payload) {
       context.commit("setCurrentUser", payload);
     },
     setUserImage(context, payload) {
       context.commit("setUserImage", payload);
+    },
+    setLandlordListings(context, payload) {
+      context.commit("setLandlordListings", payload);
     },
   },
   modules: {},
@@ -156,6 +168,9 @@ export default createStore({
     },
     getUserImage(state) {
       return state.userimage;
+    },
+    getLandlordListing(state) {
+      return state.landlordListings;
     },
   },
 });

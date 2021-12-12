@@ -10,6 +10,7 @@ import Booking from "../views/dashboard/Bookings.vue";
 import SearchPage from "../views/SearchPage.vue";
 import Login from "../views/Login.vue";
 import Payment from "../views/Payment.vue";
+import Inbox from "../views/dashboard/Inbox.vue";
 
 const routes = [
   {
@@ -66,6 +67,11 @@ const routes = [
     path: "/payment",
     name: "Paymen",
     component: Payment,
+  },
+  {
+    path: "/dashboard/inbox",
+    name: "Inbox",
+    component: Inbox,
   },
 ];
 
