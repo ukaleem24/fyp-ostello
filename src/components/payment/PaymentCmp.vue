@@ -1,101 +1,157 @@
 <template>
-  <section class="showcase">
-    <div class="nes-container with-title">
-      <h3>Donkey Kong Country SNES $19.99</h3>
-      <div class="img">
-        <img
-          src="https://stripe-camo.global.ssl.fastly.net/6d097cce2c90965a3c955721cead3e8e0a9f8050f4122b2b3c50762fbffb326a/68747470733a2f2f66696c65732e7374726970652e636f6d2f6c696e6b732f4d44423864584e6c636c38775155526f654464315454683556566c4a53327846544642554e48786d624639305a584e3058316c7963464a58546e52726556424863336b35626c5648596b5a554e45706a656730305a7a5a565335315a"
-          alt=""
-          srcset=""
-        />
+  <div class="container1">
+    <div class="row">
+      <div class="col-lg-4 mb-lg-0 mb-3">
+        <div class="card p-3">
+          <div class="img-box">
+            <img
+              src="https://www.freepnglogos.com/uploads/visa-logo-download-png-21.png"
+              alt=""
+            />
+          </div>
+          <div class="number">
+            <label class="fw-bold" for="">**** **** **** 1060</label>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <small
+              ><span class="fw-bold">Expiry date:</span
+              ><span>10/16</span></small
+            >
+            <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-lg-0 mb-3">
+        <div class="card p-3">
+          <div class="img-box">
+            <img
+              src="https://www.freepnglogos.com/uploads/mastercard-png/file-mastercard-logo-svg-wikimedia-commons-4.png"
+              alt=""
+            />
+          </div>
+          <div class="number">
+            <label class="fw-bold">**** **** **** 1060</label>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <small
+              ><span class="fw-bold">Expiry date:</span
+              ><span>10/16</span></small
+            >
+            <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-lg-0 mb-3">
+        <div class="card p-3">
+          <div class="img-box">
+            <img
+              src="https://www.freepnglogos.com/uploads/discover-png-logo/credit-cards-discover-png-logo-4.png"
+              alt=""
+            />
+          </div>
+          <div class="number">
+            <label class="fw-bold">**** **** **** 1060</label>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <small
+              ><span class="fw-bold">Expiry date:</span
+              ><span>10/16</span></small
+            >
+            <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mt-4">
+        <div class="card p-3">
+          <p class="mb-0 fw-bold h4">Payment Methods</p>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card p-3">
+          <div class="card-body border p-0">
+            <p>
+              <a
+                class="
+                  btn btn-primary
+                  p-2
+                  w-100
+                  h-100
+                  d-flex
+                  align-items-center
+                  justify-content-between
+                "
+                data-bs-toggle="collapse"
+                href="#collapseExample"
+                role="button"
+                aria-expanded="true"
+                aria-controls="collapseExample"
+              >
+                <span class="fw-bold">Credit Card</span>
+                <span class="">
+                  <span class="fab fa-cc-amex"></span>
+                  <span class="fab fa-cc-mastercard"></span>
+                  <span class="fab fa-cc-discover"></span>
+                </span>
+              </a>
+            </p>
+            <div class="collapse show p-3 pt-0" id="collapseExample">
+              <div class="row">
+                <div class="col-lg-5 mb-lg-0 mb-3">
+                  <p class="h4 mb-0">Summary</p>
+                  <p class="mb-0">
+                    <span class="fw-bold">Product:</span
+                    ><span class="c-green">: Name of product</span>
+                  </p>
+                  <p class="mb-0">
+                    <span class="fw-bold">Price:</span>
+                    <span class="c-green">:$452.90</span>
+                  </p>
+                  <p class="mb-0">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Atque nihil neque quisquam aut repellendus, dicta vero?
+                    Animi dicta cupiditate, facilis provident quibusdam ab quis,
+                    iste harum ipsum hic, nemo qui!
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <form action="" class="form">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="nes-field myfix1">
+                          <label for="email_field " class="mylabel"
+                            >Credit Card</label
+                          >
+                          <div
+                            id="stripe-element-mount-point"
+                            class="nes-input"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div class="form__div">
+                          <label class="mylabel">Name On The Card</label>
+                          <input
+                            type="text"
+                            placeholder="nameOnCard"
+                            class="myInput"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="btn btn-primary w-100">Sumbit</div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="btn btn-primary payment">Make Payment</div>
       </div>
     </div>
-  </section>
-  <div class="nes-container with-title is-centered">
-    <form @submit.prevent="handleSubmit">
-      <fieldset :class="{ dis: loading }" class="fields">
-        <div class="nes-field"></div>
-        <div class="nes-field">
-          <label for="name_field">Name</label>
-          <input
-            placeholder="Jane Doe"
-            type="text"
-            name="name"
-            id="name_field"
-            class="nes-input"
-          />
-        </div>
-        <div class="nes-field">
-          <label for="email_field">Email</label>
-          <input
-            placeholder="jane.doe@example.com "
-            type="email"
-            name="email"
-            id="email_field"
-            class="nes-input"
-          />
-        </div>
-        <div class="nes-field">
-          <label for="address_field">Address</label>
-          <input
-            placeholder="1234 Sycamore Street"
-            type="text"
-            name="address"
-            id="address_field"
-            class="nes-input"
-          />
-        </div>
-        <div class="nes-field">
-          <label for="city_field">City</label>
-          <input
-            placeholder="Reno"
-            type="text"
-            name="city"
-            id="city_field"
-            class="nes-input"
-          />
-        </div>
-        <div class="nes-field">
-          <label for="state_field">State</label>
-          <input
-            placeholder="Nevada"
-            type="text"
-            name="state"
-            id="state_field"
-            class="nes-input"
-          />
-        </div>
-        <div class="nes-field">
-          <label for="zip_field">Zip</label>
-          <input
-            placeholder="89523"
-            type="text"
-            name="zip"
-            id="zip_field"
-            class="nes-input"
-          />
-        </div>
-        <div class="nes-field">
-          <label for="email_field">Credit Card</label>
-          <div id="stripe-element-mount-point" class="nes-input" />
-        </div>
-      </fieldset>
-      <div class="nes-field">
-        <button
-          type="submit"
-          class="nes-btn is-primary"
-          :class="{ dis: loading }"
-        >
-          {{ loading ? "Loading..." : "Pay $19.99" }}
-        </button>
-      </div>
-    </form>
-  </div>
-  <h2>Or...</h2>
-  <div class="nes-field mt">
-    <button type="button" class="nes-btn is-success" @click="redirect">
-      Pay $19.99 Page
-    </button>
   </div>
 </template>
 
@@ -104,17 +160,17 @@ import { loadStripe } from "@stripe/stripe-js";
 const style = {
   style: {
     base: {
-      iconColor: "#000",
       color: "#000",
-      fontWeight: "800",
+      fontWeight: "500",
       fontFamily: "Press Start 2P",
-      fontSize: "22px",
+      fontSize: "20px",
+
       fontSmoothing: "antialiased",
       ":-webkit-autofill": {
         color: "#fce883",
       },
       "::placeholder": {
-        color: "green",
+        color: "grey",
       },
     },
     invalid: {
@@ -126,6 +182,11 @@ const style = {
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 export default {
+  data() {
+    return {
+      nameOnCard: "NAME ON THE CARD",
+    };
+  },
   setup() {
     const router = useRouter();
     let stripe = null;
@@ -204,32 +265,170 @@ export default {
 };
 </script>
 <style scoped>
-.checkout {
-  border: 1px solid black;
-  padding: 3px;
+/* ///////////////////////////// */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-.fields {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 30px;
+.mylabel {
+  padding-top: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  color: black;
 }
-.img {
+.myInput {
+  border: none;
+  outline: none !important;
+  font-size: 20px;
+  padding-top: 0px;
+}
+.myInput:focus {
+  border: none !important;
+}
+.container1 {
+  margin: 30px auto;
+}
+
+.container1 .card {
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background: #fff;
+  border-radius: 0px;
+}
+.myfix1 div {
+  padding: 5px 0px 20px;
+}
+body {
+  background: #eee;
+}
+
+.btn.btn-primary {
+  background-color: #ddd;
+  color: black;
+  box-shadow: none;
+  border: none;
+  font-size: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.btn.btn-primary:focus {
+  box-shadow: none;
+}
+
+.container1 .card .img-box {
+  width: 80px;
+  height: 50px;
+}
+
+.container1 .card img {
+  width: 100%;
+  object-fit: fill;
+}
+
+.container1 .card .number {
+  font-size: 24px;
+}
+
+.container1 .card-body .btn.btn-primary .fab.fa-cc-paypal {
+  font-size: 32px;
+  color: #3333f7;
+}
+
+.fab.fa-cc-amex {
+  color: #1c6acf;
+  font-size: 32px;
+}
+
+.fab.fa-cc-mastercard {
+  font-size: 32px;
+  color: red;
+}
+
+.fab.fa-cc-discover {
+  font-size: 32px;
+  color: orange;
+}
+
+.c-green {
+  color: green;
+}
+
+.box {
+  height: 40px;
+  width: 50px;
   display: flex;
+  align-items: center;
   justify-content: center;
+  background-color: #ddd;
 }
-.showcase {
-  margin-bottom: 20px;
+
+.btn.btn-primary.payment {
+  background-color: #1c6acf;
+  color: white;
+  border-radius: 0px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
 }
-.mt {
-  margin-top: 20px;
+form {
+  padding-top: 20px;
 }
-.dis {
-  opacity: 0.5;
-  cursor: default;
-  pointer-events: none;
+.form__div {
+  height: 50px;
+  position: relative;
+  margin-bottom: 24px;
 }
-button {
-  margin-top: 30px;
+
+.form-control {
+  width: 100%;
+  height: 45px;
+  font-size: 14px;
+  border: 1px solid #dadce0;
+  border-radius: 0;
+  outline: none;
+  padding: 2px;
+  background: none;
+  z-index: 1;
+  box-shadow: none;
+}
+
+.form__label {
+  position: absolute;
+  left: 16px;
+  top: 10px;
+  background-color: #fff;
+  color: #80868b;
+  font-size: 16px;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+
+.form-control:focus + .form__label {
+  top: -8px;
+  left: 12px;
+  color: #1a73e8;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 10;
+}
+
+.form-control:not(:placeholder-shown).form-control:not(:focus) + .form__label {
+  top: -8px;
+  left: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 10;
+}
+
+.form-control:focus {
+  border: 1.5px solid #1a73e8;
+  box-shadow: none;
 }
 </style>

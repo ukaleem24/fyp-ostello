@@ -1,15 +1,19 @@
 <template>
+  <the-header></the-header>
   <div class="main">
     <payment-cmp></payment-cmp>
   </div>
+  <the-footer></the-footer>
 </template>
 
 <script>
+import TheFooter from "../components/nav/TheFooter.vue";
 import PaymentCmp from "../components/payment/PaymentCmp.vue";
 
 export default {
   components: {
     PaymentCmp,
+    TheFooter,
   },
 };
 </script>
