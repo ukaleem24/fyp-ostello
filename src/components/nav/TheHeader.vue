@@ -200,17 +200,38 @@ export default {
   // created() {
   //   console.log(this.getCurrentUser);
   // },
-  created() {
+  async created() {
     this.profileImage = this.getUserImage;
-    // if (this.getCurrentUser.active === true) {
-    //   const userId = this.getCurrentUser.id;
-    //   //getting reviews
-    //   const reviewsResponse = await this.axios.get(
-    //     "http://localhost:3000/api/user/info/" + userId
-    //   );
-    //   this.profileImage = reviewsResponse.data.userinfo.photo;
-    //   console.log(reviewsResponse.data.userinfo);
-    // }
+    let imageName = "";
+    let gotImage = false;
+    if (this.getCurrentUser.active === true) {
+      try {
+        const userId = this.getCurrentUser.id;
+        //getting reviews
+        const userInfoResponse = await this.axios.get(
+          "http://localhost:3000/api/user/info/" + userId
+        );
+        imageName = userInfoResponse.data.userinfo.photo[0];
+        gotImage = true;
+        this.profileImage = imageName.slice(7);
+        console.log(this.profileImage);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+      if (gotImage === true) {
+        try {
+          //getting reviews
+          const imageResponse = await this.axios.get(
+            "http://localhost:3000/api/user/info/image/" + this.profileImage
+          );
+          this.profileImage = imageResponse;
+
+          console.log(this.profileImage);
+        } catch (error) {
+          console.log(error.response.data.message);
+        }
+      }
+    }
   },
 };
 </script>

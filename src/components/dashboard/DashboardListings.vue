@@ -97,19 +97,25 @@ export default {
     booking() {
       this.$router.push("/dashboard/booking");
     },
-    inbox(){
+    inbox() {
       this.$router.push("/dashboard/inbox");
-    }
+    },
   },
   async created() {
     //getting specfic listing Detail
-    const response = await this.axios.get(
-      "http://localhost:3000/api/listings/" + this.getCurrentUser.id
-    );
-    console.log(response.data.searchResults);
-    this.listingData = response.data.searchResults;
-    this.$store.dispatch("setLandlordListings", { listing: this.listingData });
-    console.log(this.getLandlordListing);
+    try {
+      const response = await this.axios.get(
+        "http://localhost:3000/api/listings/" + this.getCurrentUser.id
+      );
+      console.log(response.data.searchResults);
+      this.listingData = response.data.searchResults;
+      this.$store.dispatch("setLandlordListings", {
+        listing: this.listingData,
+      });
+      console.log(this.getLandlordListing);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   },
 };
 </script>

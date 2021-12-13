@@ -245,6 +245,7 @@ export default {
     uploadImage(e) {
       ////////////
       this.tempPhoto = e.target.files[0];
+      console.log(this.tempPhoto);
       var previewImage = null;
       // const photo = e.target.files[0];
       const image = e.target.files;
@@ -253,8 +254,6 @@ export default {
       reader.readAsDataURL(image[0]);
       reader.onload = (e) => {
         previewImage = e.target.result;
-        console.log("check");
-        console.log(previewImage);
         this.personalInformation.photo = previewImage;
       };
 
