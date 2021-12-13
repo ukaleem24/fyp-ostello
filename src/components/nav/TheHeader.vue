@@ -112,8 +112,20 @@
                             </h6>
                             <img
                               class="login-img"
-                              v-if="getCurrentUser.active === true"
-                              :src="profileImage"
+                              v-if="
+                                getCurrentUser.active === true &&
+                                gotUserPofileImage === true
+                              "
+                              :src="'http://localhost:3000/' + profileImage"
+                              alt=""
+                            />
+                            <img
+                              class="login-img"
+                              v-if="
+                                gotUserPofileImage === false &&
+                                getCurrentUser.active === true
+                              "
+                              :src="getUserImage"
                               alt=""
                             />
                             <h6
@@ -192,6 +204,7 @@ export default {
   data() {
     return {
       profileImage: null,
+      gotUserPofileImage: false,
     };
   },
   computed: {
@@ -203,7 +216,6 @@ export default {
   async created() {
     this.profileImage = this.getUserImage;
     let imageName = "";
-    let gotImage = false;
     if (this.getCurrentUser.active === true) {
       try {
         const userId = this.getCurrentUser.id;
@@ -211,25 +223,11 @@ export default {
         const userInfoResponse = await this.axios.get(
           "http://localhost:3000/api/user/info/" + userId
         );
-        imageName = userInfoResponse.data.userinfo.photo[0];
-        gotImage = true;
-        this.profileImage = imageName.slice(7);
-        console.log(this.profileImage);
+        imageName = userInfoResponse.data.userinfo.photo;
+        this.profileImage = imageName[0];
+        this.gotUserPofileImage = true;
       } catch (error) {
         console.log(error.response.data.message);
-      }
-      if (gotImage === true) {
-        try {
-          //getting reviews
-          const imageResponse = await this.axios.get(
-            "http://localhost:3000/api/user/info/image/" + this.profileImage
-          );
-          this.profileImage = imageResponse;
-
-          console.log(this.profileImage);
-        } catch (error) {
-          console.log(error.response.data.message);
-        }
       }
     }
   },

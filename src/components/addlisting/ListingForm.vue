@@ -596,17 +596,17 @@
               </div>
               <!-- /.one-half -->
               <div class="one-half">
-                <!-- <div v-if="listingData.images.length > 0" class="media">
+                <div v-if="images.length > 0" class="media">
                   <label>Images</label>
                   <image-card
-                    v-for="singleImage in listingData.images"
-                    :key="singleImage.image"
+                    v-for="singleImage in images"
+                    :key="singleImage.id"
                     :image="singleImage.image"
                     :imageName="singleImage.imageName"
                     :id="singleImage.id"
                     @remove-image="removeImage"
                   ></image-card>
-                </div> -->
+                </div>
               </div>
               <!-- /.one-half -->
               <div class="clearfix"></div>
@@ -659,15 +659,18 @@
 </template>
 
 <script>
-// import ImageCard from "./ImageCard.vue";
+import ImageCard from "./ImageCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    // ImageCard,
+    ImageCard,
   },
   data() {
     return {
+      photoFiles: [],
+      images: [],
+      postResponse: 1,
       listingData: {
         // id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
         kind: "default",
@@ -717,7 +720,6 @@ export default {
     async submitListing() {
       try {
         this.listingData.userId = this.getCurrentUser.id;
-        console.log(this.getCurrentUser);
         const data = this.listingData;
 
         const response = await this.axios.post(
@@ -725,46 +727,65 @@ export default {
           data
         );
         if (response.data.status) {
-          console.log(response.data);
+          this.postResponse = response.data.info._id;
         }
 
         // console.log(response.data.message);
       } catch (error) {
         console.log(error.message);
       }
+      //Sending pics to DB
+      for (let i = 0; i < this.photoFiles.length; i++) {
+        try {
+          // let temop = "61b786987c1d60cf938996e2";
+          let formData = new FormData();
+          formData.append("photo", this.photoFiles[i]);
+          const response = await this.axios.post(
+            "http://localhost:3000/api/photo/" + this.postResponse,
+            formData
+          );
+          if (response.data.success) {
+            console.log(response.data);
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
       // this.$store.dispatch("addNewListing", this.listingData);
       this.$router.push("/my/listings");
     },
-    async uploadImage(e) {
+    uploadImage(e) {
       const previewImage = {
         id: Date.now() + Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
         image: null,
         imageName: "",
       };
       previewImage.imageName = e.target.files[0].name;
-      const file = e.target.files;
-      let formData = new FormData();
-      formData.append("photo", file);
-      const response = await this.axios.post(
-        "http://localhost:3000/api/test/photo/" + this.getCurrentUser.id,
-        formData
-      );
-      if (response.data.success) {
-        console.log(response.data);
-      }
+      this.photoFiles.push(e.target.files[0]);
+      // const file = e.target.files;
+      // let formData = new FormData();
+      // formData.append("photo", file);
+      // const response = await this.axios.post(
+      //   "http://localhost:3000/api/test/photo/" + this.getCurrentUser.id,
+      //   formData
+      // );
+      // if (response.data.success) {
+      //   console.log(response.data);
+      // }
       const image = e.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = (e) => {
         previewImage.image = e.target.result;
-        this.listingData.images.push(previewImage);
+        console.log(previewImage.image);
+        this.images.push(previewImage);
       };
     },
     removeImage(imageId) {
-      const imageIndex = this.listingData.images.findIndex(
+      const imageIndex = this.images.findIndex(
         (imageObj) => imageObj.id === imageId
       );
-      this.listingData.images.splice(imageIndex, 1);
+      this.images.splice(imageIndex, 1);
     },
     setMap(address) {
       this.position.lat = address.geometry.location.lat();

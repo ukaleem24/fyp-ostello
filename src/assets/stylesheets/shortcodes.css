@@ -2512,6 +2512,11 @@ form.form-listing .inner-box button.submit-form-listing:hover {
     rgba(76, 161, 175, 0.9),
     rgba(44, 62, 80, 0.9)
   ); /* Standard syntax */
+  background-image: linear-gradient(
+      rgba(76, 161, 175, 0.9),
+      rgba(44, 62, 80, 0.9)
+    ),
+    url("../images/cities/Pakistan.jpg");
 }
 
 .parallax .container {

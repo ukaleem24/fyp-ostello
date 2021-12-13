@@ -7,7 +7,18 @@
   <div class="wholeBody">
     <div class="sidebar-dashboard">
       <div class="profile_info">
-        <img :src="getUserImage" class="profile_image" alt="" />
+        <img
+          class="profile_image"
+          v-if="getCurrentUser.active === true && gotUserPofileImage === true"
+          :src="'http://localhost:3000/' + profileImage"
+          alt=""
+        />
+        <img
+          class="profile_image"
+          v-if="gotUserPofileImage === false"
+          :src="getUserImage"
+          alt=""
+        />
         <h4 class="userName">Jessica</h4>
       </div>
 
@@ -73,11 +84,16 @@ import GridCard from "./cards/BookingCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
+  data(){
+    return{
+      gotUserPofileImage:false,
+    }
+  },
   components: {
     GridCard,
   },
   computed: {
-    ...mapGetters(["getListings", "getUserImage"]),
+    ...mapGetters(["getListings", "getUserImage","getCurrentUser"]),
   },
   methods: {
     profile() {
@@ -93,6 +109,30 @@ export default {
       this.$router.push("/dashboard/inbox");
     }
   },
+  async created() {
+    if (this.getCurrentUser.active === false) {
+      this.$router.push("/");
+    }
+    this.profileImage = this.getUserImage;
+    let imageName = "";
+    if (this.getCurrentUser.active === true) {
+      try {
+        const userId = this.getCurrentUser.id;
+        //getting reviews
+        const userInfoResponse = await this.axios.get(
+          "http://localhost:3000/api/user/info/" + userId
+        );
+        imageName = userInfoResponse.data.userinfo.photo;
+        this.profileImage = imageName[0];
+        this.gotUserPofileImage = true;
+        console.log(this.gotUserPofileImage);
+        console.log();
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    }
+  },
+
 };
 </script>
 <style scoped>

@@ -289,6 +289,8 @@ export default {
   },
   data() {
     return {
+      tempPhoto: [],
+      listingPhotos: [],
       landlord: {},
       allReviews: [],
       listingData: [],
@@ -309,17 +311,17 @@ export default {
   },
   methods: {
     nextImage() {
-      if (this.index === this.listingData.images.length - 1) {
+      if (this.index === this.listingPhotos.length - 1) {
         this.index = 0;
       } else ++this.index;
-      this.currentImage = this.listingData.images[this.index].image;
+      this.currentImage = this.listingPhotos[this.index];
     },
     previousImage() {
       if (this.index === 0) {
-        this.index = this.listingData.images.length;
+        this.index = this.listingPhotos.length;
       }
       this.index -= 1;
-      this.currentImage = this.listingData.images[this.index].image;
+      this.currentImage = this.listingPhotos[this.index];
     },
     async submitReview() {
       try {
@@ -349,6 +351,24 @@ export default {
   },
 
   async created() {
+    try {
+      const roomId = this.$route.params.roomId;
+      //getting reviews
+      const photoResponse = await this.axios.get(
+        "http://localhost:3000/api/get/photos/" + roomId
+      );
+      // imageName = userInfoResponse.data.userinfo.photo;
+      // this.photoResponse = imageName[0];
+      this.listingPhotos = photoResponse.data.photos;
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+    for (let i = 0; i < this.listingPhotos.length; i++) {
+      this.tempPhoto.push(this.listingPhotos[i].photo);
+      this.listingPhotos[i] = "http://localhost:3000/" + this.tempPhoto[i];
+    }
+    this.currentImage = this.listingPhotos[1];
+
     // console.log(this.$route.params);
     // const roomId = this.$route.params.roomId;
     // this.listingData = this.$store.getters.getListings.find(
@@ -357,22 +377,31 @@ export default {
     // console.log(this.$store.getters.getListings);
     // console.log;
     //getting specfic listing Detail
-    const roomId = this.$route.params.roomId;
-    console.log(roomId);
-    const response = await this.axios.get(
-      "http://localhost:3000/api/search/specific_listing/" + roomId
-    );
-    console.log(response.data.searchResults);
-    this.listingData = response.data.searchResults[0];
-    this.landlord = this.listingData.user;
+    try {
+      const roomId = this.$route.params.roomId;
+      console.log(roomId);
+      const response = await this.axios.get(
+        "http://localhost:3000/api/search/specific_listing/" + roomId
+      );
+      console.log(response.data.searchResults);
+      this.listingData = response.data.searchResults[0];
+      this.landlord = this.listingData.user;
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
 
     //getting reviews
-    const reviewsResponse = await this.axios.get(
-      "http://localhost:3000/api/listingdetail/review/" + roomId
-    );
+    try {
+      const roomId = this.$route.params.roomId;
+      const reviewsResponse = await this.axios.get(
+        "http://localhost:3000/api/listingdetail/review/" + roomId
+      );
 
-    console.log(reviewsResponse.data.reviews);
-    this.allReviews = reviewsResponse.data.reviews;
+      console.log(reviewsResponse.data.reviews);
+      this.allReviews = reviewsResponse.data.reviews;
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   },
 };
 </script>
