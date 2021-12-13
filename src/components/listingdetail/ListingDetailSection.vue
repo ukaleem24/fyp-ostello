@@ -181,7 +181,12 @@
                   </p>
                 </div>
                 <div class="submit-form">
-                  <button type="submit">Submit Your Review</button>
+                  <p v-if="disableLoginFeatures">
+                    Please Login to submit a review!
+                  </p>
+                  <button type="submit" :disabled="disableLoginFeatures">
+                    Submit Your Review
+                  </button>
                 </div>
               </form>
               <!-- /.comment-form -->
@@ -215,19 +220,40 @@
 
               <h4 class="ownerName">{{ landlord.fName }}</h4>
               <h4 class="rent">RENTAL PERIOD</h4>
-              <div>
+              <form @submit.prevent="submitBooking">
                 <div>
-                  <label for="moveIn">Move-in date</label>
-                  <input type="date" name="moveIn" class="date_input" />
+                  <div>
+                    <label for="moveIn">Move-in date</label>
+                    <input
+                      type="date"
+                      name="moveIn"
+                      class="date_input"
+                      v-model="moveInDate"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="moveOut">Description</label>
+                    <textarea
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="3"
+                      v-model="description"
+                      required
+                    ></textarea>
+                  </div>
                 </div>
-                <div>
-                  <label for="moveOut">Description</label>
-                  <textarea name="" id="" cols="30" rows="3"></textarea>
+                <div class="booking-button-container">
+                  <button
+                    class="booking-button"
+                    type="submit"
+                    :disabled="disableLoginFeatures"
+                  >
+                    Send Enquiry
+                  </button>
                 </div>
-              </div>
-              <div class="booking-button-container">
-                <button class="booking-button">Send Enquiry</button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -304,6 +330,9 @@ export default {
       },
       index: 0,
       currentImage: this.$store.getters.getListings[0].images[0].image,
+      disableLoginFeatures: true,
+      moveInDate: "",
+      description: "",
     };
   },
   computed: {
@@ -339,10 +368,34 @@ export default {
         if (response.data.success === true) {
           this.allReviews.push(data);
         }
+        console.log(this.allReviews);
 
         // console.log(response.data.message);
       } catch (error) {
         console.log(error.response.data.message);
+      }
+    },
+    async submitBooking() {
+      try {
+        console.log("booking form triggered");
+        const data = {
+          landlordId: this.landlord,
+          tenantId: this.getCurrentUser.id,
+          listingId: this.$route.params.roomId,
+          moveIn: this.moveInDate,
+          description: this.description,
+          status: "pending",
+          payment: "pending",
+        };
+        const response = await this.axios.post(
+          "http://localhost:3000/api//new/booking",
+          data
+        );
+        if (response.data.success) {
+          console.log(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
     //
@@ -399,6 +452,10 @@ export default {
 
       console.log(reviewsResponse.data.reviews);
       this.allReviews = reviewsResponse.data.reviews;
+      if (this.$store.getters.getCurrentUser.active) {
+        this.disableLoginFeatures = false;
+        console.log("KAJLKFDJSLKDSJFLKDj");
+      }
     } catch (error) {
       console.log(error.response.data.message);
     }

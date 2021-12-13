@@ -16,7 +16,8 @@
           <!-- /.box-header -->
           <div class="box-content">
             <div class="box-title">
-              <a href="#" title="" class="addressName">New York 123 </a
+              <a href="#" title="" class="addressName"
+                >{{ bookingDetails.listing.streetAddress }} </a
               ><i class="fa fa-check-circle" aria-hidden="true"></i>
             </div>
             <ul class="rating">
@@ -25,11 +26,21 @@
               </li>
             </ul>
             <div class="box-desc">
-              <p>kaleems wants to book your property</p>
+              <p>
+                {{ bookingDetails.tenant.fName }} wants to book your property
+              </p>
+              <p>Message: {{ bookingDetails.description }}</p>
             </div>
-            <div class="button-Container">
-              <button>Accept</button>
-              <button>Decline</button>
+            <ul class="location">
+              <li class="address">
+                <span class="ti-location-pin"></span
+                >{{ bookingDetails.listing.city }},
+                {{ bookingDetails.listing.country }}
+              </li>
+            </ul>
+            <div class="button-Container" v-if="bookingStatus === 'pending'">
+              <button @click="updateStatus('accepted')">Accept</button>
+              <button @click="updateStatus('declined')">Decline</button>
             </div>
           </div>
         </div>
@@ -46,21 +57,26 @@
 
 <script>
 export default {
-  //   props: ["id", "price", "address", "type", "image", "description", "currency"],
-  methods: {
-    async removeListing() {
-      const roomId = this.id;
-      console.log(roomId);
-      const response = await this.axios.delete(
-        "http://localhost:3000/api/delete/listing/" + roomId
-      );
-      console.log(response.data.message);
-      this.$store.dispatch("removeListing", { id: this.id });
-    },
+  props: ["bookingDetails"],
+  data() {
+    return { bookingStatus: this.bookingDetails.status };
   },
-  computed: {
-    listingUrl() {
-      return "/room/" + this.id;
+  methods: {
+    async updateStatus(st) {
+      try {
+        const response = await this.axios.put(
+          "http://localhost:3000/api//booking/update/status/" +
+            this.bookingDetails._id,
+          { status: st }
+        );
+        if (response.data.success) {
+          this.bookingStatus = st;
+          console.log("SUCSESSSSSSSSSSSSS");
+        }
+        // console.log(response.data.message);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
     },
   },
 };

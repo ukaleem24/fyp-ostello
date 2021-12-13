@@ -91,6 +91,7 @@ export default {
       this.rating += this.allReviews[i].rating;
     }
     this.averageRating = this.rating / this.allReviews.length;
+    this.averageRating = parseInt(this.averageRating);
     if (isNaN(this.averageRating)) {
       this.averageRating = "No";
     }

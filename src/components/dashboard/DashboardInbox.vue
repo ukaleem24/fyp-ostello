@@ -62,11 +62,15 @@
     </div>
     <div class="content">
       <div class="profile-Container">
-        <div class="listing-result">
-          <h4>{{ getListings.length }} Results Found</h4>
-        </div>
-        <inbox-tenant v-if="isTenant === true"></inbox-tenant>
-        <inbox-landlord v-if="isLandlord === true"></inbox-landlord>
+        <h4>Your Properties:</h4>
+        <br />
+        <inbox-landlord
+          v-for="booking in landlordBookings"
+          :key="booking._id"
+          :bookingDetails="booking"
+        ></inbox-landlord>
+
+        <inbox-tenant></inbox-tenant>
       </div>
     </div>
   </div>
@@ -81,9 +85,9 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      isLandlord: false,
-      isTenant: false,
-      gotUserPofileImage:false,
+      currentUser: null,
+      landlordBookings: null,
+      tenantBookings: null,
     };
   },
   components: {
@@ -108,16 +112,21 @@ export default {
     },
   },
   async created() {
-     if (this.getCurrentUser.active === false) {
+    if (this.getCurrentUser.active === false) {
       this.$router.push("/");
     }
     try {
-      const searchQuery = this.getCurrentUser.id;
+      this.currentUser = this.$store.getters.getCurrentUser;
+      if (!this.currentUser.active) {
+        this.$router.push("/login");
+      }
       const response = await this.axios.get(
-        "http://localhost:3000/api/listings/" + searchQuery
+        "http://localhost:3000/api//booking/details/landlord/" +
+          this.currentUser.id
       );
       if (response.data.success === true) {
-        this.isLandlord = true;
+        console.log(response.data.bookings);
+        this.landlordBookings = response.data.bookings;
       }
     } catch (error) {
       if (error.response.data.success === false) {
@@ -141,7 +150,6 @@ export default {
         console.log(error.response.data.message);
       }
     }
-    
   },
 };
 </script>
