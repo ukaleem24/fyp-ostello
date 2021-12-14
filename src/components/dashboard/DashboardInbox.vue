@@ -92,6 +92,7 @@ export default {
       currentUser: null,
       landlordBookings: null,
       tenantBookings: null,
+      gotUserPofileImage:false,
     };
   },
   components: {
