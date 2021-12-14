@@ -70,7 +70,11 @@
           :bookingDetails="booking"
         ></inbox-landlord>
 
-        <inbox-tenant></inbox-tenant>
+        <inbox-tenant
+          v-for="booking in tenantBookings"
+          :key="booking._id"
+          :bookingDetails="booking"
+        ></inbox-tenant>
       </div>
     </div>
   </div>
@@ -112,9 +116,12 @@ export default {
     },
   },
   async created() {
+    //if user is not logged in, push to the login page
     if (this.getCurrentUser.active === false) {
       this.$router.push("/");
     }
+
+    //Getting bookings of current user as a tenant from server to show notifications
     try {
       this.currentUser = this.$store.getters.getCurrentUser;
       if (!this.currentUser.active) {
@@ -125,14 +132,30 @@ export default {
           this.currentUser.id
       );
       if (response.data.success === true) {
-        console.log(response.data.bookings);
         this.landlordBookings = response.data.bookings;
       }
     } catch (error) {
-      if (error.response.data.success === false) {
-        this.isTenant = true;
-      }
+      console.log("landlord error: " + error);
     }
+
+    //Getting bookings of current user as a tenant from server to show notifications
+    try {
+      this.currentUser = this.$store.getters.getCurrentUser;
+      if (!this.currentUser.active) {
+        this.$router.push("/login");
+      }
+      const response = await this.axios.get(
+        "http://localhost:3000/api//booking/details/tenant/" +
+          this.currentUser.id
+      );
+      if (response.data.success === true) {
+        console.log(response.data.bookings);
+        this.tenantBookings = response.data.bookings;
+      }
+    } catch (error) {
+      console.log("landlord error: " + error);
+    }
+
     let imageName = "";
     if (this.getCurrentUser.active === true) {
       try {
@@ -145,7 +168,6 @@ export default {
         this.profileImage = imageName[0];
         this.gotUserPofileImage = true;
         console.log(this.gotUserPofileImage);
-        console.log();
       } catch (error) {
         console.log(error.response.data.message);
       }

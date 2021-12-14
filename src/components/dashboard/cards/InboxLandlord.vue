@@ -10,7 +10,7 @@
                 class="profile_image"
                 alt=""
               />
-              <h4 class="userName">Kaleem Ullah</h4>
+              <h4 class="userName">{{ bookingDetails.tenant.fName }}</h4>
             </div>
           </div>
           <!-- /.box-header -->
@@ -71,7 +71,6 @@ export default {
         );
         if (response.data.success) {
           this.bookingStatus = st;
-          console.log("SUCSESSSSSSSSSSSSS");
         }
         // console.log(response.data.message);
       } catch (error) {

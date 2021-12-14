@@ -11,23 +11,44 @@
                   class="profile_image"
                   alt=""
                 />
-                <h4 class="userName">Kaleem Ullah</h4>
+                <h4 class="userName">{{ bookingDetails.landlord.fName }}</h4>
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-content">
               <div class="box-title">
-                <a href="#" title="" class="addressName">New York 123 </a
+                <a href="#" title="" class="addressName"
+                  >{{ bookingDetails.listing.streetAddress }} </a
                 ><i class="fa fa-check-circle" aria-hidden="true"></i>
               </div>
               <ul class="rating">
                 <li>
-                  <p>22/12/2021</p>
+                  <p>Requested move-in date: {{ bookingDetails.moveIn }}</p>
                 </li>
               </ul>
-              <div class="box-desc">
-                <p>Your request for booking New York 123 is panding</p>
+              <div v-if="bookingStatus === 'accepted'">
+                <div class="box-desc">
+                  <p>
+                    {{ bookingDetails.landlord.fName }} {{ bookingStatus }} your
+                    request to rent this property
+                  </p>
+                </div>
+
+                <div v-if="paymentStatus === 'pending'">
+                  <p>Please make the payment to complete booking process!</p>
+                  <router-link to="/payment">Pay now</router-link>
+                </div>
               </div>
+              <div v-else>
+                <p>Your request to rent this property is pending approval!</p>
+              </div>
+              <ul class="location">
+                <li class="address">
+                  <span class="ti-location-pin"></span
+                  >{{ bookingDetails.listing.city }},
+                  {{ bookingDetails.listing.country }}
+                </li>
+              </ul>
             </div>
           </div>
           <!-- /.box-content -->
@@ -43,25 +64,33 @@
 
 <script>
 export default {
-  //   props: ["id", "price", "address", "type", "image", "description", "currency"],
-  methods: {
-    async removeListing() {
-      const roomId = this.id;
-      console.log(roomId);
-      const response = await this.axios.delete(
-        "http://localhost:3000/api/delete/listing/" + roomId
-      );
-      console.log(response.data.message);
-      this.$store.dispatch("removeListing", { id: this.id });
-    },
+  props: ["bookingDetails"],
+  data() {
+    return {
+      bookingStatus: this.bookingDetails.status,
+      paymentStatus: this.bookingDetails.paymentStatus,
+    };
   },
-  computed: {
-    listingUrl() {
-      return "/room/" + this.id;
+  methods: {
+    async updateStatus(st) {
+      try {
+        const response = await this.axios.put(
+          "http://localhost:3000/api//booking/update/status/" +
+            this.bookingDetails._id,
+          { status: st }
+        );
+        if (response.data.success) {
+          this.bookingStatus = st;
+        }
+        // console.log(response.data.message);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
     },
   },
 };
 </script>
+
 <style scoped>
 .myfix {
   display: flex;
