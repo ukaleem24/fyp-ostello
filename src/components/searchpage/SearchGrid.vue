@@ -7,6 +7,7 @@
           <h4>{{ searchResults.length }} Results Found</h4>
         </div>
         <grid-card
+          class="listing-card"
           v-for="result in searchResults"
           :key="result._id"
           :listing="result"
@@ -52,5 +53,8 @@ h4 {
   color: grey;
   font-weight: 700;
   font-family: "Roboto", sans-serif;
+}
+.listing-card {
+  margin-bottom: 40px;
 }
 </style>

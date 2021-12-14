@@ -113,8 +113,8 @@ export default {
   padding-top: 20px;
 }
 .email-exist h4 {
-  color: black;
-  background-color: white;
+  color: rgb(218, 6, 6);
+  background-color: rgb(232, 240, 254);
   border: 1px solid #2c3e50;
   border-radius: 5px;
   font-weight: 600 !important;

@@ -811,7 +811,7 @@ export default {
 
 <style scoped>
 .myfix3 {
-  padding-top: 80px;
+  padding-top: 100px;
 }
 .myMapFix {
   height: 40vh;

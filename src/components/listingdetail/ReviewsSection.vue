@@ -2,7 +2,7 @@
   <li class="comment">
     <article class="comment-body">
       <div class="comment-image">
-        <img class="authorImg" :src="authorImage" alt="" />
+        <img class="authorImg" :src="profileimage" alt="" />
       </div>
       <!-- /.comment-image -->
       <div class="comment-content">
@@ -12,6 +12,12 @@
             <font-awesome-icon
               icon="star"
               v-for="rate in intRating"
+              :key="rate"
+            ></font-awesome-icon>
+            <font-awesome-icon
+              class="black-star"
+              icon="star"
+              v-for="rate in blackRating"
               :key="rate"
             ></font-awesome-icon>
           </span>
@@ -34,12 +40,17 @@ export default {
   data() {
     return {
       intRating: null,
-      authorImage: "https://www.w3schools.com/howto/img_avatar.png",
+      profileimage: "https://www.w3schools.com/howto/img_avatar.png",
+      blackRating: 0,
     };
   },
-  props: ["author", "rating", "authorReview", "title"],
+  props: ["author", "photo", "rating", "authorReview", "title"],
   created() {
     this.intRating = parseInt(this.rating);
+    this.blackRating = 5 - this.intRating;
+    if (this.photo != null) {
+      this.profileimage = "http://localhost:3000/" + this.photo;
+    }
   },
 };
 </script>
@@ -47,5 +58,8 @@ export default {
 .authorImg {
   border-radius: 50%;
   height: 70px;
+}
+.black-star {
+  color: #2c3e50;
 }
 </style>

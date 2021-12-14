@@ -4,10 +4,7 @@
       <div class="box-imagebox">
         <div class="box-header">
           <div class="box-image">
-            <img
-              src="https://housinganywhere.imgix.net/room/1666164/2c7b7d12-4352-4220-b79f-46f27da8e820.jpg?auto=format&fit=clip&orient=0&ixlib=react-9.2.0&w=1446"
-              alt=""
-            />
+            <img :src="listingPhotos[0]" alt="" />
             <a @click="saveListing" href="#" title="">Preview</a>
             <div class="overlay"></div>
           </div>
@@ -19,11 +16,17 @@
             <a href="#" title="">{{ listing.currency }} {{ listing.price }}</a
             ><i class="fa fa-check-circle" aria-hidden="true"></i>
           </div>
-          <div class="queue" v-if="averageRating != 'No'">
+          <div class="" v-if="averageRating != 'No'">
             <font-awesome-icon
-              class="font-icon"
+              class="queue"
               icon="star"
               v-for="rate in averageRating"
+              :key="rate"
+            ></font-awesome-icon>
+            <font-awesome-icon
+              class="queuee"
+              icon="star"
+              v-for="rate in blackRating"
               :key="rate"
             ></font-awesome-icon>
           </div>
@@ -66,7 +69,10 @@ export default {
     return {
       allReviews: "",
       rating: 0,
-      averageRating: null,
+      averageRating: 0,
+      blackRating: 0,
+      tempPhoto: null,
+      listingPhotos: [],
     };
   },
   methods: {
@@ -91,16 +97,35 @@ export default {
       this.rating += this.allReviews[i].rating;
     }
     this.averageRating = this.rating / this.allReviews.length;
-    this.averageRating = parseInt(this.averageRating);
+    if (!isNaN(this.averageRating)) {
+      this.averageRating = parseInt(this.averageRating);
+    }
     if (isNaN(this.averageRating)) {
       this.averageRating = "No";
     }
+    this.blackRating = 5 - this.averageRating;
+    console.log(this.blackRating);
+
+    //getting images of a listing to display on card
+    try {
+      const roomId = this.listing._id;
+      const photoResponse = await this.axios.get(
+        "http://localhost:3000/api/get/photos/" + roomId
+      );
+      // imageName = userInfoResponse.data.userinfo.photo;
+      // this.photoResponse = imageName[0];
+      this.listingPhotos = photoResponse.data.photos;
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+    this.tempPhoto = this.listingPhotos[0].photo;
+    this.listingPhotos[0] = "http://localhost:3000/" + this.tempPhoto[0];
   },
 };
 </script>
 
 <style scoped>
 .queue {
-  color: rgb(236, 236, 20);
+  color: #f0b108;
 }
 </style>

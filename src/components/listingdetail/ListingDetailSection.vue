@@ -131,12 +131,15 @@
             <div class="clearfix"></div>
           </div>
           <div class="comment-area">
-            <h3 class="comment-title">{{ allReviews.length }} Reviews</h3>
+            <h3 class="comment-title" id="showing-reviews">
+              {{ allReviews.length }} Reviews
+            </h3>
             <ol>
               <review-section
-                v-for="review in allReviews"
+                v-for="review in finalReviews"
                 :key="review._id"
                 :author="review.user"
+                :photo="review.photo"
                 :rating="review.rating"
                 :authorReview="review.review"
                 :title="review.title"
@@ -184,7 +187,11 @@
                   <p v-if="disableLoginFeatures">
                     Please Login to submit a review!
                   </p>
-                  <button type="submit" :disabled="disableLoginFeatures">
+                  <button
+                    type="submit"
+                    id="submitReview"
+                    :disabled="disableLoginFeatures"
+                  >
                     Submit Your Review
                   </button>
                 </div>
@@ -212,7 +219,14 @@
             <div class="box contact-box" id="booking-section">
               <div class="profile_info">
                 <img
+                  v-if="gotLandlordProfileImage === false"
                   src="https://www.w3schools.com/howto/img_avatar.png"
+                  class="profile_image1"
+                  alt=""
+                />
+                <img
+                  v-if="gotLandlordProfileImage === true"
+                  :src="'http://localhost:3000/' + landlordProfileImage"
                   class="profile_image1"
                   alt=""
                 />
@@ -233,7 +247,7 @@
                     />
                   </div>
                   <div>
-                    <label for="moveOut">Description</label>
+                    <label for="moveOut">Introduce Yourself</label>
                     <textarea
                       name=""
                       id=""
@@ -315,14 +329,15 @@ export default {
   },
   data() {
     return {
+      gotLandlordProfileImage: false,
+      landlordProfileImage: "",
       tempPhoto: [],
       listingPhotos: [],
       landlord: {},
       allReviews: [],
       listingData: [],
       reviewData: {
-        author: "Usama Ilyas",
-        authorImage: "https://www.w3schools.com/howto/img_avatar.png",
+        author: "",
         email: "",
         title: "",
         review: "",
@@ -333,6 +348,8 @@ export default {
       disableLoginFeatures: true,
       moveInDate: "",
       description: "",
+      reviewImages: [],
+      finalReviews: [],
     };
   },
   computed: {
@@ -353,6 +370,7 @@ export default {
       this.currentImage = this.listingPhotos[this.index];
     },
     async submitReview() {
+      let submitReviw = false;
       try {
         const data = {
           user: this.getCurrentUser.id,
@@ -366,13 +384,40 @@ export default {
           data
         );
         if (response.data.success === true) {
-          this.allReviews.push(data);
+          submitReviw = true;
         }
         console.log(this.allReviews);
 
         // console.log(response.data.message);
       } catch (error) {
         console.log(error.response.data.message);
+      }
+      if (submitReviw === true) {
+        let tempReviewImage = null;
+        try {
+          const userId = this.getCurrentUser.id;
+          let imageName = null;
+          //getting reviews
+          const userInfoResponse = await this.axios.get(
+            "http://localhost:3000/api/user/info/" + userId
+          );
+          imageName = userInfoResponse.data.userinfo.photo;
+          tempReviewImage = imageName[0];
+        } catch (error) {
+          tempReviewImage = null;
+        }
+        let tempuser = {
+          fName: this.getCurrentUser.fName,
+          lName: this.getCurrentUser.lName,
+        };
+        let data = {
+          user: tempuser,
+          photo: tempReviewImage,
+          rating: this.reviewData.rating,
+          review: this.reviewData.review,
+          title: this.reviewData.title,
+        };
+        this.finalReviews.push(data);
       }
     },
     async submitBooking() {
@@ -406,7 +451,6 @@ export default {
   async created() {
     try {
       const roomId = this.$route.params.roomId;
-      //getting reviews
       const photoResponse = await this.axios.get(
         "http://localhost:3000/api/get/photos/" + roomId
       );
@@ -452,10 +496,55 @@ export default {
 
       console.log(reviewsResponse.data.reviews);
       this.allReviews = reviewsResponse.data.reviews;
+      console.log(this.allReviews);
       if (this.$store.getters.getCurrentUser.active) {
         this.disableLoginFeatures = false;
         console.log("KAJLKFDJSLKDSJFLKDj");
       }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+    //getting review Images
+    if (this.allReviews.length != 0) {
+      for (let i = 0; i < this.allReviews.length; i++) {
+        try {
+          const userId = this.allReviews[i].user._id;
+          let imageName = null;
+          //getting reviews
+          const userInfoResponse = await this.axios.get(
+            "http://localhost:3000/api/user/info/" + userId
+          );
+          imageName = userInfoResponse.data.userinfo.photo;
+          this.reviewImages.push(imageName[0]);
+        } catch (error) {
+          this.reviewImages.push(null);
+        }
+      }
+    }
+    if (this.allReviews.length != 0) {
+      for (let i = 0; i < this.allReviews.length; i++) {
+        let data = {
+          user: this.allReviews[i].user,
+          photo: this.reviewImages[i],
+          rating: this.allReviews[i].rating,
+          review: this.allReviews[i].review,
+          title: this.allReviews[i].title,
+        };
+        this.finalReviews.push(data);
+      }
+    }
+
+    //getting landlord info
+    try {
+      const userId = this.landlord._id;
+      let imageName = null;
+      //getting reviews
+      const userInfoResponse = await this.axios.get(
+        "http://localhost:3000/api/user/info/" + userId
+      );
+      imageName = userInfoResponse.data.userinfo.photo;
+      this.landlordProfileImage = imageName[0];
+      this.gotLandlordProfileImage = true;
     } catch (error) {
       console.log(error.response.data.message);
     }
@@ -541,9 +630,10 @@ export default {
   font-size: 17px;
 }
 .title {
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 500;
   line-height: 72px;
+  padding-bottom: 5px;
 }
 .icons {
   font-size: 24px;
@@ -559,7 +649,6 @@ export default {
   font-size: 20px;
   color: #2c3e50;
 }
-
 .myMapFix {
   height: 300px;
 }
@@ -567,7 +656,11 @@ export default {
 .image-fix {
   max-width: 900px; /* you can use % */
   height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 .comment-respond form .comment-form-title {
   padding-left: unset;
 }
