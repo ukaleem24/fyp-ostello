@@ -64,8 +64,8 @@ const routes = [
     component: Login,
   },
   {
-    path: "/payment",
-    name: "Paymen",
+    path: "/payment/:bookingId",
+    name: "Payment",
     component: Payment,
   },
   {

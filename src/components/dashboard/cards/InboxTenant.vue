@@ -36,7 +36,7 @@
 
                 <div v-if="paymentStatus === 'pending'">
                   <p>Please make the payment to complete booking process!</p>
-                  <router-link to="/payment">Pay now</router-link>
+                  <button @click="redirectPayment">Pay now</button>
                 </div>
               </div>
               <div v-else>
@@ -86,6 +86,10 @@ export default {
       } catch (error) {
         console.log(error.response.data.message);
       }
+    },
+
+    redirectPayment() {
+      this.$router.push("/payment/" + this.bookingDetails._id);
     },
   },
 };

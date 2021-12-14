@@ -17,7 +17,9 @@
               ><span class="fw-bold">Expiry date:</span
               ><span>10/16</span></small
             >
-            <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+            <small
+              ><span class="fw-bold">Name: </span><span> Your Name</span></small
+            >
           </div>
         </div>
       </div>
@@ -37,7 +39,10 @@
               ><span class="fw-bold">Expiry date:</span
               ><span>10/16</span></small
             >
-            <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+            <small
+              ><span class="fw-bold">Name: </span
+              ><span> Your Name </span></small
+            >
           </div>
         </div>
       </div>
@@ -57,13 +62,15 @@
               ><span class="fw-bold">Expiry date:</span
               ><span>10/16</span></small
             >
-            <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+            <small
+              ><span class="fw-bold">Name: </span><span> Your Name</span></small
+            >
           </div>
         </div>
       </div>
       <div class="col-12 mt-4">
         <div class="card p-3">
-          <p class="mb-0 fw-bold h4">Payment Methods</p>
+          <p class="mb-0 fw-bold h4">Payment Method</p>
         </div>
       </div>
       <div class="col-12">
@@ -104,7 +111,9 @@
                   </p>
                   <p class="mb-0">
                     <span class="fw-bold">Price:</span>
-                    <span class="c-green">:$452.90</span>
+                    <span class="c-green">
+                      listing.currency.toUpperCase() listing.price
+                    </span>
                   </p>
                   <p class="mb-0">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -114,7 +123,7 @@
                   </p>
                 </div>
                 <div class="col-lg-7">
-                  <form action="" class="form">
+                  <form action="" class="form" @submit.prevent="submitPayment">
                     <div class="row">
                       <div class="col-12">
                         <div class="nes-field myfix1">
@@ -130,15 +139,13 @@
                       <div>
                         <div class="form__div">
                           <label class="mylabel">Name On The Card</label>
-                          <input
-                            type="text"
-                            placeholder="nameOnCard"
-                            class="myInput"
-                          />
+                          <input type="text" class="myInput" />
                         </div>
                       </div>
                       <div class="col-12">
-                        <div class="btn btn-primary w-100">Sumbit</div>
+                        <div class="btn btn-primary w-100" type="submit">
+                          Sumbit
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -149,7 +156,9 @@
         </div>
       </div>
       <div class="col-12">
-        <div class="btn btn-primary payment">Make Payment</div>
+        <div class="btn btn-primary payment" @click="submitPayment">
+          Make Payment
+        </div>
       </div>
     </div>
   </div>
@@ -181,10 +190,14 @@ const style = {
 };
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      nameOnCard: "NAME ON THE CARD",
+      bookingDetails: null,
+      tenant: null,
+      listing: null,
     };
   },
   setup() {
@@ -247,20 +260,56 @@ export default {
         loading.value = false;
       }
     }
-    function redirect() {
-      stripe.redirectToCheckout({
-        successUrl: "http://localhost:3000/success",
-        cancelUrl: "http://localhost:3000",
-        lineItems: [
-          {
-            price: "price_0J1wDR0ADhx7uM8yPL8Wmpoq",
-            quantity: 1,
-          },
-        ],
-        mode: "payment",
-      });
+    return { loading, handleSubmit };
+  },
+  computed: {
+    ...mapGetters(["getUserImage", "getCurrentUser"]),
+  },
+  methods: {
+    async submitPayment() {
+      const data = {
+        totalPrice: this.listing.price,
+        email: this.tenant.email,
+        name: this.tenant.fName + this.tenant.lName,
+        currency: this.listing.currency,
+        bookingId: this.$route.params.bookingId,
+      };
+      try {
+        const response = await this.axios.post(
+          "http://localhost:3000/api/payment",
+          data
+        );
+        if (response.data.success) {
+          console.log(response.data);
+          this.$router.push("/dashboard/inbox");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  async created() {
+    console.log("Inside created");
+    //if user is not logged in, push to the login page
+    if (this.getCurrentUser.active === false) {
+      this.$router.push("/login");
     }
-    return { redirect, loading, handleSubmit };
+    console.log(this.$route.params.bookingId);
+    //Getting booking details from server for processing payment
+    try {
+      const response = await this.axios.get(
+        "http://localhost:3000/api/booking/details/" +
+          this.$route.params.bookingId
+      );
+      if (response.data.success) {
+        this.bookingDetails = response.data.booking[0];
+        this.tenant = this.bookingDetails.tenant;
+        this.listing = this.bookingDetails.listing;
+        console.log(response.data.booking);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>
