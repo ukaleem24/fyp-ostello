@@ -19,7 +19,7 @@
           :src="getUserImage"
           alt=""
         />
-        <h4 class="userName">Jessica</h4>
+        <h4 class="userName">{{ getCurrentUser.firstName }}</h4>
       </div>
 
       <div class="icon-container">
@@ -84,16 +84,16 @@ import GridCard from "./cards/BookingCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
-  data(){
-    return{
-      gotUserPofileImage:false,
-    }
+  data() {
+    return {
+      gotUserPofileImage: false,
+    };
   },
   components: {
     GridCard,
   },
   computed: {
-    ...mapGetters(["getListings", "getUserImage","getCurrentUser"]),
+    ...mapGetters(["getListings", "getUserImage", "getCurrentUser"]),
   },
   methods: {
     profile() {
@@ -105,9 +105,9 @@ export default {
     booking() {
       this.$router.push("/dashboard/booking");
     },
-    inbox(){
+    inbox() {
       this.$router.push("/dashboard/inbox");
-    }
+    },
   },
   async created() {
     if (this.getCurrentUser.active === false) {
@@ -132,7 +132,6 @@ export default {
       }
     }
   },
-
 };
 </script>
 <style scoped>
