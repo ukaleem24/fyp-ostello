@@ -5,11 +5,7 @@
         <div class="myfix">
           <div class="profile_info">
             <div class="imageSection">
-              <img
-                src="https://housinganywhere.imgix.net/room/1666164/c160ccda-c41b-47ea-b77a-d5a993e4fce3.jpg?auto=format&fit=clip&orient=0&ixlib=react-9.2.0&w=1446"
-                class="profile_image"
-                alt=""
-              />
+              <img :src="profilePhoto" class="profile_image" alt="" />
               <h4 class="userName">{{ bookingDetails.tenant.fName }}</h4>
             </div>
           </div>
@@ -25,11 +21,51 @@
                 <p>22/12/2021</p>
               </li>
             </ul>
-            <div class="box-desc">
+            <div v-if="bookingStatus === 'pending'" class="box-desc">
               <p>
                 {{ bookingDetails.tenant.fName }} wants to book your property
               </p>
               <p>Message: {{ bookingDetails.description }}</p>
+            </div>
+            <div v-if="bookingStatus === 'accepted'" class="box-desc">
+              <div class="myfix-flex">
+                <font-awesome-icon
+                  class="icons tick-icon"
+                  icon="check-circle"
+                ></font-awesome-icon>
+                <p class="booking-label">Booking confirmed</p>
+              </div>
+              <div class="myfix-flex" v-if="paymentStatus === 'pending'">
+                <font-awesome-icon
+                  class="icons grey-tick-icon"
+                  icon="check-circle"
+                ></font-awesome-icon>
+                <p class="booking-label">Payment pending</p>
+              </div>
+              <div class="myfix-flex" v-if="paymentStatus === 'completed'">
+                <font-awesome-icon
+                  class="icons tick-icon"
+                  icon="check-circle"
+                ></font-awesome-icon>
+                <p class="booking-label">Payment completed</p>
+              </div>
+              <div class="myfix-flex" v-if="paymentStatus === 'pending'">
+                <font-awesome-icon
+                  class="icons grey-tick-icon"
+                  icon="check-circle"
+                ></font-awesome-icon>
+                <p class="booking-label">Booking completed</p>
+              </div>
+              <div class="myfix-flex" v-if="paymentStatus === 'completed'">
+                <font-awesome-icon
+                  class="icons tick-icon"
+                  icon="check-circle"
+                ></font-awesome-icon>
+                <p class="booking-label">Booking completed</p>
+              </div>
+            </div>
+            <div class="myfix-flex" v-if="bookingStatus === 'declined'">
+              <p class="booking-cancel-label">Booking cancelled</p>
             </div>
             <ul class="location">
               <li class="address">
@@ -59,7 +95,11 @@
 export default {
   props: ["bookingDetails"],
   data() {
-    return { bookingStatus: this.bookingDetails.status };
+    return {
+      bookingStatus: this.bookingDetails.status,
+      paymentStatus: this.bookingDetails.paymentStatus,
+      profilePhoto: "https://www.w3schools.com/howto/img_avatar.png",
+    };
   },
   methods: {
     async updateStatus(st) {
@@ -77,6 +117,22 @@ export default {
         console.log(error.response.data.message);
       }
     },
+  },
+  async beforeCreate() {
+    try {
+      const userId = this.bookingDetails.tenant._id;
+      console.log(this.bookingDetails.tenant._id);
+      let imageName = null;
+      //getting reviews
+      const userInfoResponse = await this.axios.get(
+        "http://localhost:3000/api/user/info/" + userId
+      );
+      imageName = userInfoResponse.data.userinfo.photo;
+      this.profilePhoto = imageName[0];
+      this.profilePhoto = "http://localhost:3000/" + this.profilePhoto;
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   },
 };
 </script>
@@ -130,5 +186,25 @@ export default {
   text-align: right;
   color: #4ca1af;
   font-weight: 400;
+}
+.myfix-flex {
+  display: flex;
+  padding-bottom: 10px;
+}
+.tick-icon {
+  color: #00a300;
+  font-size: 20px;
+}
+.booking-label {
+  font-size: 15px;
+  padding-left: 15px;
+}
+.grey-tick-icon {
+  color: gray;
+  font-size: 20px;
+}
+.booking-cancel-label {
+  padding: 15px 0px 15px;
+  font-size: 15px;
 }
 </style>

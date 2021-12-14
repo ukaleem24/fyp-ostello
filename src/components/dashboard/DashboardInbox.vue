@@ -19,7 +19,7 @@
           :src="getUserImage"
           alt=""
         />
-        <h4 class="userName">Jessica</h4>
+        <h4 class="userName">{{getCurrentUser.firstName}}</h4>
       </div>
 
       <div class="icon-container">
@@ -92,6 +92,7 @@ export default {
       currentUser: null,
       landlordBookings: null,
       tenantBookings: null,
+      gotUserPofileImage:false,
     };
   },
   components: {

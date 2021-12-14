@@ -6,11 +6,7 @@
           <div class="myfix">
             <div class="profile_info">
               <div class="imageSection">
-                <img
-                  src="https://housinganywhere.imgix.net/room/1666164/c160ccda-c41b-47ea-b77a-d5a993e4fce3.jpg?auto=format&fit=clip&orient=0&ixlib=react-9.2.0&w=1446"
-                  class="profile_image"
-                  alt=""
-                />
+                <img :src="profilePhoto" class="profile_image" alt="" />
                 <h4 class="userName">{{ bookingDetails.landlord.fName }}</h4>
               </div>
             </div>
@@ -69,6 +65,7 @@ export default {
     return {
       bookingStatus: this.bookingDetails.status,
       paymentStatus: this.bookingDetails.paymentStatus,
+      profilePhoto: "https://www.w3schools.com/howto/img_avatar.png",
     };
   },
   methods: {
@@ -91,6 +88,24 @@ export default {
     redirectPayment() {
       this.$router.push("/payment/" + this.bookingDetails._id);
     },
+  },
+  async created() {
+    //getting landlord info
+    try {
+      const userId = this.bookingDetails.landlord._id;
+      console.log(this.bookingDetails.landlord._id);
+
+      let imageName = null;
+      //getting reviews
+      const userInfoResponse = await this.axios.get(
+        "http://localhost:3000/api/user/info/" + userId
+      );
+      imageName = userInfoResponse.data.userinfo.photo;
+      this.profilePhoto = imageName[0];
+      this.profilePhoto = "http://localhost:3000/" + this.profilePhoto;
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   },
 };
 </script>
