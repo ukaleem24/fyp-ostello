@@ -172,8 +172,8 @@
                             >My Payments</router-link
                           >
                         </li>
-                        <li>
-                          <router-link to="/my/listings">Logout</router-link>
+                        <li @click="logoutUser">
+                          <a href="">Logout</a>
                         </li>
                       </ul>
                     </li>
@@ -213,6 +213,13 @@ export default {
   // created() {
   //   console.log(this.getCurrentUser);
   // },
+
+  methods: {
+    logoutUser() {
+      this.$store.dispatch("logoutUser");
+      this.$router.push("/");
+    },
+  },
   async created() {
     this.profileImage = this.getUserImage;
     let imageName = "";

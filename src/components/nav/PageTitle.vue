@@ -65,11 +65,13 @@ export default {
     },
     setPlace(place) {
       const addressComponents = place.address_components;
-      addressComponents.forEach((comp) => {
-        if (comp.types.includes("locality")) {
-          this.searchQuery = comp.long_name;
-        }
-      });
+      if (addressComponents) {
+        addressComponents.forEach((comp) => {
+          if (comp.types.includes("locality")) {
+            this.searchQuery = comp.long_name;
+          }
+        });
+      }
     },
     inputChanged(e) {
       this.searchQuery = e.target.value;

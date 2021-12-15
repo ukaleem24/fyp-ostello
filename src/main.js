@@ -11,6 +11,7 @@ import auth from "@websanova/vue-auth/src/v3";
 
 import TheHeader from "./components/nav/TheHeader.vue";
 import TheFooter from "./components/nav/TheFooter.vue";
+import LoadingAnimation from "./components/ui/LoadingAnimation.vue";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
@@ -28,6 +29,7 @@ app.component("font-awesome-icon", FontAwesomeIcon);
 app.component("vue3-star-ratings", vue3StarRatings);
 app.component("TheHeader", TheHeader);
 app.component("TheFooter", TheFooter);
+app.component("LoadingAnimation", LoadingAnimation);
 
 app.use(VueAxios, axios);
 

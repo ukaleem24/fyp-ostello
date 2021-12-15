@@ -1,5 +1,6 @@
 <template>
-  <div class="col-md-4">
+  <loading-animation v-if="togglePreloader"></loading-animation>
+  <div class="col-md-4 listing-card">
     <div class="imagebox style1">
       <div class="box-imagebox">
         <div class="box-header">
@@ -73,6 +74,7 @@ export default {
       blackRating: 0,
       tempPhoto: null,
       listingPhotos: [],
+      togglePreloader: true,
     };
   },
   methods: {
@@ -115,11 +117,13 @@ export default {
       // imageName = userInfoResponse.data.userinfo.photo;
       // this.photoResponse = imageName[0];
       this.listingPhotos = photoResponse.data.photos;
+      this.tempPhoto = this.listingPhotos[0].photo;
+      this.listingPhotos[0] = "http://localhost:3000/" + this.tempPhoto[0];
     } catch (error) {
       console.log(error.response.data.message);
+    } finally {
+      this.togglePreloader = false;
     }
-    this.tempPhoto = this.listingPhotos[0].photo;
-    this.listingPhotos[0] = "http://localhost:3000/" + this.tempPhoto[0];
   },
 };
 </script>
@@ -127,5 +131,8 @@ export default {
 <style scoped>
 .queue {
   color: #f0b108;
+}
+.listing-card {
+  margin-bottom: 40px;
 }
 </style>

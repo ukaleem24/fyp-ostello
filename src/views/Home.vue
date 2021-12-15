@@ -1,9 +1,5 @@
 <template>
-  <div class="preloader" v-if="togglePreloader">
-    <div class="clear-loading loading-effect-2">
-      <span></span>
-    </div>
-  </div>
+  <loading-animation v-if="togglePreloader"></loading-animation>
   <the-header></the-header>
   <page-title></page-title>
   <mix-comp></mix-comp>
@@ -34,7 +30,10 @@ export default {
     };
   },
   beforeCreate() {
-    setTimeout(() => (this.togglePreloader = false), 1000);
+    // setTimeout(() => (), 1000);
+  },
+  mounted() {
+    this.togglePreloader = false;
   },
 };
 </script>

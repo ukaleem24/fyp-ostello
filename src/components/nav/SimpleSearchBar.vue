@@ -4,13 +4,22 @@
       <div class="row">
         <div class="col-md-12">
           <div class="wrap-box-search style1">
-            <form action="#" method="get" accept-charset="utf-8">
+            <form @submit.prevent="redirectSearchPage">
               <span>
-                <input
+                <GMapAutocomplete
                   type="text"
                   placeholder="What are you looking for ?"
                   name="search"
-                  :value="$route.params.searchQuery"
+                  id="location"
+                  :options="{
+                    componentRestrictions: { country: ['pk'] },
+                    strictBounds: true,
+                    types: ['(cities)'],
+                  }"
+                  @place_changed="setPlace"
+                  @input="inputChanged"
+                  @keyup.enter="redirectSearchPage"
+                  :value="searchQuery"
                 />
               </span>
               <span class="location">
@@ -42,10 +51,34 @@
 
 <script>
 export default {
+  data() {
+    return {
+      searchQuery: this.$route.params.searchQuery,
+    };
+  },
   computed: {
-    searchQuery() {
-      console.log(this.$route.params.searchQuery);
-      return this.$route.params.searchQuery;
+    // computedSearchQuery() {
+    //   console.log(this.$route.params.searchQuery);
+    //   return this.$route.params.searchQuery;
+    // },
+  },
+
+  methods: {
+    redirectSearchPage() {
+      this.$router.push("/search/" + this.searchQuery);
+    },
+    setPlace(place) {
+      const addressComponents = place.address_components;
+      if (addressComponents) {
+        addressComponents.forEach((comp) => {
+          if (comp.types.includes("locality")) {
+            this.searchQuery = comp.long_name;
+          }
+        });
+      }
+    },
+    inputChanged(e) {
+      this.searchQuery = e.target.value;
     },
   },
 };

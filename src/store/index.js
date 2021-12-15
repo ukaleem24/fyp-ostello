@@ -130,6 +130,16 @@ export default createStore({
     setUserImage(state, payload) {
       state.userimage = payload.image;
     },
+    logoutCurrentUser(state) {
+      state.currentUser = {
+        active: false,
+        firstName: "",
+        email: "",
+        lastName: "",
+        id: null,
+      };
+      state.landlordListings = [];
+    },
   },
   plugins: [createPersistedState()],
 
@@ -152,6 +162,9 @@ export default createStore({
     },
     setLandlordListings(context, payload) {
       context.commit("setLandlordListings", payload);
+    },
+    logoutUser(context) {
+      context.commit("logoutCurrentUser");
     },
   },
   modules: {},
