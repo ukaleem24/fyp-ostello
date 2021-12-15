@@ -63,7 +63,7 @@
     <div class="content">
       <div class="profile-Container">
         <div class="listing-result">
-          <h4>{{ getListings.length }} Results Found</h4>
+          <h4>0 Results Found</h4>
         </div>
         <div class="grid-Container">
           <grid-card class="grid-item"></grid-card>
@@ -93,7 +93,7 @@ export default {
     GridCard,
   },
   computed: {
-    ...mapGetters(["getListings", "getUserImage", "getCurrentUser"]),
+    ...mapGetters(["getUserImage", "getCurrentUser"]),
   },
   methods: {
     profile() {

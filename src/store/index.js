@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
   state() {
@@ -130,6 +131,7 @@ export default createStore({
       state.userimage = payload.image;
     },
   },
+  plugins: [createPersistedState()],
 
   actions: {
     addNewListing(context, payload) {

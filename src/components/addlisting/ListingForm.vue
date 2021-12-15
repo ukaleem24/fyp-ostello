@@ -717,6 +717,7 @@ export default {
     ...mapGetters(["getCurrentUser"]),
   },
   methods: {
+    //Submit data to create new listing in database
     async submitListing() {
       try {
         this.listingData.userId = this.getCurrentUser.id;
@@ -729,15 +730,13 @@ export default {
         if (response.data.status) {
           this.postResponse = response.data.info._id;
         }
-
-        // console.log(response.data.message);
       } catch (error) {
         console.log(error.message);
       }
-      //Sending pics to DB
+
+      //Posting listing images to backend
       for (let i = 0; i < this.photoFiles.length; i++) {
         try {
-          // let temop = "61b786987c1d60cf938996e2";
           let formData = new FormData();
           formData.append("photo", this.photoFiles[i]);
           const response = await this.axios.post(
@@ -751,7 +750,6 @@ export default {
           console.log(error.message);
         }
       }
-      // this.$store.dispatch("addNewListing", this.listingData);
       this.$router.push("/my/listings");
     },
     uploadImage(e) {
