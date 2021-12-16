@@ -8,8 +8,8 @@
               <a href="#" title=""> Ostello </a>
             </div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ostello is an online platform, on which landlords can list their
+              properties for rent.
             </p>
           </div>
           <!-- /.widget-about -->
@@ -17,33 +17,27 @@
         <!-- /.col-md-3 -->
         <div class="col-md-3">
           <div class="widget widget-categories">
-            <h3 class="widget-title">Categories</h3>
+            <h3 class="widget-title">Cities</h3>
             <ul class="one-half">
               <li>
-                <a href="#" title="">Foot</a>
+                <a href="/search/islamabad" title="">Islamabad</a>
               </li>
               <li>
-                <a href="#" title="">Hotel</a>
+                <a href="/search/lahore" title="">Lahore</a>
               </li>
               <li>
-                <a href="#" title="">Play</a>
+                <a href="/search/rawalpindi" title="">Rawalpindi</a>
               </li>
               <li>
-                <a href="#" title="">Automove</a>
+                <a href="/search/karachi" title="">Karachi</a>
               </li>
             </ul>
             <ul class="one-half">
               <li>
-                <a href="#" title="">Shop</a>
+                <a href="/search/quetta" title="">Quetta</a>
               </li>
               <li>
-                <a href="#" title="">Fitness</a>
-              </li>
-              <li>
-                <a href="#" title="">Nightlife</a>
-              </li>
-              <li>
-                <a href="#" title="">Park</a>
+                <a href="/search/peshawar" title="">Peshawar</a>
               </li>
             </ul>
             <div class="clearfix"></div>
@@ -136,7 +130,7 @@
           </ul>
           <!-- /.social-ft -->
           <div class="copyright">
-            © 2017 Copyright by Deercreative. All rights reserved.
+            © 2021 Copyright by Ostello. All rights reserved.
           </div>
           <!-- /.copyright -->
         </div>

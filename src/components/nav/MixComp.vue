@@ -3,59 +3,6 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div class="highlights">
-            <ul class="menu-list">
-              <li>
-                <a href="#" title="">
-                  <img src="../../assets/images/page/cutlery.png" alt="" />
-                  <span>Foot</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" title="">
-                  <img src="../../assets/images/page/double-bed.png" alt="" />
-                  <span>Hotel</span>
-                </a>
-              </li>
-              <li class="active">
-                <a href="#" title="">
-                  <img src="../../assets/images/page/guitar.png" alt="" />
-                  <span>Play</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" title="">
-                  <img src="../../assets/images/page/rent-a-car.png" alt="" />
-                  <span>Automove</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" title="">
-                  <img src="../../assets/images/page/shopping-bag.png" alt="" />
-                  <span>Shop</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" title="">
-                  <img src="../../assets/images/page/dumbbell.png" alt="" />
-                  <span>Fitness</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" title="">
-                  <img src="../../assets/images/page/cocktail.png" alt="" />
-                  <span>Nightlife</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" title="">
-                  <img src="../../assets/images/page/park.png" alt="" />
-                  <span>Park</span>
-                </a>
-              </li>
-            </ul>
-            <!-- /.menu-list -->
-          </div>
           <!-- /.highlights -->
         </div>
         <!-- /.col-md-12 -->
@@ -88,7 +35,7 @@
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Islamabad</a>
+              <a href="/search/islamabad" title="">Islamabad</a>
               <p>Pakistan</p>
             </div>
           </div>
@@ -102,7 +49,7 @@
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Karachi</a>
+              <a href="/search/karachi" title="">Karachi</a>
               <p>Pakistan</p>
             </div>
           </div>
@@ -114,7 +61,7 @@
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Lahore</a>
+              <a href="/search/lahore" title="">Lahore</a>
               <p>Pakistan</p>
             </div>
           </div>
@@ -128,7 +75,7 @@
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Quetta</a>
+              <a href="/search/quetta" title="">Quetta</a>
               <p>Pakistan</p>
             </div>
           </div>
@@ -140,7 +87,7 @@
               <div class="overlay"></div>
             </div>
             <div class="box-content">
-              <a href="#" title="">Peshawar</a>
+              <a href="/search/peshawar" title="">Peshawar</a>
               <p>Pakistan</p>
             </div>
           </div>

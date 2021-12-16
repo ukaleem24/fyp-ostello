@@ -11,6 +11,8 @@ import SearchPage from "../views/SearchPage.vue";
 import Login from "../views/Login.vue";
 import Payment from "../views/Payment.vue";
 import Inbox from "../views/dashboard/Inbox.vue";
+import NotFound from "../views/NotFound.vue";
+import ContactUs from "../views/ContactUs.vue";
 
 const routes = [
   {
@@ -73,6 +75,12 @@ const routes = [
     name: "Inbox",
     component: Inbox,
   },
+  {
+    path: "/contact",
+    name: "ContactUs",
+    component: ContactUs,
+  },
+  { path: "/:pathMatch(.*)*", component: NotFound },
 ];
 
 const router = createRouter({

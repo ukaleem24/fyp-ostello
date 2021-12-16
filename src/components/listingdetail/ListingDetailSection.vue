@@ -441,6 +441,7 @@ export default {
         );
         if (response.data.success) {
           console.log(response.data.message);
+          this.$router.push("/dashboard/inbox");
         }
       } catch (error) {
         console.log(error);

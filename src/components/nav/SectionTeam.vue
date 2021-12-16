@@ -17,11 +17,14 @@
           <div class="team">
             <div class="member">
               <div class="member-image">
-                <img src="../../assets/images/members/usama.jpg" alt="" />
+                <img
+                  src="../../assets/images/members/kaleem.jpg"
+                  alt="kaleem"
+                />
               </div>
               <div class="">
-                <h4 class="name">Usama Ilyas</h4>
-                <div class="option">CEO</div>
+                <h4 class="name">Kaleem Ullah</h4>
+                <div class="option">Founder, CEO</div>
               </div>
             </div>
             <!-- /.team-member -->
@@ -30,8 +33,8 @@
                 <img src="../../assets/images/members/usama.jpg" alt="" />
               </div>
               <div class="">
-                <h4 class="name">Kaleem Ullah</h4>
-                <div class="option">CEO Assistant</div>
+                <h4 class="name">Usama Ilyas</h4>
+                <div class="option">Peon</div>
               </div>
             </div>
           </div>

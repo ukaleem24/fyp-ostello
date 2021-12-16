@@ -12,77 +12,20 @@
               <nav id="mainnav" class="mainnav">
                 <ul class="menu">
                   <li>
-                    <a href="#" title="">Explore</a>
+                    <a href="/">Home</a>
+                  </li>
+                  <li>
+                    <a href="#" title="">About</a>
                     <ul class="submenu">
                       <li>
-                        <a href="explore-v1.html" title=""
-                          >Explore Map Zoom In</a
-                        >
-                      </li>
-                      <li>
-                        <a href="explore-v2.html" title=""
-                          >Explore Map Zoom Out</a
-                        >
-                      </li>
-                      <li>
-                        <a href="explore-v3.html" title="">Explore Map List</a>
-                      </li>
-                      <li>
-                        <a href="explore-v4.html" title="">Explore Grid</a>
-                      </li>
-                      <li>
-                        <router-link to="/my/listings"
-                          >Explore List</router-link
-                        >
-                      </li>
-                      <li>
-                        <a href="explore-detail.html" title=""
-                          >Explore Details</a
-                        >
+                        <a href="/contact" title="">Contact Us</a>
                       </li>
                     </ul>
                   </li>
-                  <li>
-                    <a href="#" title="">Pages</a>
-                    <ul class="submenu">
-                      <li>
-                        <a href="index.html" title="">Index Layout</a>
-                      </li>
-                      <li>
-                        <a href="404.html" title="">404 Page</a>
-                      </li>
-                      <li>
-                        <a href="addlisting.html" title="">Add Listings</a>
-                      </li>
-                      <li>
-                        <a href="comingsoon.html" title="">Comming Soon</a>
-                      </li>
-                      <li>
-                        <a href="contact.html" title="">Contact</a>
-                      </li>
-                      <li>
-                        <a href="price.html" title="">Price Page</a>
-                      </li>
-                      <li>
-                        <a href="work.html" title="">How It Works</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="blog.html" title="">Blog</a>
-                    <ul class="submenu">
-                      <li>
-                        <a href="blog.html" title="">Blog</a>
-                      </li>
-                      <li>
-                        <a href="blog-single.html" title="">Blog Single</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
+                  <li v-if="!userLoggedIn">
                     <router-link to="/login">Log In</router-link>
                   </li>
-                  <li>
+                  <li v-if="!userLoggedIn">
                     <router-link to="/register/newuser">Sign Up</router-link>
                   </li>
                 </ul>
@@ -205,6 +148,7 @@ export default {
     return {
       profileImage: null,
       gotUserPofileImage: false,
+      userLoggedIn: false,
     };
   },
   computed: {
@@ -233,6 +177,7 @@ export default {
         imageName = userInfoResponse.data.userinfo.photo;
         this.profileImage = imageName[0];
         this.gotUserPofileImage = true;
+        this.userLoggedIn = true;
       } catch (error) {
         console.log(error.response.data.message);
       }

@@ -62,7 +62,7 @@
     </div>
     <div class="content">
       <div class="profile-Container">
-        <h4>Your Properties:</h4>
+        <h4 v-if="landlordBookings != null">Your Properties:</h4>
         <br />
         <inbox-landlord
           v-for="booking in landlordBookings"
@@ -70,6 +70,7 @@
           :bookingDetails="booking"
         ></inbox-landlord>
 
+        <h4 v-if="tenantBookings != []">Your Enquiries:</h4>
         <inbox-tenant
           v-for="booking in tenantBookings"
           :key="booking._id"
@@ -133,6 +134,7 @@ export default {
           this.currentUser.id
       );
       if (response.data.success === true) {
+        console.log(response.data.booings);
         this.landlordBookings = response.data.bookings;
       }
     } catch (error) {
