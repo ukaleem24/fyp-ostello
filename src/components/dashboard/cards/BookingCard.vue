@@ -22,21 +22,22 @@
         <!-- /.box-header -->
         <div class="box-content">
           <div class="box-title">
-            <a href="#" title="">Acantara</a
+            <a href="#" title=""
+              >{{ listing.currency.toUpperCase() }}{{ listing.price }}/Month</a
             ><i class="fa fa-check-circle" aria-hidden="true"></i>
           </div>
           <ul class="rating">
-            <li>kaleem Ullah</li>
-            <li>12/12/12</li>
-            <li>12/12/12</li>
+            <li>{{ listing.streetAddress }}</li>
+            <li>{{ listing.type }}</li>
           </ul>
         </div>
         <!-- /.box-content -->
         <ul class="location">
           <li class="address">
-            <span class="ti-location-pin"></span>Seoul, Korea
+            <span class="ti-location-pin"></span>{{ listing.city }},
+            {{ listing.country }}
           </li>
-          <li class="open">Booked</li>
+          <li class="open">Booking Completed</li>
         </ul>
         <!-- /.location -->
       </div>
@@ -45,3 +46,9 @@
     <!-- /.imaegbox style1 -->
   </div>
 </template>
+
+<script>
+export default {
+  props: ["listing"],
+};
+</script>

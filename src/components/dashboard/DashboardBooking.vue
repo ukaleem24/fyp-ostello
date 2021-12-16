@@ -66,12 +66,12 @@
           <h4>0 Results Found</h4>
         </div>
         <div class="grid-Container">
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
-          <grid-card class="grid-item"></grid-card>
+          <grid-card
+            v-for="booking in tenantBookings"
+            :key="booking._id"
+            :listing="booking.listing"
+            class="grid-item"
+          ></grid-card>
         </div>
       </div>
     </div>
@@ -87,6 +87,7 @@ export default {
   data() {
     return {
       gotUserPofileImage: false,
+      tenantBookings: null,
     };
   },
   components: {
@@ -130,6 +131,23 @@ export default {
       } catch (error) {
         console.log(error.response.data.message);
       }
+    }
+
+    try {
+      this.currentUser = this.$store.getters.getCurrentUser;
+      if (!this.currentUser.active) {
+        this.$router.push("/login");
+      }
+      const response = await this.axios.get(
+        "http://localhost:3000/api//booking/details/tenant/" +
+          this.currentUser.id
+      );
+      if (response.data.success === true) {
+        console.log(response.data.bookings);
+        this.tenantBookings = response.data.bookings;
+      }
+    } catch (error) {
+      console.log("landlord error: " + error);
     }
   },
 };
