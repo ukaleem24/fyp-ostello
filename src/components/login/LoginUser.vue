@@ -32,7 +32,6 @@
                 </div>
                 <div class="btn-more">
                   <button class="buttonU" @click="login">Login</button>
-                  <button class="buttonU" @click="getProfile">Login</button>
                 </div>
               </form>
               <!-- /form -->
