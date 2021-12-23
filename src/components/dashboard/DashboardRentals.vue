@@ -50,7 +50,7 @@
       <div class="icon-container">
         <div class="icon-label">
           <font-awesome-icon icon="money-check-alt"></font-awesome-icon>
-          <h5 class="myFixlabelIcon" @click="rentals">Rentals</h5>
+          <h5 class="myFixlabelIcon">Rentals</h5>
         </div>
       </div>
       <div class="icon-container">
@@ -62,20 +62,17 @@
     </div>
     <div class="content">
       <div class="profile-Container">
-        <h4 v-if="landlordBookings != null">Your Properties:</h4>
-        <br />
-        <inbox-landlord
-          v-for="booking in landlordBookings"
-          :key="booking._id"
-          :bookingDetails="booking"
-        ></inbox-landlord>
-
-        <h4 v-if="tenantBookings != []">Your Enquiries:</h4>
-        <inbox-tenant
-          v-for="booking in tenantBookings"
-          :key="booking._id"
-          :bookingDetails="booking"
-        ></inbox-tenant>
+        <div class="listing-result">
+          <h4>{{ landlordBookings.length }} Results Found</h4>
+        </div>
+        <div class="grid-Container">
+          <grid-card
+            v-for="booking in landlordBookings"
+            :key="booking._id"
+            :listing="booking.listing"
+            class="grid-item"
+          ></grid-card>
+        </div>
       </div>
     </div>
   </div>
@@ -83,22 +80,18 @@
 
 <script>
 import "../../assets/stylesheets/dashbordStyle.css";
-import InboxTenant from "./cards/InboxTenant.vue";
-import InboxLandlord from "./cards/InboxLandlord.vue";
+import GridCard from "./cards/BookingCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
-      currentUser: null,
-      landlordBookings: null,
-      tenantBookings: null,
       gotUserPofileImage: false,
+      landlordBookings: [],
     };
   },
   components: {
-    InboxTenant,
-    InboxLandlord,
+    GridCard,
   },
   computed: {
     ...mapGetters(["getUserImage", "getCurrentUser"]),
@@ -116,56 +109,16 @@ export default {
     inbox() {
       this.$router.push("/dashboard/inbox");
     },
-    rentals() {
-      this.$router.push("/dashboard/rentals");
-    },
     logoutUser() {
       this.$store.dispatch("logoutUser");
       this.$router.push("/");
     },
   },
   async created() {
-    //if user is not logged in, push to the login page
     if (this.getCurrentUser.active === false) {
       this.$router.push("/");
     }
-
-    //Getting bookings of current user as a tenant from server to show notifications
-    try {
-      this.currentUser = this.$store.getters.getCurrentUser;
-      if (!this.currentUser.active) {
-        this.$router.push("/login");
-      }
-      const response = await this.axios.get(
-        "http://localhost:3000/api//booking/details/landlord/" +
-          this.currentUser.id
-      );
-      if (response.data.success === true) {
-        console.log(response.data.booings);
-        this.landlordBookings = response.data.bookings;
-      }
-    } catch (error) {
-      console.log("landlord error: " + error);
-    }
-
-    //Getting bookings of current user as a tenant from server to show notifications
-    try {
-      this.currentUser = this.$store.getters.getCurrentUser;
-      if (!this.currentUser.active) {
-        this.$router.push("/login");
-      }
-      const response = await this.axios.get(
-        "http://localhost:3000/api//booking/details/tenant/" +
-          this.currentUser.id
-      );
-      if (response.data.success === true) {
-        console.log(response.data.bookings);
-        this.tenantBookings = response.data.bookings;
-      }
-    } catch (error) {
-      console.log("landlord error: " + error);
-    }
-
+    this.profileImage = this.getUserImage;
     let imageName = "";
     if (this.getCurrentUser.active === true) {
       try {
@@ -178,9 +131,27 @@ export default {
         this.profileImage = imageName[0];
         this.gotUserPofileImage = true;
         console.log(this.gotUserPofileImage);
+        console.log();
       } catch (error) {
         console.log(error.response.data.message);
       }
+    }
+
+    try {
+      this.currentUser = this.$store.getters.getCurrentUser;
+      if (!this.currentUser.active) {
+        this.$router.push("/login");
+      }
+      const response = await this.axios.get(
+        "http://localhost:3000/api//booking/details/landlord/" +
+          this.currentUser.id
+      );
+      if (response.data.success === true) {
+        console.log(response.data.bookings);
+        this.landlordBookings = response.data.bookings;
+      }
+    } catch (error) {
+      console.log("landlord error: " + error);
     }
   },
 };
@@ -192,9 +163,10 @@ export default {
   grid-template-columns: auto auto;
 }
 .grid-item {
-  padding: 10px 10px 50px 10px;
-  width: 80%;
-  max-height: 80%;
+  margin-bottom: 50px;
+  padding: 10px 10px 100px 10px;
+  width: 350px;
+  max-height: 400px;
 }
 .sidebar-dashboard .icon-container {
   color: gainsboro;

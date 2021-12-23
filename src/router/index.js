@@ -11,6 +11,7 @@ import SearchPage from "../views/SearchPage.vue";
 import Login from "../views/Login.vue";
 import Payment from "../views/Payment.vue";
 import Inbox from "../views/dashboard/Inbox.vue";
+import Rentals from "../views/dashboard/Rentals.vue";
 import NotFound from "../views/NotFound.vue";
 import ContactUs from "../views/ContactUs.vue";
 
@@ -56,8 +57,8 @@ const routes = [
     component: Booking,
   },
   {
-    path: "/search/:searchQuery",
-    name: "Search Page",
+    path: "/search/:category?/:searchQuery",
+    name: "Search",
     component: SearchPage,
   },
   {
@@ -74,6 +75,11 @@ const routes = [
     path: "/dashboard/inbox",
     name: "Inbox",
     component: Inbox,
+  },
+  {
+    path: "/dashboard/rentals",
+    name: "Rentals",
+    component: Rentals,
   },
   {
     path: "/contact",

@@ -28,10 +28,10 @@
               </span>
               <span class="categories">
                 <span class="ti-angle-down"></span>
-                <select name="categories">
-                  <option value="">All Categories</option>
-                  <option value="">All Categories</option>
-                  <option value="">All Categories</option>
+                <select name="categories" v-model="category">
+                  <option value="all">All Categories</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="House">House</option>
                 </select>
               </span>
               <button type="submit" class="search-btn">Search</button>
@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       searchQuery: this.$route.params.searchQuery,
+      category: "all",
     };
   },
   computed: {
@@ -65,7 +66,10 @@ export default {
 
   methods: {
     redirectSearchPage() {
-      this.$router.push("/search/" + this.searchQuery);
+      this.$router.push({
+        name: "Search",
+        params: { searchQuery: this.searchQuery, category: this.category },
+      });
     },
     setPlace(place) {
       const addressComponents = place.address_components;
@@ -80,6 +84,11 @@ export default {
     inputChanged(e) {
       this.searchQuery = e.target.value;
     },
+  },
+  mounted() {
+    if (this.$route.params.category) {
+      this.category = this.$route.params.category.toString();
+    }
   },
 };
 </script>

@@ -50,7 +50,7 @@
       <div class="icon-container">
         <div class="icon-label">
           <font-awesome-icon icon="money-check-alt"></font-awesome-icon>
-          <h5 class="myFixlabelIcon">My Payments</h5>
+          <h5 class="myFixlabelIcon" @click="rentals">Rentals</h5>
         </div>
       </div>
       <div class="icon-container">
@@ -112,6 +112,9 @@ export default {
     },
     inbox() {
       this.$router.push("/dashboard/inbox");
+    },
+    rentals() {
+      this.$router.push("/dashboard/rentals");
     },
     logoutUser() {
       this.$store.dispatch("logoutUser");

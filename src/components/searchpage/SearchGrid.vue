@@ -35,11 +35,22 @@ export default {
   async beforeCreate() {
     const searchQuery = this.$route.params.searchQuery;
     console.log(searchQuery);
-    const response = await this.axios.get(
-      "http://localhost:3000/api/search/listings/" + searchQuery
-    );
-    console.log(response.data.searchResults);
-    this.searchResults = response.data.searchResults;
+    if (this.$route.params.category) {
+      const category = this.$route.params.category;
+      const response = await this.axios.get(
+        "http://localhost:3000/api/search/filter/listings/" +
+          searchQuery +
+          "/" +
+          category
+      );
+      this.searchResults = response.data.searchResults;
+    } else {
+      const response = await this.axios.get(
+        "http://localhost:3000/api/search/listings/" + searchQuery
+      );
+      this.searchResults = response.data.searchResults;
+    }
+
     this.showAnimation = false;
   },
 };

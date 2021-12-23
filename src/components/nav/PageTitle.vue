@@ -31,10 +31,10 @@
               </span>
               <span class="categories">
                 <span class="ti-angle-down"></span>
-                <select name="categories">
-                  <option value="">All Categories</option>
-                  <option value="">Apartments</option>
-                  <option value="">House</option>
+                <select name="categories" v-model="category">
+                  <option value="all">All Categories</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="House">House</option>
                 </select>
               </span>
               <button type="submit" class="search-btn">Search</button>
@@ -57,11 +57,15 @@ export default {
   data() {
     return {
       searchQuery: "",
+      category: "all",
     };
   },
   methods: {
     redirectSearchPage() {
-      this.$router.push("/search/" + this.searchQuery);
+      this.$router.push({
+        name: "Search",
+        params: { searchQuery: this.searchQuery, category: this.category },
+      });
     },
     setPlace(place) {
       const addressComponents = place.address_components;
