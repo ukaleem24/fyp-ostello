@@ -210,9 +210,15 @@
             <div class="box pdmap style1" id="flat-map-4">
               <GMapMap
                 class="myMapFix"
-                :center="{ lat: 33.6844, lng: 73.0479 }"
-                :zoom="10"
-              />
+                :center="{ lat: position.lat, lng: position.lng }"
+                :zoom="15"
+              >
+                <GMapMarker
+                  :key="listing"
+                  :position="{ lat: position.lat, lng: position.lng }"
+                  :clickable="true"
+                  :draggable="true"
+              /></GMapMap>
               <!-- <div class="gm-map">
                 <div class="map-4"></div>
               </div> -->
@@ -353,6 +359,7 @@ export default {
       reviewImages: [],
       finalReviews: [],
       togglePreloader: true,
+      position: { lat: 33.6844, lng: 73.0479 },
     };
   },
   computed: {
@@ -488,6 +495,8 @@ export default {
         console.log(response.data.searchResults);
         this.listingData = response.data.searchResults[0];
         this.landlord = this.listingData.user;
+        this.position.lat = parseFloat(this.listingData.position.lat);
+        this.position.lng = parseFloat(this.listingData.position.lng);
       } catch (error) {
         console.log(error.response.data.message);
       }

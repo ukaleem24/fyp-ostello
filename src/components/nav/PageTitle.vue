@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="page-title-heading">Discover the Best Places</div>
           <div class="text-heading">
-            Expolore top-rated attractions, activities and more
+            Expolore top-rated hostels, apartments and more!
           </div>
           <div class="wrap-box-search">
             <form @submit="redirectSearchPage">
@@ -33,8 +33,8 @@
                 <span class="ti-angle-down"></span>
                 <select name="categories">
                   <option value="">All Categories</option>
-                  <option value="">All Categories</option>
-                  <option value="">All Categories</option>
+                  <option value="">Apartments</option>
+                  <option value="">House</option>
                 </select>
               </span>
               <button type="submit" class="search-btn">Search</button>

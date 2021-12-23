@@ -34,7 +34,7 @@
               </div>
               <div class="">
                 <h4 class="name">Usama Ilyas</h4>
-                <div class="option">Peon</div>
+                <div class="option">CEO, Peon</div>
               </div>
             </div>
           </div>

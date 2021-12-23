@@ -189,12 +189,13 @@
                 </div>
                 <!-- /.wrap-listing -->
                 <div class="wrap-listing price-from">
-                  <label>Price</label>
+                  <label>Rent/month*</label>
                   <input
                     type="text"
                     name="price"
                     placeholder="Price"
                     v-model="listingData.price"
+                    required
                   />
                 </div>
                 <!-- /.wrap-listing -->
@@ -750,7 +751,7 @@ export default {
           console.log(error.message);
         }
       }
-      this.$router.push("/my/listings");
+      this.$router.push("/");
     },
     uploadImage(e) {
       const previewImage = {
