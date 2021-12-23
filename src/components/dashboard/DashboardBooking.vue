@@ -63,7 +63,7 @@
     <div class="content">
       <div class="profile-Container">
         <div class="listing-result">
-          <h4>0 Results Found</h4>
+          <h4>{{ tenantBookings.length }} Results Found</h4>
         </div>
         <div class="grid-Container">
           <grid-card
@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       gotUserPofileImage: false,
-      tenantBookings: null,
+      tenantBookings: [],
     };
   },
   components: {
@@ -163,9 +163,10 @@ export default {
   grid-template-columns: auto auto;
 }
 .grid-item {
-  padding: 10px 10px 50px 10px;
-  width: 80%;
-  max-height: 80%;
+  margin-bottom: 50px;
+  padding: 10px 10px 100px 10px;
+  width: 350px;
+  max-height: 400px;
 }
 .sidebar-dashboard .icon-container {
   color: gainsboro;
