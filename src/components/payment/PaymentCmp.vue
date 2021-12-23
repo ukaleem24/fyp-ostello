@@ -14,11 +14,11 @@
           </div>
           <div class="d-flex align-items-center justify-content-between">
             <small
-              ><span class="fw-bold">Expiry date:</span
-              ><span>10/16</span></small
-            >
-            <small
-              ><span class="fw-bold">Name: </span><span> Your Name</span></small
+              ><span class="fw-bold">Name: </span
+              ><span
+                >{{ getCurrentUser.firstName }}
+                {{ getCurrentUser.lastName }}</span
+              ></small
             >
           </div>
         </div>
@@ -36,12 +36,11 @@
           </div>
           <div class="d-flex align-items-center justify-content-between">
             <small
-              ><span class="fw-bold">Expiry date:</span
-              ><span>10/16</span></small
-            >
-            <small
               ><span class="fw-bold">Name: </span
-              ><span> Your Name </span></small
+              ><span
+                >{{ getCurrentUser.firstName }}
+                {{ getCurrentUser.lastName }}</span
+              ></small
             >
           </div>
         </div>
@@ -59,11 +58,11 @@
           </div>
           <div class="d-flex align-items-center justify-content-between">
             <small
-              ><span class="fw-bold">Expiry date:</span
-              ><span>10/16</span></small
-            >
-            <small
-              ><span class="fw-bold">Name: </span><span> Your Name</span></small
+              ><span class="fw-bold">Name: </span
+              ><span>
+                {{ getCurrentUser.firstName }}
+                {{ getCurrentUser.lastName }}</span
+              ></small
             >
           </div>
         </div>
@@ -106,20 +105,21 @@
                 <div class="col-lg-5 mb-lg-0 mb-3">
                   <p class="h4 mb-0">Summary</p>
                   <p class="mb-0">
-                    <span class="fw-bold">Product:</span
-                    ><span class="c-green">: Name of product</span>
+                    <span class="fw-bold">Address: </span
+                    ><span class="c-green price">{{ HouseAddress }}</span>
                   </p>
                   <p class="mb-0">
-                    <span class="fw-bold">Price:</span>
-                    <span class="c-green">
-                      listing.currency.toUpperCase() listing.price
+                    <span class="fw-bold">Rent: </span>
+                    <span class="c-green price">
+                      {{ currency }}
+                      {{ price }}
                     </span>
                   </p>
                   <p class="mb-0">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Atque nihil neque quisquam aut repellendus, dicta vero?
-                    Animi dicta cupiditate, facilis provident quibusdam ab quis,
-                    iste harum ipsum hic, nemo qui!
+                    Our rental payment service is completely free for you to
+                    use. That’s right, no hidden fees! Just accurate and
+                    automated rental management with a seamless payment process
+                    from start to finish.
                   </p>
                 </div>
                 <div class="col-lg-7">
@@ -198,6 +198,9 @@ export default {
       bookingDetails: null,
       tenant: null,
       listing: null,
+      price: 0,
+      currency: "PKR",
+      HouseAddress: "",
     };
   },
   setup() {
@@ -305,6 +308,9 @@ export default {
         this.bookingDetails = response.data.booking[0];
         this.tenant = this.bookingDetails.tenant;
         this.listing = this.bookingDetails.listing;
+        this.price = this.bookingDetails.listing.price;
+        this.currency = this.bookingDetails.listing.currency;
+        this.HouseAddress = this.bookingDetails.listing.streetAddress;
         console.log(response.data.booking);
       }
     } catch (error) {
@@ -322,6 +328,9 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+}
+.price {
+  font-weight: 600;
 }
 .mylabel {
   padding-top: 5px;

@@ -56,7 +56,7 @@
       <div class="icon-container">
         <div class="icon-label">
           <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
-          <h5 class="myFixlabelIcon">Logout</h5>
+          <h5 @click="logoutUser" class="myFixlabelIcon">Logout</h5>
         </div>
       </div>
     </div>
@@ -111,6 +111,10 @@ export default {
     },
     inbox() {
       this.$router.push("/dashboard/inbox");
+    },
+    logoutUser() {
+      this.$store.dispatch("logoutUser");
+      this.$router.push("/");
     },
   },
   async created() {
