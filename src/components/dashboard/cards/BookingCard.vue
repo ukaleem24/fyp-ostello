@@ -4,10 +4,7 @@
       <div class="box-imagebox">
         <div class="box-header">
           <div class="box-image">
-            <img
-              src="https://housinganywhere.imgix.net/room/1666164/2c7b7d12-4352-4220-b79f-46f27da8e820.jpg?auto=format&fit=clip&orient=0&ixlib=react-9.2.0&w=1446"
-              alt=""
-            />
+            <img :src="listingPhotos[0]" alt="" />
             <div class="overlay"></div>
           </div>
         </div>
@@ -42,5 +39,30 @@
 <script>
 export default {
   props: ["listing"],
+  data() {
+    return {
+      listingPhotos: [],
+      tempPhoto: null,
+    };
+  },
+  async created() {
+    //getting images of a listing to display on card
+    try {
+      const roomId = this.listing._id;
+      const photoResponse = await this.axios.get(
+        "http://localhost:3000/api/get/photos/" + roomId
+      );
+      // imageName = userInfoResponse.data.userinfo.photo;
+      // this.photoResponse = imageName[0];
+      this.listingPhotos = photoResponse.data.photos;
+      this.tempPhoto = this.listingPhotos[0].photo;
+      this.listingPhotos[0] = "http://localhost:3000/" + this.tempPhoto[0];
+      console.log(this.listingPhotos[0]);
+    } catch (error) {
+      console.log(error.response.data.message);
+    } finally {
+      this.togglePreloader = false;
+    }
+  },
 };
 </script>
