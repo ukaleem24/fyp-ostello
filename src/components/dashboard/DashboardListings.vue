@@ -19,7 +19,7 @@
           :src="getUserImage"
           alt=""
         />
-        <h4 class="userName">{{getCurrentUser.firstName}}</h4>
+        <h4 class="userName">{{ getCurrentUser.firstName }}</h4>
       </div>
 
       <div class="icon-container">
@@ -75,6 +75,7 @@
           image="https://housinganywhere.imgix.net/room/1666164/1cbe6586-3e60-4748-ab99-58664ed0eb49.jpg?auto=format&fit=clip&orient=0&ixlib=react-9.2.0&w=1446"
           :description="listing.description"
           :currency="listing.currency"
+          :listing="listing"
         ></listing-card>
       </div>
     </div>
@@ -90,7 +91,7 @@ export default {
   data() {
     return {
       listingData: [],
-      gotUserPofileImage:false,
+      gotUserPofileImage: false,
     };
   },
   components: {
@@ -114,7 +115,7 @@ export default {
     },
   },
   async created() {
-     if (this.getCurrentUser.active === false) {
+    if (this.getCurrentUser.active === false) {
       this.$router.push("/");
     }
     //getting specfic listing Detail
@@ -131,7 +132,7 @@ export default {
     } catch (error) {
       console.log(error.response.data.message);
     }
-   
+
     let imageName = "";
     if (this.getCurrentUser.active === true) {
       try {

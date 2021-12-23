@@ -1,4 +1,5 @@
 <template>
+  <loading-animation v-if="showAnimation"></loading-animation>
   <simple-search-bar></simple-search-bar>
   <section class="flat-row flat-imagebox style3">
     <div class="container">
@@ -28,6 +29,7 @@ export default {
   data() {
     return {
       searchResults: [],
+      showAnimation: true,
     };
   },
   async beforeCreate() {
@@ -38,6 +40,7 @@ export default {
     );
     console.log(response.data.searchResults);
     this.searchResults = response.data.searchResults;
+    this.showAnimation = false;
   },
 };
 </script>
