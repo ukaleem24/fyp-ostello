@@ -417,8 +417,8 @@ export default {
           tempReviewImage = null;
         }
         let tempuser = {
-          fName: this.getCurrentUser.fName,
-          lName: this.getCurrentUser.lName,
+          fName: this.getCurrentUser.firstName,
+          lName: this.getCurrentUser.lastName,
         };
         let data = {
           user: tempuser,
